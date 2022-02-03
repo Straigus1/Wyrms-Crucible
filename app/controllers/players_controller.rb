@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
     
 
-    def currentmember
+    def currentplayer
         player = Player.find_by(id: session[:player_id])
         if player
             render json: player

@@ -3,6 +3,9 @@ body {
 }
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
   
 }
 
@@ -12,9 +15,10 @@ body {
   height: 900px;
   width: 1600px;
   top: 4%;
-  left: 8%;
+  /* left: 8%; */
 }
 
+/* > Title Screen */
 #title-background {
   background-image: url("https://i.pinimg.com/736x/3b/ad/c3/3badc3197ebd90438bd9b48096542186--lighthouse-painting-drawing.jpg");
   background-position: center;
@@ -32,7 +36,7 @@ body {
   background-color: #FDE8BC;
   height: 100%;
   width: 300px;
-  border: groove black;
+  border: groove 1px black;
   right: 100px
 }
 
@@ -43,4 +47,50 @@ body {
   margin-top: 100px;
   padding: 20px;
   
+}
+/* > Signup Page */
+.signup-menu {
+  position: absolute;
+  background-color: #FDE8BC ;
+  border: solid green;
+  height: 100%;
+  width: 500px;
+  border: groove 1px black;
+  display: flex;
+  justify-content: center;
+  /* right: 550px */
+  
+}
+
+#signup-background {
+  background-image: url("https://i.pinimg.com/736x/3b/ad/c3/3badc3197ebd90438bd9b48096542186--lighthouse-painting-drawing.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signup-header {
+  margin: 20px;
+}
+
+.signup-label {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.form-control {
+  width: 400px
+}
+
+/* > Login Page */
+
+#login-background {
+  background-image: url("https://i.pinimg.com/736x/3b/ad/c3/3badc3197ebd90438bd9b48096542186--lighthouse-painting-drawing.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
 }
