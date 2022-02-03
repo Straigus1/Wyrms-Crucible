@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import TitleScreen from "./Components/TitleScreen";
 
 function App() {
   const [player, setPlayer] = useState(null);
@@ -19,7 +20,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route path='/home' element={<TitleScreen/>}/>
+          <Route>
+            <TitleScreen player={player} setPlayer={setPlayer} />
+          </Route>
         </Switch>
       </BrowserRouter>
     </div>

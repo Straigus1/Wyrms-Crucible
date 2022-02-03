@@ -1,38 +1,46 @@
+body {
+  background-color: #000000
+}
 .App {
   text-align: center;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.game-box {
+  border: ridge rgb(145, 124, 8);
+  position: absolute;
+  height: 900px;
+  width: 1600px;
+  top: 4%;
+  left: 8%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#title-background {
+  background-image: url("https://i.pinimg.com/736x/3b/ad/c3/3badc3197ebd90438bd9b48096542186--lighthouse-painting-drawing.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#title {
+  max-width: 100%;
+  margin-top: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+#title-menu {
+  position: absolute;
+  background-color: #FDE8BC;
+  height: 100%;
+  width: 300px;
+  border: groove black;
+  right: 100px
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn {
+  background-color: black;
+  border: black;
+  width: 200px;
+  margin-top: 100px;
+  padding: 20px;
+  
 }
