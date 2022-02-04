@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {Form} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 
 function LoginPage ({player, setPlayer}) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useHistory();
+    const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -21,7 +21,7 @@ function LoginPage ({player, setPlayer}) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((player) => setPlayer(player));
-        navigate('/account', { replace: true });
+        navigate('/', { replace: true });
       } else {
         setErrorMessage('Incorrect username or password.')
       }

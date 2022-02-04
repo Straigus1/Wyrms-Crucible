@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import { Button } from "react-bootstrap";
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { Form } from "react-bootstrap";
 
 
@@ -10,7 +10,7 @@ function SignupPage ({player, setPlayer}) {
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useHistory();
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
