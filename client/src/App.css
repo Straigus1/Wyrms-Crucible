@@ -104,3 +104,95 @@ body {
   display: flex;
   justify-content: center;
 }
+
+#harpyB {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  top: 10%;
+}
+
+.party-box {
+  bottom: 0;
+  width: 100%;
+  height: 20%;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+}
+/* > Rogue UI */
+
+.characterUI {
+  
+  flex-grow: 1;
+  background-color: green;
+  width: 32%;
+  height: 100%;
+  border: solid 2px red
+}
+
+.characterUI-turn {
+  flex-grow: 1;
+  background-color: green;
+  width: 32%;
+  height: 100%;
+  border: solid 2px purple
+}
+
+.character-pics {
+  position: relative;
+  border: solid 3px blue;
+  left: 5%;
+  top: 11%;
+  float: left
+}
+
+.character-hp {
+  font-weight: bolder;
+}
+
+#character-healthbar {
+  position: relative;
+  float: right;
+  width: 250px;
+  right: 10%;
+  
+}
+
+#attack {
+  position: relative;
+  margin-top: 25px;
+  right: 15%;
+  float: right;
+  top: 10%;
+}
+
+#attack-turn {
+  position: relative;
+  border: solid gold;
+  background-color: red;
+  margin-top: 25px;
+  float: right;
+  right: 15%;
+  top: 10%;
+}
+
+#attack-turn:hover {
+  border: solid gold;
+  background-color: gold;
+  
+}
+
+#attack-turn:active {
+  border: solid red;
+  background-color: gold;
+  
+}
+
+#enemy-hp {
+  position: absolute;
+  top: 2%;
+  width: 400px;
+  
+}
+ 
