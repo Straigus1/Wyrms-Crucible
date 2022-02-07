@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :encounters
+  resources :checkpoints
   # Defines the root path route ("/")
 
   # Player CRUD actions

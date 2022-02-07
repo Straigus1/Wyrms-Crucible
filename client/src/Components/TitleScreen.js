@@ -47,7 +47,9 @@ function TitleScreen ({player, setPlayer}) {
                 <Button onClick={() => navigate("/signup")}>
                     Signup
                 </Button>
-                <Button>Credits</Button>
+                <Button onClick={() => navigate("/battleone")}>
+                    Credits
+                </Button>
                 <Button>Tutorials/Tips</Button>
                 </>}
             </div>

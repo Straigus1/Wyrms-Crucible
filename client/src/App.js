@@ -5,6 +5,7 @@ import './App.css';
 import TitleScreen from "./Components/TitleScreen";
 import SignupPage from "./Components/SignupPage";
 import LoginPage from "./Components/LoginPage";
+import BattleOne from "./Components/BattleOne"
 
 function App() {
   const [player, setPlayer] = useState(null);
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<TitleScreen player={player} setPlayer={player}/> }/>
           <Route path="/login" element={<LoginPage player={player} setPlayer={player}/> }/>
           <Route path="/signup" element={<SignupPage player={player} setPlayer={player}/> }/>
+          <Route path="/battleone" element={<BattleOne player={player} setPlayer={player}/> }/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_004736) do
+ActiveRecord::Schema.define(version: 2022_02_04_192501) do
+
+  create_table "checkpoints", force: :cascade do |t|
+    t.string "save_name"
+    t.string "ch_health"
+    t.string "ch_resources"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "encounters", force: :cascade do |t|
+    t.string "encounter_name"
+    t.string "enemies"
+    t.string "dialogue"
+    t.integer "player_id", null: false
+    t.integer "checkpoint_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["checkpoint_id"], name: "index_encounters_on_checkpoint_id"
+    t.index ["player_id"], name: "index_encounters_on_player_id"
+  end
 
   create_table "players", force: :cascade do |t|
     t.string "username"
@@ -22,4 +42,6 @@ ActiveRecord::Schema.define(version: 2022_02_02_004736) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "encounters", "checkpoints"
+  add_foreign_key "encounters", "players"
 end

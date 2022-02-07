@@ -94,3 +94,13 @@ body {
   display: flex;
   justify-content: center;
 }
+
+/* > BattleOne */
+#battle-one-background {
+  background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b6530d7e-d067-4e99-bed2-11686bd75d1c/d1j1uy-2ffe8b4e-58f9-4af6-9088-4713e81cfb01.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I2NTMwZDdlLWQwNjctNGU5OS1iZWQyLTExNjg2YmQ3NWQxY1wvZDFqMXV5LTJmZmU4YjRlLTU4ZjktNGFmNi05MDg4LTQ3MTNlODFjZmIwMS5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.oy18MF5nh5tjnereymUzhQ_q0CAr8esFkzFQDEukNWc");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
