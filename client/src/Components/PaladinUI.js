@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 import { ProgressBar } from 'react-bootstrap'
 
 
-function PaladinUI ({palTurn, setPalTurn, setPaladinHealth, paladinHealth, enemyHealth, setEnemyHealth}) {
+function PaladinUI ({updateBattleLog, palTurn, setPalTurn, paladinHealth, enemyHealth, setEnemyHealth}) {
 
     function paladinDamageModifier() {
         return (Math.floor(Math.random() * 6 + 1) + 7)
@@ -30,9 +30,24 @@ function PaladinUI ({palTurn, setPalTurn, setPaladinHealth, paladinHealth, enemy
 
     function palAttack() {
         const damage = (enemyHealth) - (paladinAttack)
+        // updateBattleLog(`Paladin rolled 🎲${paladinRoll} against the opponent.`)
         if (paladinRoll >= 14) {
-            setEnemyHealth(damage)}
-            setPalTurn(3)
+            if (paladinAttack <= 11) {
+                updateBattleLog(
+                    `Paladin rolled 🎲${paladinRoll} against the opponent.`,
+                    `Paladin attacked the enemy for ${paladinAttack} damage!`)
+            } else {
+                updateBattleLog(
+                    `Paladin rolled 🎲${paladinRoll} against the opponent.`,
+                    `Paladin crushed the target for ${paladinAttack} damage!!`)
+            }
+            setEnemyHealth(damage)
+        } else {
+            updateBattleLog(
+                `Paladin rolled 🎲${paladinRoll} against the opponent.`,
+                `Paladin misses the mark!`)
+        }
+            setPalTurn(2)
     }
     if (paladinHealth < 0) {
         paladinHealth = 0
@@ -75,7 +90,7 @@ function PaladinUI ({palTurn, setPalTurn, setPaladinHealth, paladinHealth, enemy
             />
             <div className='character-hp' >HP: {paladinHealth}/47</div>
             <ProgressBar variant={progressBarClass()} animated id='character-healthbar' now={healthBar} />
-            {palTurn === 2 ? 
+            {palTurn === 1 ? 
             <Button 
                 id='attack-turn'
                 onClick={palAttack}>

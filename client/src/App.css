@@ -17,6 +17,9 @@ body {
   top: 4%;
   /* left: 8%; */
 }
+p {
+  color: white
+}
 
 /* > Title Screen */
 #title-background {
@@ -95,6 +98,15 @@ body {
   justify-content: center;
 }
 
+/* > Beginning */
+
+#beginning-background {
+  background-image: url("./Images/beginning-lighthouse.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 /* > BattleOne */
 #battle-one-background {
   background-image: url("./Images/battle-one.png");
@@ -126,7 +138,7 @@ body {
   width: 1200px;
   height: 500px;
   color: white;
-  font-size: 300px;
+  font-size: 280px;
   
   
 }
@@ -140,25 +152,52 @@ body {
   bottom: 50%;
   background-color: red;
   border-radius: 10px;
+  
 }
 
 .continue:hover {
-  
+  background-color: gold;
   box-shadow: 0px 0px 7px lightblue;
+  color: black;
+  animation-duration: .2s;
+  animation-name: change;
+  
+}
+
+@keyframes change {
+  from {
+    background-color: red;
+    color: white;
+  }
+  to {
+    background-color: gold;
+    color: black;
+  } 
 }
 
 .continue:active {
-  border: ridge 2px gold;
+  border: ridge 2px red;
+  color: red
 }
 
 /* Battle Log */
 .battle-log {
   position: absolute;
-  border: solid 3px green;
-  background-color: red;
+  border: groove 3px rgb(88, 88, 88);
+  background-image: url("./Images/black-paper-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   width: 320px;
   height: 600px;
-  left: .1px
+  left: .1px;
+  opacity: .8;
+}
+
+.log-image {
+  max-width: 100%;
+  opacity: .7;
+  
 }
 /* > Party UI */
 

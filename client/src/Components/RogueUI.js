@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 import { ProgressBar } from 'react-bootstrap'
 
 
-function RogueUI ({setSorTurn, rogTurn, setRogTurn, setRogueHealth, rogueHealth, enemyHealth, setEnemyHealth}) {
+function RogueUI ({updateBattleLog, rogTurn, setRogTurn, rogueHealth, enemyHealth, setEnemyHealth}) {
 
     function rogueDamageModifier() {
         return (Math.floor(Math.random() * 11 + 2) + 6)
@@ -17,16 +17,32 @@ function RogueUI ({setSorTurn, rogTurn, setRogTurn, setRogueHealth, rogueHealth,
     function rogueDiceRoll() {
         return (Math.floor(Math.random() * 20 + 1) + 6)
     }
+    
+    
     const rogueRoll = rogueDiceRoll()
-
-   
-
+    
     function rogAttack() {
         const damage = (enemyHealth) - (rogueAttack)
+       // updateBattleLog(`Rogue rolled 🎲${rogueRoll} against the opponent.`)
         if (rogueRoll >= 14) {
-        setEnemyHealth(damage)}
+            if (rogueAttack <= 12) {
+                updateBattleLog(
+                    `Rogue rolled 🎲${rogueRoll} against the opponent.`,
+                    `Rogue slashed the enemy for ${rogueAttack} damage! `)
+            } else {
+                updateBattleLog(
+                    `Rogue rolled 🎲${rogueRoll} against the opponent.`,
+                    `Rogue mutilated the target for ${rogueAttack} damage!!`)
+            }
+            setEnemyHealth(damage)
+        } else {
+            updateBattleLog(
+                `Rogue rolled 🎲${rogueRoll} against the opponent.`,
+                'Rogue missed the target')
+        }
         setRogTurn(2)
-        setSorTurn(1)
+        // setSorTurn(1)
+        // updateBattleLog(`Rogue did ${damage} to enemy`)
     }
 
     if (rogueHealth < 0) {

@@ -2,18 +2,13 @@ import {useState, useEffect} from 'react'
 import TypeWriterEffect from 'react-typewriter-effect';
 import battlelog from '../Images/battle-log.png'
 
-function BattleLog({setRogueHealth, setPaladinHealth, setSorcererHealth, setEnemyHealth, enemyAttack, rogueHealth, sorcererHealth, paladinHealth, enemyHealth}) {
-    
-  
-    function logActions () {
-        let damage = enemyAttack
-        if (rogueHealth--) {
-            return <p>Rogue took {damage} damage!</p>
-        } else if (paladinHealth--) {
-            return <p>Paladin took {damage} damage!</p>
-        } else if (sorcererHealth--) {
-            return <p>Sorcerer took {damage} damage!</p>
-        }
+function BattleLog({battleLog}) {
+
+    function displayBattleLog() {
+        const log = battleLog.map((log) => {
+            return <p>{log}</p>
+        })
+        return log
     }
        
 
@@ -24,7 +19,7 @@ function BattleLog({setRogueHealth, setPaladinHealth, setSorcererHealth, setEnem
             src={battlelog}
             alt='battle log'
             />
-            {logActions()}
+            {displayBattleLog()}
         </div>
     )
 

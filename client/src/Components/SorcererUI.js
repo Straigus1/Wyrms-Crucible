@@ -5,7 +5,7 @@ import sorcererac from '../Images/sorcerer-armor.png'
 import { Button } from 'react-bootstrap'
 import { ProgressBar } from 'react-bootstrap'
 
-function SorcererUI ({setPalTurn, sorTurn, setSorTurn, setSorcererHealth, sorcererHealth, enemyHealth, setEnemyHealth}) {
+function SorcererUI ({updateBattleLog, sorTurn, setSorTurn, sorcererHealth, enemyHealth, setEnemyHealth}) {
 
     function sorcererDamageModifier() {
         return (Math.floor(Math.random() * 19 + 3) + 1)
@@ -30,10 +30,25 @@ function SorcererUI ({setPalTurn, sorTurn, setSorTurn, setSorcererHealth, sorcer
 
     function sorAttack() {
         const damage = (enemyHealth) - (sorcererAttack)
+        // updateBattleLog(`Sorcerer rolled 🎲${sorcererRoll} against the enemy`)
         if (sorcererRoll >= 14) {
-        setEnemyHealth(damage)}
-        setSorTurn(3)
-        setPalTurn(1)
+            if (sorcererAttack <= 14) {
+                updateBattleLog(
+                    `Sorcerer rolled 🎲${sorcererRoll} against the enemy`,
+                    `Sorcerer blasted the enemy for ${sorcererAttack} damage!`)
+            } else {
+                updateBattleLog(
+                    `Sorcerer rolled 🎲${sorcererRoll} against the enemy`,
+                    `Sorcerer obliterated the target for ${sorcererAttack} damage!!`)
+            }
+        setEnemyHealth(damage)
+        } else {
+            updateBattleLog(
+                `Sorcerer rolled 🎲${sorcererRoll} against the enemy`,
+                `Sorcerer missed the target`)
+        }
+        setSorTurn(2)
+        // setPalTurn(1)
     }
 
     
@@ -78,7 +93,7 @@ function SorcererUI ({setPalTurn, sorTurn, setSorTurn, setSorcererHealth, sorcer
             />
             <div className='character-hp'>HP: {sorcererHealth}/38</div>
             <ProgressBar variant={progressBarClass()} animated id='character-healthbar' now={healthBar} />
-            {sorTurn === 2 ? 
+            {sorTurn === 1 ? 
             <Button 
                 id='attack-turn'
                 onClick={sorAttack}>
