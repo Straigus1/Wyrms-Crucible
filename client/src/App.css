@@ -151,8 +151,16 @@ body {
   border: ridge 2px gold;
 }
 
-
-/* > Rogue UI */
+/* Battle Log */
+.battle-log {
+  position: absolute;
+  border: solid 3px green;
+  background-color: red;
+  width: 320px;
+  height: 600px;
+  left: .1px
+}
+/* > Party UI */
 
 .characterUI {
   

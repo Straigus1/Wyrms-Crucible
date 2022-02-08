@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProgressBar } from 'react-bootstrap'
 import harpyB from '../Images/harpybigv.png'
+import BattleLog from './BattleLog'
 import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
@@ -101,6 +102,7 @@ function BattleOne () {
                 Victory!
                 <button className='continue' onClick={continueClick}> Continue </button>
             </div>}
+            <BattleLog />
             <div className='party-box'>
                 <RogueUI setSorTurn={setSorTurn} rogTurn={rogTurn} setRogTurn={setRogTurn} rogueHealth={rogueHealth} setRogueHealth={setRogueHealth} enemyHealth={enemyHealth} setEnemyHealth={setEnemyHealth}/>
                 <SorcererUI setPalTurn={setPalTurn} sorTurn={sorTurn} setSorTurn={setSorTurn} sorcererHealth={sorcererHealth} setSorcererHealth={setSorcererHealth} enemyHealth={enemyHealth} setEnemyHealth={setEnemyHealth} />
