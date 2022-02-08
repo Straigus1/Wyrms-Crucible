@@ -20,7 +20,7 @@ body {
 
 /* > Title Screen */
 #title-background {
-  background-image: url("https://i.pinimg.com/736x/3b/ad/c3/3badc3197ebd90438bd9b48096542186--lighthouse-painting-drawing.jpg");
+  background-image: url("./Images/title-background.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -63,7 +63,7 @@ body {
 }
 
 #signup-background {
-  background-image: url("https://i.pinimg.com/736x/3b/ad/c3/3badc3197ebd90438bd9b48096542186--lighthouse-painting-drawing.jpg");
+  background-image: url("./Images/signup-pic.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -87,7 +87,7 @@ body {
 /* > Login Page */
 
 #login-background {
-  background-image: url("https://i.pinimg.com/736x/3b/ad/c3/3badc3197ebd90438bd9b48096542186--lighthouse-painting-drawing.jpg");
+  background-image: url("./Images/signup-pic.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -97,7 +97,7 @@ body {
 
 /* > BattleOne */
 #battle-one-background {
-  background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b6530d7e-d067-4e99-bed2-11686bd75d1c/d1j1uy-2ffe8b4e-58f9-4af6-9088-4713e81cfb01.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I2NTMwZDdlLWQwNjctNGU5OS1iZWQyLTExNjg2YmQ3NWQxY1wvZDFqMXV5LTJmZmU4YjRlLTU4ZjktNGFmNi05MDg4LTQ3MTNlODFjZmIwMS5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.oy18MF5nh5tjnereymUzhQ_q0CAr8esFkzFQDEukNWc");
+  background-image: url("./Images/battle-one.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -120,35 +120,103 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
+
+.victory {
+  position: relative;
+  width: 1200px;
+  height: 500px;
+  color: white;
+  font-size: 300px;
+  
+  
+}
+
+.continue {
+  position: relative;
+  width: 500px;
+  height: 100px;
+  color: white;
+  font-size: 50px;
+  bottom: 50%;
+  background-color: red;
+  border-radius: 10px;
+}
+
+.continue:hover {
+  
+  box-shadow: 0px 0px 7px lightblue;
+}
+
+.continue:active {
+  border: ridge 2px gold;
+}
+
+
 /* > Rogue UI */
 
 .characterUI {
   
   flex-grow: 1;
-  background-color: green;
+  background-image: url("./Images/brick-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 32%;
   height: 100%;
-  border: solid 2px red
+  border: ridge .5px rgb(90, 77, 2)
 }
 
 .characterUI-turn {
   flex-grow: 1;
-  background-color: green;
+  background-image: url("./Images/brick-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 32%;
   height: 100%;
-  border: solid 2px purple
+  border: ridge .5px rgb(177, 151, 3);
+  box-shadow: 0px 0px 10px red;
+}
+
+.rogue-ac {
+  position: absolute;
+  width: 45px;
+  height: 58px;
+  left: 5px
+}
+
+.sorcerer-ac {
+  position: absolute;
+  width: 45px;
+  height: 58px;
+  left: 538px
+}
+
+.paladin-ac {
+  position: absolute;
+  width: 45px;
+  height: 58px;
+  left: 1070px
 }
 
 .character-pics {
   position: relative;
-  border: solid 3px blue;
+  border: ridge 3px rgb(148, 148, 146);
   left: 5%;
   top: 11%;
-  float: left
+  float: left;
+  width: 135px;
+  height: 135px;
+  background-color: black;
+  box-shadow: 0px 0px 7px rgb(151, 145, 113);
+  border-radius: 1px;
 }
 
 .character-hp {
+  position: relative;
   font-weight: bolder;
+  left: 3%;
+  color: white
 }
 
 #character-healthbar {
@@ -156,8 +224,11 @@ body {
   float: right;
   width: 250px;
   right: 10%;
+
   
 }
+
+
 
 #attack {
   position: relative;

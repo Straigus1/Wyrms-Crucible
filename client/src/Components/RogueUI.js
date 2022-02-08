@@ -1,5 +1,7 @@
 import React from 'react'
 import roguepic from '../Images/rogue-pic.png'
+import roguedead from '../Images/rogue-pic-dead.png'
+import rogueac from '../Images/rogue-armor.png'
 import { Button } from 'react-bootstrap'
 import { ProgressBar } from 'react-bootstrap'
 
@@ -7,12 +9,31 @@ import { ProgressBar } from 'react-bootstrap'
 function RogueUI ({setSorTurn, rogTurn, setRogTurn, setRogueHealth, rogueHealth, enemyHealth, setEnemyHealth}) {
 
     function rogueDamageModifier() {
-        return Math.floor(Math.random() * 5 + 9)
+        return (Math.floor(Math.random() * 11 + 2) + 6)
     }
 
     const rogueAttack = rogueDamageModifier()
 
-    
+    function rogueDiceRoll() {
+        return (Math.floor(Math.random() * 20 + 1) + 6)
+    }
+    const rogueRoll = rogueDiceRoll()
+
+   
+
+    function rogAttack() {
+        const damage = (enemyHealth) - (rogueAttack)
+        if (rogueRoll >= 14) {
+        setEnemyHealth(damage)}
+        setRogTurn(2)
+        setSorTurn(1)
+    }
+
+    if (rogueHealth < 0) {
+        rogueHealth = 0
+    }
+
+    const healthBar = ((rogueHealth / 41) * 100)
 
     function className() {
         if (rogTurn === 1) {
@@ -22,25 +43,44 @@ function RogueUI ({setSorTurn, rogTurn, setRogTurn, setRogueHealth, rogueHealth,
         }
     }
 
-    function rogAttack() {
-        const damage = (enemyHealth) - (rogueAttack)
-        setEnemyHealth(damage)
-        setRogTurn(2)
-        setSorTurn(1)
-    }
+    function progressBarClass () {
+        if (healthBar < 100 && healthBar >= 50) {
+            return "success"
+        } else if (healthBar < 50 && healthBar >= 25) {
+            return "warning"
+        } else if (healthBar < 25) {
+            return "danger"
+        } else {
+            return ""
+        }
 
-    const healthBar = ((rogueHealth / 41) * 100)
+    } 
+
+    function rogueStatus() {
+        if (rogueHealth > 0) {
+            return roguepic
+        } else {
+            return roguedead
+        }
+    }
+    
     
 
     return (
         <div className={className()}>
+            
             <img 
             className='character-pics'
-            src={roguepic}
+            src={rogueStatus()}
             alt='rogue pic'
             />
+            <img 
+            className='rogue-ac'
+            src={rogueac}
+            alt='rogue shield'
+            />
             <div className='character-hp'>HP: {rogueHealth}/41</div>
-            <ProgressBar id='character-healthbar' now={healthBar} />
+            <ProgressBar variant={progressBarClass()} animated id='character-healthbar' now={healthBar} />
             {rogTurn === 1 ? 
             <Button 
                 id='attack-turn'
