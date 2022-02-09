@@ -1,15 +1,17 @@
 import {useState, useEffect} from 'react'
-import TypeWriterEffect from 'react-typewriter-effect';
+import Typewriter from "typewriter-effect";
 import battlelog from '../Images/battle-log.png'
 
 function BattleLog({battleLog}) {
 
     function displayBattleLog() {
         const log = battleLog.map((log) => {
-            return <p>{log}</p>
+            return <li>{log}</li>
         })
         return log
     }
+
+    
        
 
     return (
@@ -19,7 +21,8 @@ function BattleLog({battleLog}) {
             src={battlelog}
             alt='battle log'
             />
-            {displayBattleLog()}
+            <ul id="scroll">{displayBattleLog()}</ul>
+           
         </div>
     )
 

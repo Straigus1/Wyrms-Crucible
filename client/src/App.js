@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Beginning from "./Components/Beginning";
+import Beginning2 from "./Components/Beginning2";
 import TitleScreen from "./Components/TitleScreen";
 import SignupPage from "./Components/SignupPage";
 import LoginPage from "./Components/LoginPage";
@@ -33,7 +34,8 @@ function App() {
           <Route path="/" element={<TitleScreen player={player} setPlayer={player}/> }/>
           <Route path="/login" element={<LoginPage player={player} setPlayer={player}/> }/>
           <Route path="/signup" element={<SignupPage player={player} setPlayer={player}/> }/>
-          <Route path="/beginning" element={<Beginning player={player} setPlayer={player}/> }/>
+          <Route path="/beginning-discover" element={<Beginning player={player} setPlayer={player}/> }/>
+          <Route path="/beginning-entrance" element={<Beginning2 player={player} setPlayer={player}/> }/>
           <Route path="/battleone" element={<BattleOne player={player} setPlayer={player}/> }/>
         </Routes>
       </BrowserRouter>

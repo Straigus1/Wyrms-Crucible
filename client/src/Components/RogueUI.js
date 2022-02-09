@@ -14,8 +14,10 @@ function RogueUI ({updateBattleLog, rogTurn, setRogTurn, rogueHealth, enemyHealt
 
     const rogueAttack = rogueDamageModifier()
 
+    const diceRoll = Math.floor(Math.random() * 20 + 1)
+
     function rogueDiceRoll() {
-        return (Math.floor(Math.random() * 20 + 1) + 6)
+        return (diceRoll) + 6
     }
     
     
@@ -23,21 +25,20 @@ function RogueUI ({updateBattleLog, rogTurn, setRogTurn, rogueHealth, enemyHealt
     
     function rogAttack() {
         const damage = (enemyHealth) - (rogueAttack)
-       // updateBattleLog(`Rogue rolled 🎲${rogueRoll} against the opponent.`)
         if (rogueRoll >= 14) {
             if (rogueAttack <= 12) {
                 updateBattleLog(
-                    `Rogue rolled 🎲${rogueRoll} against the opponent.`,
+                    `Rogue rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                     `Rogue slashed the enemy for ${rogueAttack} damage! `)
             } else {
                 updateBattleLog(
-                    `Rogue rolled 🎲${rogueRoll} against the opponent.`,
+                    `Rogue rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                     `Rogue mutilated the target for ${rogueAttack} damage!!`)
             }
             setEnemyHealth(damage)
         } else {
             updateBattleLog(
-                `Rogue rolled 🎲${rogueRoll} against the opponent.`,
+                `Rogue rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                 'Rogue missed the target')
         }
         setRogTurn(2)

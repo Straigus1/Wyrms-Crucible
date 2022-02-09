@@ -13,15 +13,17 @@ function PaladinUI ({updateBattleLog, palTurn, setPalTurn, paladinHealth, enemyH
     }
     const paladinAttack = paladinDamageModifier()
 
+    const diceRoll = Math.floor(Math.random() * 20 + 1)
+
     function paladinDiceRoll() {
-        return (Math.floor(Math.random() * 20 + 1) + 6)
+        return (diceRoll) + 7
     }
     const paladinRoll = paladinDiceRoll()
 
    
 
     function className() {
-        if (palTurn === 2) {
+        if (palTurn === 1) {
             return 'characterUI-turn'
         } else {
             return 'characterUI'
@@ -30,22 +32,21 @@ function PaladinUI ({updateBattleLog, palTurn, setPalTurn, paladinHealth, enemyH
 
     function palAttack() {
         const damage = (enemyHealth) - (paladinAttack)
-        // updateBattleLog(`Paladin rolled 🎲${paladinRoll} against the opponent.`)
         if (paladinRoll >= 14) {
             if (paladinAttack <= 11) {
                 updateBattleLog(
-                    `Paladin rolled 🎲${paladinRoll} against the opponent.`,
+                    `Paladin rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                     `Paladin attacked the enemy for ${paladinAttack} damage!`)
             } else {
                 updateBattleLog(
-                    `Paladin rolled 🎲${paladinRoll} against the opponent.`,
+                    `Paladin rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                     `Paladin crushed the target for ${paladinAttack} damage!!`)
             }
             setEnemyHealth(damage)
         } else {
             updateBattleLog(
-                `Paladin rolled 🎲${paladinRoll} against the opponent.`,
-                `Paladin misses the mark!`)
+                `Paladin rolled 🎲(${diceRoll}) + 7 against the enemy.`,
+                `Paladin missed the mark!`)
         }
             setPalTurn(2)
     }

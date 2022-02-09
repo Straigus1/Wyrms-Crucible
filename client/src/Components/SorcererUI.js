@@ -16,35 +16,36 @@ function SorcererUI ({updateBattleLog, sorTurn, setSorTurn, sorcererHealth, enem
     
 
     function className() {
-        if (sorTurn === 2) {
+        if (sorTurn === 1) {
             return 'characterUI-turn'
         } else {
             return 'characterUI'
         }
     }
 
+    const diceRoll = Math.floor(Math.random() * 20 + 1)
+
     function sorcererDiceRoll() {
-        return (Math.floor(Math.random() * 20 + 1) + 6)
+        return (diceRoll) + 5
     }
     const sorcererRoll = sorcererDiceRoll()
 
     function sorAttack() {
         const damage = (enemyHealth) - (sorcererAttack)
-        // updateBattleLog(`Sorcerer rolled 🎲${sorcererRoll} against the enemy`)
         if (sorcererRoll >= 14) {
             if (sorcererAttack <= 14) {
                 updateBattleLog(
-                    `Sorcerer rolled 🎲${sorcererRoll} against the enemy`,
+                    `Sorcerer rolled 🎲(${diceRoll}) + 5 against the enemy.`,
                     `Sorcerer blasted the enemy for ${sorcererAttack} damage!`)
             } else {
                 updateBattleLog(
-                    `Sorcerer rolled 🎲${sorcererRoll} against the enemy`,
+                    `Sorcerer rolled 🎲(${diceRoll}) + 5 against the enemy.`,
                     `Sorcerer obliterated the target for ${sorcererAttack} damage!!`)
             }
         setEnemyHealth(damage)
         } else {
             updateBattleLog(
-                `Sorcerer rolled 🎲${sorcererRoll} against the enemy`,
+                `Sorcerer rolled (${diceRoll}) + 5 against the enemy.`,
                 `Sorcerer missed the target`)
         }
         setSorTurn(2)
