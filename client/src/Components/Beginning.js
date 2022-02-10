@@ -21,7 +21,7 @@ function Beginning() {
                         onInit={(typewriter)=> {
 
                         typewriter
-                        .pauseFor(400)
+                        .pauseFor(200)
                         .changeDelay(10)
                         .typeString("Upon entering the lighthouse, it immediately becomes clear that something isn’t right. ")   
                         .pauseFor(1000)

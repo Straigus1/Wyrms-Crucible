@@ -1,12 +1,11 @@
 import {useState, useEffect} from 'react'
-import Typewriter from "typewriter-effect";
 import battlelog from '../Images/battle-log.png'
 
 function BattleLog({battleLog}) {
 
     function displayBattleLog() {
         const log = battleLog.map((log) => {
-            return <li>{log}</li>
+            return <li className='log-appearance'>{log}</li>
         })
         return log
     }

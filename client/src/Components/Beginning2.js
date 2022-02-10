@@ -21,7 +21,7 @@ function Beginning2() {
                         onInit={(typewriter)=> {
 
                         typewriter
-                        .pauseFor(400)
+                        .pauseFor(200)
                         .changeDelay(10)
                         .typeString("Once every ten years, the gods host the Divinity Games - an event where mortals can compete for deification. ")   
                         .pauseFor(1000)
