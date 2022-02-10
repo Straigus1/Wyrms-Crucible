@@ -1,13 +1,18 @@
-import React from 'react'
+import {useState} from 'react'
 import roguepic from '../Images/rogue-pic.png'
 import roguedead from '../Images/rogue-pic-dead.png'
 import rogueac from '../Images/rogue-armor.png'
 import roguebless from '../Images/rogue-pic-bless.png'
+import healingpotion from '../Images/healing-potion.png'
+import potionused from '../Images/healing-potion-used.png'
 import iris from '../Images/rogue-name.png'
 import { ProgressBar } from 'react-bootstrap'
 
 
 function RogueUI ({
+    battleLog,
+    setBattleLog,
+    setRogueHealth,
     enemyArmorClass,
     phantomCD,
     setPhantomCD,
@@ -19,7 +24,9 @@ function RogueUI ({
     rogueHealth, 
     enemyHealth, 
     setEnemyHealth}) 
-    {
+            {
+    const [potionAmount, setPotionAmount] = useState(3)
+    const [potionCD, setPotionCD] = useState(true)
 
     function rogueDamageModifier() {
         return (Math.floor(Math.random() * 11 + 2) + 6)
@@ -59,6 +66,7 @@ function RogueUI ({
                 `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                 'Iris missed the target')
         }
+        setPotionCD(true)
         setRogTurn(2)
     }
 
@@ -82,11 +90,12 @@ function RogueUI ({
                 `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                 'Iris missed the target')
         }
+        setPotionCD(true)
         setRogTurn(2)
     }
 
     function roguePhantomAssultModifier() {
-        return (Math.floor(Math.random() * 15 + 3) + 18)
+        return (Math.floor(Math.random() * 15 + 4) + 18)
     }
 
     const phantomAttack = roguePhantomAssultModifier()
@@ -109,12 +118,15 @@ function RogueUI ({
                 `Iris rolled 🎲(${diceRoll}) + 11 against the enemy.`,
                 'Iris lamentably missed the mark')
         }
+        setPotionCD(true)
         setRogTurn(2)
         setPhantomCD(0)
     }
 
     if (rogueHealth < 0) {
-        rogueHealth = 0
+        setRogueHealth(0)
+    } else if (rogueHealth > 41) {
+        setRogueHealth(41)
     }
 
     const healthBar = ((rogueHealth / 41) * 100)
@@ -152,6 +164,14 @@ function RogueUI ({
         }
     }
 
+    function potionStatus() {
+        if (potionCD) {
+            return healingpotion
+        } else {
+            return potionused
+        }
+    }
+
     function phantomAvailable() {
         if (phantomCD === 4 ) {
             return <button
@@ -167,6 +187,23 @@ function RogueUI ({
                 Phantom Assault
         </button>
         }
+    }
+
+    function potionRestoreModifier () {
+        return (Math.floor(Math.random() * 8 + 1) + 12)
+    }
+
+    const potionRestore = potionRestoreModifier()
+
+
+    function drinkPotion() {
+        const restore = (rogueHealth) + (potionRestore)
+        if (potionCD === true && rogTurn === 1 && potionAmount > 0 && rogueHealth > 0) {
+            setRogueHealth(restore)
+            setPotionAmount(potionAmount - 1)
+            setPotionCD(false)
+            setBattleLog([...battleLog, `Iris restored ${potionRestore} health.`])
+        } 
     }
     
     function renderActions() {
@@ -218,6 +255,13 @@ function RogueUI ({
             src={rogueStatus()}
             alt='rogue pic'
             />
+            <img 
+            className='healing-potion-rog'
+            src={potionStatus()}
+            alt='healing-potion'
+            onClick={drinkPotion}
+            />
+            <h1 className='potion-amount-rog'>{potionAmount}</h1>
             <img 
             className='rogue-ac'
             src={rogueac}

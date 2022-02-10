@@ -20,8 +20,10 @@ function LoginPage ({player, setPlayer}) {
       body: JSON.stringify({ username, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((player) => setPlayer(player));
-        navigate('/', { replace: true });
+        r.json().then((player) =>{
+          setPlayer(player)
+        });
+        navigate('/');
       } else {
         setErrorMessage('Incorrect username or password.')
       }

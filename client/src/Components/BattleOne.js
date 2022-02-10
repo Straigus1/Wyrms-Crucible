@@ -39,6 +39,7 @@ function BattleOne () {
     function updateBattleLog(roll, info) {
         setBattleLog([...battleLog, roll, info])
     }
+    
     // No longer attack dead heroes
     function enemyTarget () {
         let target = Math.floor(Math.random() * 10)
@@ -232,6 +233,9 @@ function BattleOne () {
                     phantomCD={phantomCD}
                     setPhantomCD={setPhantomCD}
                     enemyArmorClass={enemyArmorClass}
+                    setRogueHealth={setRogueHealth}
+                    battleLog={battleLog}
+                    setBattleLog={setBattleLog}
                 />
                 <SorcererUI
                     updateBattleLog={updateBattleLog} 
@@ -244,6 +248,9 @@ function BattleOne () {
                     lightningCD={lightningCD}
                     setLightningCD={setLightningCD}
                     enemyArmorClass={enemyArmorClass}
+                    setSorcererHealth={setSorcererHealth}
+                    battleLog={battleLog}
+                    setBattleLog={setBattleLog}
                 />
                 <PaladinUI 
                     updateBattleLog={updateBattleLog} 
@@ -259,6 +266,7 @@ function BattleOne () {
                     smiteCD={smiteCD}
                     setSmiteCD={setSmiteCD}
                     enemyArmorClass={enemyArmorClass}
+                    setPaladinHealth={setPaladinHealth}
                 />
             </div>
         </div>

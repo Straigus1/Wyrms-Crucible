@@ -1,5 +1,20 @@
 body {
-  background-color: #000000
+  background: linear-gradient(-45deg, #130a07, #130a09, #130913, #130906);
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 .App {
   text-align: center;
@@ -350,6 +365,54 @@ ul {
   width: 45px;
   height: 58px;
   left: 1070px
+}
+
+.healing-potion-rog {
+  position: absolute;
+  top: -8px;
+  left: 120px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.potion-amount-rog {
+  position: absolute;
+  font-size: 30px;
+  color: white;
+  left: 170px
+}
+
+.healing-potion-sor {
+  position: absolute;
+  top: -8px;
+  left: 652px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.potion-amount-sor {
+  position: absolute;
+  font-size: 30px;
+  color: white;
+  left: 702px
+}
+
+.healing-potion-pld {
+  position: absolute;
+  top: -8px;
+  left: 1185px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.potion-amount-pld {
+  position: absolute;
+  font-size: 30px;
+  color: white;
+  left: 1235px
 }
 
 .character-pics {

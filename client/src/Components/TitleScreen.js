@@ -28,7 +28,7 @@ function TitleScreen ({player, setPlayer}) {
                 {player ? 
                 <>
                 <h5>Welcome, {player.username}</h5>
-                <Button onClick={() => navigate("/login")}>
+                <Button onClick={() => navigate("/beginning-discover")}>
                     New Game
                 </Button>
         

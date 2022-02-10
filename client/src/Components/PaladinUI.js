@@ -1,14 +1,17 @@
-import React from 'react'
+import {useState} from 'react'
 import paladinpic from '../Images/paladin-pic.png'
 import paladindead from '../Images/paladin-pic-dead.png'
 import paladinbless from '../Images/paladin-pic-bless.png'
 import paladinac from '../Images/paladin-armor.png'
+import healingpotion from '../Images/healing-potion.png'
+import potionused from '../Images/healing-potion-used.png'
 import deus from '../Images/paladin-name.png'
 import { ProgressBar } from 'react-bootstrap'
 
 
 
 function PaladinUI ({
+    setPaladinHealth,
     enemyArmorClass,
     smiteCD,
     setSmiteCD,
@@ -22,6 +25,9 @@ function PaladinUI ({
     paladinHealth, 
     enemyHealth, 
     setEnemyHealth}) {
+    
+    const [potionAmount, setPotionAmount] = useState(3)
+    const [potionCD, setPotionCD] = useState(true)
 
     function paladinDamageModifier() {
         return (Math.floor(Math.random() * 6 + 1) + 4)
@@ -69,6 +75,7 @@ function PaladinUI ({
                 `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                 `Deus missed the mark!`)
         }
+        setPotionCD(true)
         setPalTurn(2)
     }
 
@@ -94,19 +101,23 @@ function PaladinUI ({
         } else {
             updateBattleLog(
                 `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
-                `Deus whiffed his holy swing`)
+                `Deus whiffed his holy swing!`)
         }
+        setPotionCD(true)
         setPalTurn(2)
         setSmiteCD(0)
     }
 
     function palBlessAction() {
         setBattleLog([...battleLog, "Deus blessed the team, increasing dice rolls!" ])
+        setPotionCD(true)
         setBlessStatus(6)
         setPalTurn(2)
     }
     if (paladinHealth < 0) {
-        paladinHealth = 0
+        setPaladinHealth(0)
+    } else if (paladinHealth > 47) {
+        setPaladinHealth(47)
     }
 
     const healthBar = ((paladinHealth / 47) * 100)
@@ -126,8 +137,6 @@ function PaladinUI ({
 
     } 
 
-    
-
     function paladinStatus() {
         if (paladinHealth > 0 && blessStatus === 0) {
             return paladinpic
@@ -135,6 +144,14 @@ function PaladinUI ({
             return paladinbless
         } else {
             return paladindead
+        }
+    }
+
+    function potionStatus() {
+        if (potionCD) {
+            return healingpotion
+        } else {
+            return potionused
         }
     }
 
@@ -155,6 +172,21 @@ function PaladinUI ({
         }
     }
 
+    function potionRestoreModifier () {
+        return (Math.floor(Math.random() * 8 + 1) + 12)
+    }
+
+    const potionRestore = potionRestoreModifier()
+
+    function drinkPotion() {
+        const restore = (paladinHealth) + (potionRestore)
+        if (potionCD === true && palTurn === 1 && potionAmount > 0 && paladinHealth > 0) {
+            setPaladinHealth(restore)
+            setPotionAmount(potionAmount - 1)
+            setPotionCD(false)
+            setBattleLog([...battleLog, `Deus restored ${potionRestore} health.`])
+        } 
+    }
 
     function renderActions() {
         if (palTurn === 1) {
@@ -204,6 +236,13 @@ function PaladinUI ({
             src={paladinStatus()}
             alt='paladin pic'
             />
+            <img 
+            className='healing-potion-pld'
+            src={potionStatus()}
+            alt='healing-potion'
+            onClick={drinkPotion}
+            />
+            <h1 className='potion-amount-pld'>{potionAmount}</h1>
             <img 
             className='paladin-ac'
             src={paladinac}

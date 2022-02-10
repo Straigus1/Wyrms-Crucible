@@ -1,12 +1,17 @@
-import React from 'react'
+import {useState} from 'react'
 import sorcererpic from '../Images/sorcerer-pic.png'
 import sorcererdead from '../Images/sorcerer-pic-dead.png'
 import sorcererbless from '../Images/sorcerer-pic-bless.png'
 import sorcererac from '../Images/sorcerer-armor.png'
+import healingpotion from '../Images/healing-potion.png'
+import potionused from '../Images/healing-potion-used.png'
 import juhl from '../Images/sorcerer-name.png'
 import { ProgressBar } from 'react-bootstrap'
 
 function SorcererUI ({
+    battleLog,
+    setBattleLog,
+    setSorcererHealth,
     enemyArmorClass,
     lightningCD,
     setLightningCD,
@@ -18,8 +23,11 @@ function SorcererUI ({
     enemyHealth, 
     setEnemyHealth}) {
 
+    const [potionAmount, setPotionAmount] = useState(3)
+    const [potionCD, setPotionCD] = useState(true)
+
     function sorcererDamageModifier() {
-        return (Math.floor(Math.random() * 10 + 1) + 1)
+        return (Math.floor(Math.random() * 12 + 1) + 4)
     }
 
     const sorcererAttack = sorcererDamageModifier()
@@ -57,6 +65,7 @@ function SorcererUI ({
                 `Juhl rolled 🎲(${diceRoll}) + 5 against the enemy.`,
                 `Juhl missed the target`)
         }
+        setPotionCD(true)
         setSorTurn(2)
     }
 
@@ -80,7 +89,7 @@ function SorcererUI ({
                 `Juhl pelted the enemy for ${magicMissleAttack} damage!`)
         
         setEnemyHealth(damage)
-        
+        setPotionCD(true)
         setSorTurn(2)
     }
 
@@ -107,7 +116,7 @@ function SorcererUI ({
                 `Juhl obliterated the target for ${lightningBoltAttack} damage!!!`)
         }
         setEnemyHealth(damage)
-        
+        setPotionCD(true)
         setSorTurn(2)
         setLightningCD(0)
     }
@@ -115,7 +124,9 @@ function SorcererUI ({
     
 
     if (sorcererHealth < 0 ) {
-        sorcererHealth = 0
+        setSorcererHealth(0)
+    } else if (sorcererHealth > 38) {
+        setSorcererHealth(38)
     }
 
     const healthBar = ((sorcererHealth / 38) * 100)
@@ -144,6 +155,14 @@ function SorcererUI ({
         }
     }
 
+    function potionStatus() {
+        if (potionCD) {
+            return healingpotion
+        } else {
+            return potionused
+        }
+    }
+
     function lightningAvailable() {
         if (lightningCD === 5) {
             return <button
@@ -159,6 +178,23 @@ function SorcererUI ({
                 Lightning Bolt
         </button>
         }
+    }
+
+    function potionRestoreModifier () {
+        return (Math.floor(Math.random() * 8 + 1) + 12)
+    }
+
+    const potionRestore = potionRestoreModifier()
+
+
+    function drinkPotion() {
+        const restore = (sorcererHealth) + (potionRestore)
+        if (potionCD === true && sorTurn === 1 && potionAmount > 0 && sorcererHealth > 0) {
+            setSorcererHealth(restore)
+            setPotionAmount(potionAmount - 1)
+            setPotionCD(false)
+            setBattleLog([...battleLog, `Juhl restored ${potionRestore} health.`])
+        } 
     }
 
     function renderActions() {
@@ -209,6 +245,13 @@ function SorcererUI ({
             src={sorcererStatus()}
             alt='rogue pic'
             />
+            <img 
+            className='healing-potion-sor'
+            src={potionStatus()}
+            alt='healing-potion'
+            onClick={drinkPotion}
+            />
+            <h1 className='potion-amount-sor'>{potionAmount}</h1>
             <img 
             className='sorcerer-ac'
             src={sorcererac}
