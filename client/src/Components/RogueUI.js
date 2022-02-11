@@ -64,7 +64,7 @@ function RogueUI ({
         } else {
             updateBattleLog(
                 `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
-                'Iris missed the target')
+                'Iris missed the target.')
         }
         setPotionCD(true)
         setRogTurn(2)
@@ -88,7 +88,7 @@ function RogueUI ({
         } else {
             updateBattleLog(
                 `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
-                'Iris missed the target')
+                'Iris missed the target.')
         }
         setPotionCD(true)
         setRogTurn(2)

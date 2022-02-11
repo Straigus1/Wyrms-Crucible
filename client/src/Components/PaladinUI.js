@@ -73,7 +73,7 @@ function PaladinUI ({
         } else {
             updateBattleLog(
                 `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
-                `Deus missed the mark!`)
+                `Deus missed the mark.`)
         }
         setPotionCD(true)
         setPalTurn(2)

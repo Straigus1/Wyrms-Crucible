@@ -566,7 +566,7 @@ ul {
 #venom-strike {
   left: -45px;
   top: -70px;
-  background-color: green;
+  background-color: rgb(58, 124, 58);
   font-size: 14.5px;
   overflow: hidden;
   white-space: nowrap;

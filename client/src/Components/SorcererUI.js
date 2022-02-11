@@ -63,7 +63,7 @@ function SorcererUI ({
         } else {
             updateBattleLog(
                 `Juhl rolled 🎲(${diceRoll}) + 5 against the enemy.`,
-                `Juhl missed the target`)
+                `Juhl missed the target.`)
         }
         setPotionCD(true)
         setSorTurn(2)
