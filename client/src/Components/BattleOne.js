@@ -193,7 +193,9 @@ function BattleOne () {
     function renderCurrentOutcome () {
         
         if (enemyHealth > 0) {
-            return <div> <ProgressBar variant="danger" id='enemy-hp' now={healthBar} />
+            return <div> 
+                <h2 className='harpy-health-value'>{enemyHealth}/275 </h2>
+                <ProgressBar variant="danger" id='enemy-hp' now={healthBar} />
                 <img src={renderEnemy()} alt='harpyB' id='harpyB' />
             {playerLost()}
             </div>

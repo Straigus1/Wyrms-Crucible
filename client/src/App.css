@@ -662,7 +662,7 @@ ul {
 
 #enemy-hp {
   position: absolute;
-  top: 2%;
+  top: 7%;
   width: 400px;
   
 }
@@ -704,3 +704,18 @@ ul {
   
 }
 
+.behemoth-health-value {
+  position: absolute;
+  color: white;
+  top: 22%;
+  left: 49%;
+  font-size: 20px;
+}
+
+.harpy-health-value {
+  position: absolute;
+  color: white;
+  top: 4%;
+  left: 47.5%;
+  font-size: 20px;
+}

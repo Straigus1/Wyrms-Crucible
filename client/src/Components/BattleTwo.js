@@ -193,7 +193,9 @@ function BattleTwo () {
     function renderCurrentOutcome () {
         
         if (enemyHealth > 0) {
-            return <div> <ProgressBar variant="danger" id='behemoth-hp' now={healthBar} />
+            return <div>
+                <h2 className='behemoth-health-value'>{enemyHealth}/325 </h2>
+                <ProgressBar variant="danger" id='behemoth-hp' now={healthBar} />
                 <img src={renderEnemy()} alt='BehemothB' id='behemoth' />
             {playerLost()}
             </div>
