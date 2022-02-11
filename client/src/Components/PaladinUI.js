@@ -88,7 +88,7 @@ function PaladinUI ({
     function palDivineSmite() {
         const damage = (enemyHealth) - (smiteAttack)
         if (paladinRoll >= enemyArmorClass) {
-            if (paladinAttack <= 11) {
+            if (smiteAttack <= 11) {
                 updateBattleLog(
                     `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                     `Deus smited the enemy for ${smiteAttack} damage!`)
@@ -140,7 +140,7 @@ function PaladinUI ({
     function paladinStatus() {
         if (paladinHealth > 0 && blessStatus === 0) {
             return paladinpic
-        } else if (blessStatus) {
+        } else if (blessStatus && paladinHealth > 0) {
             return paladinbless
         } else {
             return paladindead

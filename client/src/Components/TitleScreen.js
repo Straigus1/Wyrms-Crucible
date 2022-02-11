@@ -1,7 +1,7 @@
 import React from 'react'
 // import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
-import title from '../Images/Group 107.png'
+import title from '../Images/title-pic.png'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -27,7 +27,7 @@ function TitleScreen ({player, setPlayer}) {
                 <img src={title} id="title" alt="title" />
                 {player ? 
                 <>
-                <h5>Welcome, {player.username}</h5>
+                <h5>Welcome, {player.username}!</h5>
                 <Button onClick={() => navigate("/beginning-discover")}>
                     New Game
                 </Button>
@@ -47,8 +47,8 @@ function TitleScreen ({player, setPlayer}) {
                 <Button onClick={() => navigate("/signup")}>
                     Signup
                 </Button>
-                <Button onClick={() => navigate("/beginning-discover")}>
-                    New Game
+                <Button onClick={() => navigate("/")}>
+                    Credits
                 </Button>
                 <Button onClick={() => navigate("/")}>
                     Tutorials/Tips

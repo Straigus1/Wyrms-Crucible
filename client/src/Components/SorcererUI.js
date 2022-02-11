@@ -148,7 +148,7 @@ function SorcererUI ({
     function sorcererStatus() {
         if (sorcererHealth > 0 && blessStatus === 0) {
             return sorcererpic
-        } else if (blessStatus) {
+        } else if (blessStatus && sorcererHealth > 0) {
             return sorcererbless
         } else {
             return sorcererdead

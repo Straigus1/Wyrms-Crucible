@@ -116,7 +116,7 @@ function RogueUI ({
         } else {
             updateBattleLog(
                 `Iris rolled 🎲(${diceRoll}) + 11 against the enemy.`,
-                'Iris lamentably missed the mark')
+                'Iris lamentably missed the mark.')
         }
         setPotionCD(true)
         setRogTurn(2)
@@ -157,7 +157,7 @@ function RogueUI ({
     function rogueStatus() {
         if (rogueHealth > 0 && blessStatus === 0) {
             return roguepic
-        } else if (blessStatus) {
+        } else if (blessStatus && rogueHealth > 0) {
             return roguebless
         } else {
             return roguedead

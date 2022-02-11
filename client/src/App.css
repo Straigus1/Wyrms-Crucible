@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(-45deg, #130a07, #130a09, #130913, #130906);
+  background: linear-gradient(-45deg, #130a07, #1f0f0d, #130913, #130906);
   animation: gradient 15s ease infinite;
   background-size: 400% 400%;
   height: 100vh;
@@ -52,7 +52,8 @@ ul {
 
 #title {
   max-width: 100%;
-  margin-top: 20px;
+  margin-bottom: 40px;
+  border: groove 3px rgb(145, 124, 8);
 }
 
 #title-menu {
@@ -68,7 +69,7 @@ ul {
   background-color: black;
   border: black;
   width: 200px;
-  margin-top: 100px;
+  margin-top: 60px;
   padding: 20px;
   
 }
@@ -194,11 +195,32 @@ ul {
   background-size: 100% 100%;
 }
 
+#transition-one-background {
+  background-image: url("./Images/transition-one.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 
+#transition-two-background {
+  background-image: url("./Images/transition-two.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 
 /* > BattleOne */
 #battle-one-background {
   background-image: url("./Images/battle-one.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+
+#battle-two-background {
+  background-image: url("./Images/battle-two.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -246,8 +268,8 @@ ul {
 
 #lose-button {
   position: absolute;
-  left: 50px;
-  top: 220px
+  left: 55px;
+  top: 200px
 }
 
 .continue:hover {
@@ -666,3 +688,19 @@ ul {
   top: 650px;
   opacity: 85%
 }
+
+#behemoth {
+  position: relative;
+  width: 650px;
+  height: 420px;
+  top: 28%;
+}
+
+#behemoth-hp {
+  position: absolute;
+  top: 25%;
+  left: 35%;
+  width: 500px;
+  
+}
+
