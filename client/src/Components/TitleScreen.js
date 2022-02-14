@@ -29,7 +29,7 @@ function TitleScreen ({player, setPlayer}) {
                 <>
                 <h5>Welcome, {player.username}!</h5>
                 <Button onClick={() => navigate("/beginning-discover")}>
-                    New Game
+                    Start Game
                 </Button>
         
                 <Button onClick={handleLogoutClick}>

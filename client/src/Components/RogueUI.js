@@ -3,13 +3,16 @@ import roguepic from '../Images/rogue-pic.png'
 import roguedead from '../Images/rogue-pic-dead.png'
 import rogueac from '../Images/rogue-armor.png'
 import roguebless from '../Images/rogue-pic-bless.png'
+import roguestun from '../Images/rogue-pic-stun.png'
 import healingpotion from '../Images/healing-potion.png'
 import potionused from '../Images/healing-potion-used.png'
 import iris from '../Images/rogue-name.png'
 import { ProgressBar } from 'react-bootstrap'
 
 
+
 function RogueUI ({
+    rogStunStatus,
     battleLog,
     setBattleLog,
     setRogueHealth,
@@ -23,13 +26,14 @@ function RogueUI ({
     setRogTurn, 
     rogueHealth, 
     enemyHealth, 
-    setEnemyHealth}) 
-            {
+    setEnemyHealth}) {
+
     const [potionAmount, setPotionAmount] = useState(3)
     const [potionCD, setPotionCD] = useState(true)
+    // const [damageValue, setDamageValue] = useState(0)
 
     function rogueDamageModifier() {
-        return (Math.floor(Math.random() * 11 + 2) + 6)
+        return (Math.floor(Math.random() * 12 + 1) + 7)
     }
 
     const rogueAttack = rogueDamageModifier()
@@ -61,6 +65,8 @@ function RogueUI ({
                     `Iris mutilated the target for ${rogueAttack} damage!!`)
             }
             setEnemyHealth(damage)
+            // setDamageValue(rogueAttack)
+            
         } else {
             updateBattleLog(
                 `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
@@ -68,7 +74,9 @@ function RogueUI ({
         }
         setPotionCD(true)
         setRogTurn(2)
+        
     }
+    
 
     function rogueVenomStrikeModifier() {
         return (Math.floor(Math.random() * 6 + 1) + 3)
@@ -95,7 +103,7 @@ function RogueUI ({
     }
 
     function roguePhantomAssultModifier() {
-        return (Math.floor(Math.random() * 15 + 4) + 18)
+        return (Math.floor(Math.random() * 15 + 1) + 21)
     }
 
     const phantomAttack = roguePhantomAssultModifier()
@@ -155,10 +163,12 @@ function RogueUI ({
     } 
 
     function rogueStatus() {
-        if (rogueHealth > 0 && blessStatus === 0) {
+        if (rogueHealth > 0 && blessStatus === 0 && rogStunStatus === false) {
             return roguepic
         } else if (blessStatus && rogueHealth > 0) {
             return roguebless
+        } else if (rogueHealth > 0 && rogStunStatus === true) {
+            return roguestun
         } else {
             return roguedead
         }
@@ -276,6 +286,7 @@ function RogueUI ({
             src={iris}
             alt='iris'
             />
+            {/* <h1 className='damage-dealt'>{damageValue}</h1> */}
         </div>
     )
 

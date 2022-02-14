@@ -2,6 +2,7 @@ import {useState} from 'react'
 import paladinpic from '../Images/paladin-pic.png'
 import paladindead from '../Images/paladin-pic-dead.png'
 import paladinbless from '../Images/paladin-pic-bless.png'
+import paladinstun from '../Images/paladin-pic-stun.png'
 import paladinac from '../Images/paladin-armor.png'
 import healingpotion from '../Images/healing-potion.png'
 import potionused from '../Images/healing-potion-used.png'
@@ -11,6 +12,7 @@ import { ProgressBar } from 'react-bootstrap'
 
 
 function PaladinUI ({
+    palStunStatus,
     setPaladinHealth,
     enemyArmorClass,
     smiteCD,
@@ -80,7 +82,7 @@ function PaladinUI ({
     }
 
     function paladinDivineSmiteModifier() {
-        return (Math.floor(Math.random() * 15 + 3) + 5)
+        return (Math.floor(Math.random() * 12 + 1) + 11)
     }
 
     const smiteAttack = paladinDivineSmiteModifier()
@@ -138,10 +140,12 @@ function PaladinUI ({
     } 
 
     function paladinStatus() {
-        if (paladinHealth > 0 && blessStatus === 0) {
+        if (paladinHealth > 0 && blessStatus === 0 && palStunStatus === false) {
             return paladinpic
         } else if (blessStatus && paladinHealth > 0) {
             return paladinbless
+        } else if (paladinHealth > 0 && palStunStatus === true) {
+            return paladinstun
         } else {
             return paladindead
         }

@@ -9,8 +9,11 @@ import Transition2 from "./Components/Transition2";
 import TitleScreen from "./Components/TitleScreen";
 import SignupPage from "./Components/SignupPage";
 import LoginPage from "./Components/LoginPage";
-import BattleOne from "./Components/BattleOne";
-import BattleTwo from "./Components/BattleTwo";
+import Battle1 from "./Components/Battle1";
+import Battle2 from "./Components/Battle2";
+import Battle3 from "./Components/Battle3";
+import Battle4 from "./Components/Battle4";
+import Battle5 from "./Components/Battle5";
 
 function App() {
   const [player, setPlayer] = useState(null);
@@ -35,8 +38,11 @@ function App() {
           <Route path="/beginning-entrance" element={<Beginning2 player={player} setPlayer={setPlayer}/> }/>
           <Route path="/transition-one" element={<Transition player={player} setPlayer={setPlayer}/> }/>
           <Route path="/transition-two" element={<Transition2 player={player} setPlayer={setPlayer}/> }/>
-          <Route path="/battleone" element={<BattleOne player={player} setPlayer={setPlayer}/> }/>
-          <Route path="/battletwo" element={<BattleTwo player={player} setPlayer={setPlayer}/> }/>
+          <Route path="/battleone" element={<Battle1 player={player} setPlayer={setPlayer}/> }/>
+          <Route path="/battletwo" element={<Battle2 player={player} setPlayer={setPlayer}/> }/>
+          <Route path="/battlethree" element={<Battle3 player={player} setPlayer={setPlayer}/> }/>
+          <Route path="/battlefour" element={<Battle4 player={player} setPlayer={setPlayer}/> }/>
+          <Route path="/battlefive" element={<Battle5 player={player} setPlayer={setPlayer}/> }/>
         </Routes>
       </BrowserRouter>
     </div>

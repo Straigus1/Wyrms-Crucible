@@ -1,16 +1,17 @@
 import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProgressBar } from 'react-bootstrap'
-import Behemoth from '../Images/behemoth-pic.png'
-import BehemothPoison from '../Images/behemoth-pic-poison.png'
+import lizard from '../Images/lizard-pic.png'
+import lizardPoison from '../Images/lizard-pic-poison.png'
 import roundContainer from '../Images/round-container.png'
 import BattleLog from './BattleLog'
 import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
+// import useDelayedState from 'use-delayed-state'
 
-function BattleTwo () {
-    const [enemyHealth, setEnemyHealth] = useState(325)
+function Battle1 () {
+    const [enemyHealth, setEnemyHealth] = useState(175)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
@@ -26,14 +27,14 @@ function BattleTwo () {
     const [battleLog, setBattleLog] = useState([])
 
     function enemyDamageModifier() {
-        return (Math.floor(Math.random() * 12 + 1) + 12)
+        return (Math.floor(Math.random() * 6 + 1) + 9)
     }
     const enemyAttack = enemyDamageModifier()
 
     const diceRoll = Math.floor(Math.random() * 20 + 1)
     
     function enemyDiceRoll() {
-        return (diceRoll) + 10
+        return (diceRoll) + 7
     }
     const enemyRoll = enemyDiceRoll()
 
@@ -48,47 +49,49 @@ function BattleTwo () {
             let damage = (rogueHealth) - (enemyAttack)                
             if (enemyRoll >= 15) {
                 updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Iris.`,
-                    `Behemoth attacked Iris for ${enemyAttack} damage!`)
+                    `Lizard rolled 🎲(${diceRoll}) + 7 against Iris.`,
+                    `Lizard attacked Iris for ${enemyAttack} damage!`)
                 setRogueHealth(damage)
             } else {
                 updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Iris.`,
+                    `Lizard rolled 🎲(${diceRoll}) + 7 against Iris.`,
                     'Iris avoided the attack!')
             }
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             let damage = (sorcererHealth) - (enemyAttack)
             if (enemyRoll >= 14) {
                 updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Juhl.`,
-                    `Behemoth attacked Juhl for ${enemyAttack} damage!`)
+                    `Lizard rolled 🎲(${diceRoll}) + 7 against Juhl.`,
+                    `Lizard attacked Juhl for ${enemyAttack} damage!`)
                 setSorcererHealth(damage)
             } else {
                 updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Juhl.`,
+                    `Lizard rolled 🎲(${diceRoll}) + 7 against Juhl.`,
                     'Juhl resisted the assault!')
             }
         } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             let damage = (paladinHealth) - (enemyAttack)
             if (enemyRoll >= 19) {
                 updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Deus.`,
-                    `Behemoth attacked Deus for ${enemyAttack} damage!`)
+                    `Lizard rolled 🎲(${diceRoll}) + 7 against Deus.`,
+                    `Lizard attacked Deus for ${enemyAttack} damage!`)
                 setPaladinHealth(damage)
             } else {
                 updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Deus.`,
+                    `Lizard rolled 🎲(${diceRoll}) + 7 against Deus.`,
                     'Deus blocked the strike!')
             }
         }
+        
+        
     }
-    const healthBar = ((enemyHealth / 325) * 100)
+    const healthBar = ((enemyHealth / 175) * 100)
 
     const navigate = useNavigate()
 
     function continueClick (e) {
         e.preventDefault()
-        navigate("/")
+        navigate("/transition-one")
     }
 
     function startOverClick (e) {
@@ -98,16 +101,16 @@ function BattleTwo () {
 
     function renderEnemy() {
         if (enemyHealth > 0 && poisonStatus <= 0) {
-            return Behemoth
+            return lizard
         } else if (enemyHealth > 0 && poisonStatus > 0) {
-            return BehemothPoison
+            return lizardPoison
         } else {
             return null
         }
 
     }
 
-    const enemyArmorClass = 15
+    const enemyArmorClass = 11
 
     function poisonDamageModifier() {
         return (Math.floor(Math.random() * 4 + 1) + 4)
@@ -118,8 +121,25 @@ function BattleTwo () {
     const damagePoison = (enemyHealth) - (poisonDamage)
 
     if (poisonStatus < 0) {
-        poisonStatus = 0
+        setPoisonStatus(0)
     }
+    // Trying to add delay after paladin's turn, failing miserably.
+    // Whenever delayed is added, boss attacks twice. 
+
+    // function enemyReadiesAttack() {
+    //     setTimeout(enemyTarget, 1000);
+    // }
+
+    // function stopEnemyAttack() {
+    //     clearTimeout(enemyTarget)
+    // }
+
+    // function changePalTurn () {
+    //     setTimeout(() => {setPalTurn(3)}, 1000)
+    // }
+    
+    
+
     // Rogue Turn
     if (rogTurn === 0 && rogueHealth > 0) {
         setRogTurn(1)
@@ -145,7 +165,7 @@ function BattleTwo () {
     } else if (paladinHealth <= 0 && sorTurn === 2) {
         setPalTurn(2)
         setSorTurn(3)
-    }
+    } 
     // Enemy Turn
     else if (palTurn === 2 && enemyHealth > 0) {
         enemyTarget()
@@ -171,10 +191,10 @@ function BattleTwo () {
             setEnemyHealth(damagePoison)
             setPoisonStatus(poisonStatus - 1)
             if (poisonStatus === 0) {
-            setBattleLog([...battleLog, `Behemoth was dealt ${poisonDamage} damage from poison.`])
+            setBattleLog([...battleLog, `Lizard was dealt ${poisonDamage} damage from poison.`])
             setBattleLog([...battleLog, `The enemy is no longer poisoned.`])
             } else {
-            setBattleLog([...battleLog, `Behemoth was dealt ${poisonDamage} damage from poison.`])
+            setBattleLog([...battleLog, `Lizard was dealt ${poisonDamage} damage from poison.`])
             }
         }
     }
@@ -193,10 +213,10 @@ function BattleTwo () {
     function renderCurrentOutcome () {
         
         if (enemyHealth > 0) {
-            return <div>
-                <h2 className='behemoth-health-value'>{enemyHealth}/325 </h2>
-                <ProgressBar variant="danger" id='behemoth-hp' now={healthBar} />
-                <img src={renderEnemy()} alt='BehemothB' id='behemoth' />
+            return <div> 
+                <h2 className='lizard-health-value'>{enemyHealth}/175 </h2>
+                <ProgressBar variant="danger" id='lizard-hp' now={healthBar} />
+                <img src={renderEnemy()} alt='lizard' id='lizard' />
             {playerLost()}
             </div>
             
@@ -210,7 +230,7 @@ function BattleTwo () {
     }
     
     return (
-        <div id="battle-two-background" className='game-box'>
+        <div id="battle-one-background" className='game-box'>
             
             <BattleLog battleLog={battleLog}/>
             <img 
@@ -278,4 +298,4 @@ function BattleTwo () {
   
 }
 
-export default BattleTwo
+export default Battle1

@@ -1,16 +1,16 @@
 import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProgressBar } from 'react-bootstrap'
-import harpyB from '../Images/harpybigv.png'
-import harpyBPoison from '../Images/harpybigv-poison.png'
+import Behemoth from '../Images/behemoth-pic.png'
+import BehemothPoison from '../Images/behemoth-pic-poison.png'
 import roundContainer from '../Images/round-container.png'
 import BattleLog from './BattleLog'
 import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
 
-function BattleOne () {
-    const [enemyHealth, setEnemyHealth] = useState(275)
+function Battle4 () {
+    const [enemyHealth, setEnemyHealth] = useState(325)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
@@ -26,14 +26,14 @@ function BattleOne () {
     const [battleLog, setBattleLog] = useState([])
 
     function enemyDamageModifier() {
-        return (Math.floor(Math.random() * 11 + 2) + 10)
+        return (Math.floor(Math.random() * 12 + 1) + 12)
     }
     const enemyAttack = enemyDamageModifier()
 
     const diceRoll = Math.floor(Math.random() * 20 + 1)
     
     function enemyDiceRoll() {
-        return (diceRoll) + 8
+        return (diceRoll) + 10
     }
     const enemyRoll = enemyDiceRoll()
 
@@ -48,47 +48,47 @@ function BattleOne () {
             let damage = (rogueHealth) - (enemyAttack)                
             if (enemyRoll >= 15) {
                 updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Iris.`,
-                    `Harpy attacked Iris for ${enemyAttack} damage!`)
+                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Iris.`,
+                    `Behemoth attacked Iris for ${enemyAttack} damage!`)
                 setRogueHealth(damage)
             } else {
                 updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Iris.`,
+                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Iris.`,
                     'Iris avoided the attack!')
             }
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             let damage = (sorcererHealth) - (enemyAttack)
             if (enemyRoll >= 14) {
                 updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Juhl.`,
-                    `Harpy attacked Juhl for ${enemyAttack} damage!`)
+                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Juhl.`,
+                    `Behemoth attacked Juhl for ${enemyAttack} damage!`)
                 setSorcererHealth(damage)
             } else {
                 updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Juhl.`,
+                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Juhl.`,
                     'Juhl resisted the assault!')
             }
         } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             let damage = (paladinHealth) - (enemyAttack)
             if (enemyRoll >= 19) {
                 updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Deus.`,
-                    `Harpy attacked Deus for ${enemyAttack} damage!`)
+                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Deus.`,
+                    `Behemoth attacked Deus for ${enemyAttack} damage!`)
                 setPaladinHealth(damage)
             } else {
                 updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Deus.`,
+                    `Behemoth rolled 🎲(${diceRoll}) + 10 against Deus.`,
                     'Deus blocked the strike!')
             }
         }
     }
-    const healthBar = ((enemyHealth / 275) * 100)
+    const healthBar = ((enemyHealth / 325) * 100)
 
     const navigate = useNavigate()
 
     function continueClick (e) {
         e.preventDefault()
-        navigate("/transition-one")
+        navigate("/battlefive")
     }
 
     function startOverClick (e) {
@@ -98,16 +98,16 @@ function BattleOne () {
 
     function renderEnemy() {
         if (enemyHealth > 0 && poisonStatus <= 0) {
-            return harpyB
+            return Behemoth
         } else if (enemyHealth > 0 && poisonStatus > 0) {
-            return harpyBPoison
+            return BehemothPoison
         } else {
             return null
         }
 
     }
 
-    const enemyArmorClass = 13
+    const enemyArmorClass = 15
 
     function poisonDamageModifier() {
         return (Math.floor(Math.random() * 4 + 1) + 4)
@@ -118,7 +118,7 @@ function BattleOne () {
     const damagePoison = (enemyHealth) - (poisonDamage)
 
     if (poisonStatus < 0) {
-        poisonStatus = 0
+        setPoisonStatus(0)
     }
     // Rogue Turn
     if (rogTurn === 0 && rogueHealth > 0) {
@@ -171,10 +171,10 @@ function BattleOne () {
             setEnemyHealth(damagePoison)
             setPoisonStatus(poisonStatus - 1)
             if (poisonStatus === 0) {
-            setBattleLog([...battleLog, `Harpy was dealt ${poisonDamage} damage from poison.`])
+            setBattleLog([...battleLog, `Behemoth was dealt ${poisonDamage} damage from poison.`])
             setBattleLog([...battleLog, `The enemy is no longer poisoned.`])
             } else {
-            setBattleLog([...battleLog, `Harpy was dealt ${poisonDamage} damage from poison.`])
+            setBattleLog([...battleLog, `Behemoth was dealt ${poisonDamage} damage from poison.`])
             }
         }
     }
@@ -193,10 +193,10 @@ function BattleOne () {
     function renderCurrentOutcome () {
         
         if (enemyHealth > 0) {
-            return <div> 
-                <h2 className='harpy-health-value'>{enemyHealth}/275 </h2>
-                <ProgressBar variant="danger" id='enemy-hp' now={healthBar} />
-                <img src={renderEnemy()} alt='harpyB' id='harpyB' />
+            return <div>
+                <h2 className='behemoth-health-value'>{enemyHealth}/325 </h2>
+                <ProgressBar variant="danger" id='behemoth-hp' now={healthBar} />
+                <img src={renderEnemy()} alt='BehemothB' id='behemoth' />
             {playerLost()}
             </div>
             
@@ -210,7 +210,7 @@ function BattleOne () {
     }
     
     return (
-        <div id="battle-one-background" className='game-box'>
+        <div id="battle-four-background" className='game-box'>
             
             <BattleLog battleLog={battleLog}/>
             <img 
@@ -278,4 +278,4 @@ function BattleOne () {
   
 }
 
-export default BattleOne
+export default Battle4

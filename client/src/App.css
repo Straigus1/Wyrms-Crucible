@@ -211,7 +211,7 @@ ul {
 
 /* > BattleOne */
 #battle-one-background {
-  background-image: url("./Images/battle-one.png");
+  background-image: url("./Images/lizard-fight-background.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -220,6 +220,24 @@ ul {
 }
 
 #battle-two-background {
+  background-image: url("./Images/harpy-fight-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+
+#battle-three-background {
+  background-image: url("./Images/battle-one.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+
+#battle-four-background {
   background-image: url("./Images/battle-two.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -228,12 +246,15 @@ ul {
   justify-content: center;
 }
 
-#harpyB {
-  position: relative;
-  width: 400px;
-  height: 300px;
-  top: 10%;
+#battle-five-background {
+  background-image: url("./Images/battle-two.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
 }
+
 
 .party-box {
   bottom: 0;
@@ -660,12 +681,7 @@ ul {
 
 
 
-#enemy-hp {
-  position: absolute;
-  top: 7%;
-  width: 400px;
-  
-}
+
  
 .lose {
   top: 350px;
@@ -712,10 +728,100 @@ ul {
   font-size: 20px;
 }
 
+
+
+/* .damage-dealt {
+  position: absolute;
+  top: 50%;
+  color: white;
+} */
+
+#lizard {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  top: 40%;
+}
+
+.lizard-health-value {
+  position: absolute;
+  color: white;
+  top: 34%;
+  left: 47.5%;
+  font-size: 20px;
+}
+
+#lizard-hp {
+  position: absolute;
+  top: 37%;
+  width: 400px;
+  
+}
+
+#harpy {
+  position: relative;
+  width: 300px;
+  height: 411px;
+  top: 10%;
+}
+
 .harpy-health-value {
+  position: absolute;
+  color: white;
+  top: 4%;
+  left: 48%;
+  font-size: 20px;
+}
+
+#harpy-hp {
+  position: absolute;
+  top: 7%;
+  left: 37.5%;
+  width: 400px;
+  
+}
+
+#werewolf {
+  position: relative;
+  width: 350px;
+  height: 472px;
+  top: 24.5%;
+}
+
+.werewolf-health-value {
+  position: absolute;
+  color: white;
+  top: 24%;
+  left: 47.5%;
+  font-size: 20px;
+}
+
+#werewolf-hp {
+  position: absolute;
+  top: 27%;
+  left: 37%;
+  width: 400px;
+  
+}
+
+#dragon {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  top: 10%;
+}
+
+.dragon-health-value {
   position: absolute;
   color: white;
   top: 4%;
   left: 47.5%;
   font-size: 20px;
+}
+
+#dragon-hp {
+  position: absolute;
+  top: 7%;
+  width: 400px;
+  
 }

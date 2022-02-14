@@ -2,6 +2,7 @@ import {useState} from 'react'
 import sorcererpic from '../Images/sorcerer-pic.png'
 import sorcererdead from '../Images/sorcerer-pic-dead.png'
 import sorcererbless from '../Images/sorcerer-pic-bless.png'
+import sorcererstun from '../Images/sorcerer-pic-stun.png'
 import sorcererac from '../Images/sorcerer-armor.png'
 import healingpotion from '../Images/healing-potion.png'
 import potionused from '../Images/healing-potion-used.png'
@@ -9,6 +10,7 @@ import juhl from '../Images/sorcerer-name.png'
 import { ProgressBar } from 'react-bootstrap'
 
 function SorcererUI ({
+    sorStunStatus,
     battleLog,
     setBattleLog,
     setSorcererHealth,
@@ -96,9 +98,9 @@ function SorcererUI ({
     function sorcererLightningBoltModifier() {
         const variant = Math.floor(Math.random() * 4)
         if (variant >= 1) {
-            return (Math.floor(Math.random() * 42 + 1) + 6)
+            return (Math.floor(Math.random() * 21 + 1) + 27)
         } else {
-            return (Math.floor(Math.random() * 21 + 1) + 3)
+            return (Math.floor(Math.random() * 11 + 1) + 13)
         }
     }
 
@@ -146,10 +148,12 @@ function SorcererUI ({
 
     } 
     function sorcererStatus() {
-        if (sorcererHealth > 0 && blessStatus === 0) {
+        if (sorcererHealth > 0 && blessStatus === 0 && sorStunStatus === false) {
             return sorcererpic
         } else if (blessStatus && sorcererHealth > 0) {
             return sorcererbless
+        } else if (sorcererHealth > 0 && sorStunStatus === true) {
+            return sorcererstun
         } else {
             return sorcererdead
         }
