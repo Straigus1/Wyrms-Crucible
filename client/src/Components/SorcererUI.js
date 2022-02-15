@@ -8,6 +8,7 @@ import healingpotion from '../Images/healing-potion.png'
 import potionused from '../Images/healing-potion-used.png'
 import juhl from '../Images/sorcerer-name.png'
 import { ProgressBar } from 'react-bootstrap'
+import press from '../Music/button-press.mp3'
 
 function SorcererUI ({
     sorStunStatus,
@@ -54,6 +55,10 @@ function SorcererUI ({
     }
     const sorcererRoll = sorcererDiceRoll()
 
+    function pressAudio() {
+        new Audio(press).play()
+    }
+
     function sorAttack() {
         const damage = (enemyHealth) - (sorcererAttack)
         if (sorcererRoll >= enemyArmorClass) {
@@ -69,6 +74,7 @@ function SorcererUI ({
         }
         setPotionCD(true)
         setSorTurn(2)
+        pressAudio()
     }
 
     function sorcererMagicMissleModifier() {
@@ -93,6 +99,7 @@ function SorcererUI ({
         setEnemyHealth(damage)
         setPotionCD(true)
         setSorTurn(2)
+        pressAudio()
     }
 
     function sorcererLightningBoltModifier() {
@@ -121,6 +128,7 @@ function SorcererUI ({
         setPotionCD(true)
         setSorTurn(2)
         setLightningCD(0)
+        pressAudio()
     }
 
     

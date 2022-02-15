@@ -8,8 +8,6 @@ import Sound from 'react-sound'
 import ambientSound from '../Music/ambient-theme-capstone-project.mp3'
 
 
-
-
 function TitleScreen ({player, setPlayer}) {
 
     const navigate = useNavigate();
@@ -23,14 +21,25 @@ function TitleScreen ({player, setPlayer}) {
         navigate('/', { replace: true });
       }
 
+      
+
     return (
         <div id="title-background" className="game-box">
-            <Sound
+            {/* <Sound
                 url={ambientSound}
                 playStatus={Sound.status.Playing}
                 autoLoad={true}
                 loop={true}
-            />
+            /> */}
+
+        <iframe
+            src={ambientSound}
+            allow="autoplay"
+            style={{ display: "none" }}
+            id="iframeAudio"
+        ></iframe>
+
+            
             
             <div id="title-menu">
                 <img src={title} id="title" alt="title" />

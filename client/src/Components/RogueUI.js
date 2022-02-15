@@ -8,6 +8,7 @@ import healingpotion from '../Images/healing-potion.png'
 import potionused from '../Images/healing-potion-used.png'
 import iris from '../Images/rogue-name.png'
 import { ProgressBar } from 'react-bootstrap'
+import press from '../Music/button-press.mp3'
 
 
 
@@ -51,6 +52,12 @@ function RogueUI ({
     
     
     const rogueRoll = rogueDiceRoll()
+
+    
+
+    function pressAudio() {
+        new Audio(press).play()
+    }
     
     function rogAttack() {
         const damage = (enemyHealth) - (rogueAttack)
@@ -74,6 +81,7 @@ function RogueUI ({
         }
         setPotionCD(true)
         setRogTurn(2)
+        pressAudio()
         
     }
     
@@ -100,6 +108,7 @@ function RogueUI ({
         }
         setPotionCD(true)
         setRogTurn(2)
+        pressAudio()
     }
 
     function roguePhantomAssultModifier() {
@@ -129,6 +138,7 @@ function RogueUI ({
         setPotionCD(true)
         setRogTurn(2)
         setPhantomCD(0)
+        pressAudio()
     }
 
     if (rogueHealth < 0) {

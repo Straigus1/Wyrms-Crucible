@@ -1,6 +1,7 @@
 import React from 'react'
 import Typewriter from "typewriter-effect";
 import { useNavigate } from 'react-router-dom'
+import ambientSound from '../Music/ambient-theme-capstone-project.mp3'
 
 function Transition5() {
     const navigate = useNavigate()
@@ -12,6 +13,12 @@ function Transition5() {
 
     return (
         <div id='transition-five-background' className='game-box'>
+            <iframe
+            src={ambientSound}
+            allow="autoplay"
+            style={{ display: "none" }}
+            id="iframeAudio"
+        ></iframe>
             <div>
                 <h1 className='top-expo'>Teleportation Trap</h1>
             </div>

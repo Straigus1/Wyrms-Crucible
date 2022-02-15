@@ -8,6 +8,7 @@ import BattleLog from './BattleLog'
 import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
+import battleTheme from '../Music/capstone-battle.mp3'
 // import useDelayedState from 'use-delayed-state'
 
 function Battle5 () {
@@ -254,7 +255,12 @@ function Battle5 () {
     
     return (
         <div id="battle-five-background" className='game-box'>
-            
+            <iframe
+            src={battleTheme}
+            allow="autoplay"
+            style={{ display: "none" }}
+            id="iframeAudio"
+        ></iframe>
             <BattleLog battleLog={battleLog}/>
             {renderCurrentOutcome()}
             <img 

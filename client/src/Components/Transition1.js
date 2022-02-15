@@ -2,6 +2,7 @@ import React from 'react'
 import Typewriter from "typewriter-effect";
 import { useNavigate } from 'react-router-dom'
 
+
 function Transition1() {
     const navigate = useNavigate()
 

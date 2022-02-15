@@ -15,6 +15,8 @@ import Battle2 from "./Components/Battle2";
 import Battle3 from "./Components/Battle3";
 import Battle4 from "./Components/Battle4";
 import Battle5 from "./Components/Battle5";
+// import Sample from "./Music/ambient-theme-capstone-project.mp3"
+
 
 function App() {
   const [player, setPlayer] = useState(null);
@@ -30,6 +32,12 @@ function App() {
 
   return (
     <div className="App">
+      {/* <iframe
+      src={Sample}
+      allow="autoplay"
+      style={{ display: "none" }}
+      id="iframeAudio"
+    ></iframe> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<TitleScreen player={player} setPlayer={setPlayer}/> }/>

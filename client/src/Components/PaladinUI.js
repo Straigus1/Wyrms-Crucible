@@ -8,6 +8,7 @@ import healingpotion from '../Images/healing-potion.png'
 import potionused from '../Images/healing-potion-used.png'
 import deus from '../Images/paladin-name.png'
 import { ProgressBar } from 'react-bootstrap'
+import press from '../Music/button-press.mp3'
 
 
 
@@ -59,6 +60,10 @@ function PaladinUI ({
         }
     }
 
+    function pressAudio() {
+        new Audio(press).play()
+    }
+
     function palAttack() {
         const damage = (enemyHealth) - (paladinAttack)
         if (paladinRoll >= enemyArmorClass) {
@@ -79,6 +84,7 @@ function PaladinUI ({
         }
         setPotionCD(true)
         setPalTurn(2)
+        pressAudio()
     }
 
     function paladinDivineSmiteModifier() {
@@ -108,6 +114,7 @@ function PaladinUI ({
         setPotionCD(true)
         setPalTurn(2)
         setSmiteCD(0)
+        pressAudio()
     }
 
     function palBlessAction() {
@@ -115,6 +122,7 @@ function PaladinUI ({
         setPotionCD(true)
         setBlessStatus(6)
         setPalTurn(2)
+        pressAudio()
     }
     if (paladinHealth < 0) {
         setPaladinHealth(0)
