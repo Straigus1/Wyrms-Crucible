@@ -11,11 +11,12 @@ import SorcererUI from './SorcererUI'
 // import useDelayedState from 'use-delayed-state'
 
 function Battle5 () {
-    const [enemyHealth, setEnemyHealth] = useState(500)
+    const [enemyHealth, setEnemyHealth] = useState(475)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
     const [round, setRound] = useState(1)
+    const [breathReady, setBreathReady] = useState(true)
     const [poisonStatus, setPoisonStatus] = useState(0)
     const [blessStatus, setBlessStatus] = useState(0)
     const [phantomCD, setPhantomCD] = useState(4)
@@ -27,14 +28,14 @@ function Battle5 () {
     const [battleLog, setBattleLog] = useState([])
 
     function enemyDamageModifier() {
-        return (Math.floor(Math.random() * 6 + 1) + 15)
+        return (Math.floor(Math.random() * 6 + 1) + 9)
     }
     const enemyAttack = enemyDamageModifier()
 
     const diceRoll = Math.floor(Math.random() * 20 + 1)
     
     function enemyDiceRoll() {
-        return (diceRoll) + 8
+        return (diceRoll) + 12
     }
     const enemyRoll = enemyDiceRoll()
 
@@ -42,50 +43,69 @@ function Battle5 () {
         setBattleLog([...battleLog, roll, info])
     }
 
+    function dragonBreathDamage() {
+        return (Math.floor(Math.random() * 4 + 1) + 12)
+    }
+
+    const breathAttack = dragonBreathDamage()
+
+    const breathRecharge = Math.floor(Math.random() * 6 + 1)
     // No longer attack dead heroes
     function enemyTarget () {
         let target = Math.floor(Math.random() * 10)
+        let damageFRog = (rogueHealth) - (breathAttack)
+        let damageFSor = (sorcererHealth) - (breathAttack)
+        let damageFPal = (paladinHealth) - (breathAttack)
+        if (breathReady) {
+            updateBattleLog(
+                'Dragon used Dragon Breath!',
+                `The Party was dealt ${breathAttack} damage!`)
+            setBreathReady(false)
+            setRogueHealth(damageFRog)
+            setSorcererHealth(damageFSor)
+            setPaladinHealth(damageFPal)
+        } else {
         if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
             let damage = (rogueHealth) - (enemyAttack)                
             if (enemyRoll >= 15) {
                 updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 8 against Iris.`,
+                    `Dragon rolled 🎲(${diceRoll}) + 12 against Iris.`,
                     `Dragon attacked Iris for ${enemyAttack} damage!`)
                 setRogueHealth(damage)
             } else {
                 updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 8 against Iris.`,
+                    `Dragon rolled 🎲(${diceRoll}) + 12 against Iris.`,
                     'Iris avoided the attack!')
             }
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             let damage = (sorcererHealth) - (enemyAttack)
             if (enemyRoll >= 14) {
                 updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 8 against Juhl.`,
+                    `Dragon rolled 🎲(${diceRoll}) + 12 against Juhl.`,
                     `Dragon attacked Juhl for ${enemyAttack} damage!`)
                 setSorcererHealth(damage)
             } else {
                 updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 8 against Juhl.`,
+                    `Dragon rolled 🎲(${diceRoll}) + 12 against Juhl.`,
                     'Juhl resisted the assault!')
             }
         } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             let damage = (paladinHealth) - (enemyAttack)
             if (enemyRoll >= 19) {
                 updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 8 against Deus.`,
+                    `Dragon rolled 🎲(${diceRoll}) + 12 against Deus.`,
                     `Dragon attacked Deus for ${enemyAttack} damage!`)
                 setPaladinHealth(damage)
             } else {
                 updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 8 against Deus.`,
+                    `Dragon rolled 🎲(${diceRoll}) + 12 against Deus.`,
                     'Deus blocked the strike!')
             }
         }
         
-        
     }
-    const healthBar = ((enemyHealth / 500) * 100)
+    }
+    const healthBar = ((enemyHealth / 475) * 100)
 
     const navigate = useNavigate()
 
@@ -174,6 +194,9 @@ function Battle5 () {
         setRogTurn(0)
         setSorTurn(0)
         setPalTurn(0)
+        if (breathReady === false && breathRecharge >= 5 ) {
+            setBreathReady(true)
+        }
         if (phantomCD >= 0 && phantomCD < 4 ){
             setPhantomCD(phantomCD + 1)
         }
@@ -214,7 +237,7 @@ function Battle5 () {
         
         if (enemyHealth > 0) {
             return <div> 
-                <h2 className='dragon-health-value'>{enemyHealth}/500 </h2>
+                <h2 className='dragon-health-value'>{enemyHealth}/475 </h2>
                 <ProgressBar variant="danger" id='dragon-hp' now={healthBar} />
                 <img src={renderEnemy()} alt='dragon' id='dragon' />
             {playerLost()}

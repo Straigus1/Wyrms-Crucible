@@ -181,20 +181,6 @@ ul {
 }
 /* > Beginning */
 
-#beginning-background {
-  background-image: url("./Images/beginning-lighthouse.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#beginning-entrance-background {
-  background-image: url("./Images/beginning-entrance.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
 #transition-one-background {
   background-image: url("./Images/transition-one.png");
   background-position: center;
@@ -204,6 +190,27 @@ ul {
 
 #transition-two-background {
   background-image: url("./Images/transition-two.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#transition-three-background {
+  background-image: url("./Images/transition-three.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#transition-four-background {
+  background-image: url("./Images/transition-four.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#transition-five-background {
+  background-image: url("./Images/transition-five.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;

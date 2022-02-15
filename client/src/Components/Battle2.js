@@ -111,7 +111,7 @@ function Battle2 () {
 
     function continueClick (e) {
         e.preventDefault()
-        navigate("/battlethree")
+        navigate("/transition-three")
     }
 
     function startOverClick (e) {

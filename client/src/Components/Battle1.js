@@ -91,7 +91,7 @@ function Battle1 () {
 
     function continueClick (e) {
         e.preventDefault()
-        navigate("/transition-one")
+        navigate("/transition-two")
     }
 
     function startOverClick (e) {

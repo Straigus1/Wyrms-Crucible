@@ -2,18 +2,18 @@ import React from 'react'
 import Typewriter from "typewriter-effect";
 import { useNavigate } from 'react-router-dom'
 
-function Transition() {
+function Transition4() {
     const navigate = useNavigate()
 
     function continueClick (e) {
         e.preventDefault()
-        navigate("/transition-two")
+        navigate("/battle-four")
     }
 
     return (
-        <div id='transition-one-background' className='game-box'>
+        <div id='transition-four-background' className='game-box'>
             <div>
-                <h1 className='top-expo'>Transiton: Further Exploration</h1>
+                <h1 className='top-expo'>Eerie Sounds</h1>
             </div>
             <div className='dialogue-box'>
                 <div className='dialogue-box-inner'>
@@ -40,4 +40,4 @@ function Transition() {
 
 }
 
-export default Transition
+export default Transition4

@@ -2,18 +2,18 @@ import React from 'react'
 import Typewriter from "typewriter-effect";
 import { useNavigate } from 'react-router-dom'
 
-function Transition2() {
+function Transition3() {
     const navigate = useNavigate()
 
     function continueClick (e) {
         e.preventDefault()
-        navigate("/battle-two")
+        navigate("/battle-three")
     }
 
     return (
-        <div id='transition-two-background' className='game-box'>
+        <div id='transition-three-background' className='game-box'>
             <div>
-                <h1 className='top-expo'>Discovering the Crucible</h1>
+                <h1 className='top-expo'>Entering the Lair</h1>
             </div>
             <div className='dialogue-box'>
                 <div className='dialogue-box-inner'>
@@ -23,11 +23,11 @@ function Transition2() {
                         typewriter
                         .pauseFor(200)
                         .changeDelay(10)
-                        .typeString("Once every ten years, the gods host the Divinity Games - an event where mortals can compete for deification. ")   
+                        .typeString("Upon entering the lighthouse, it immediately becomes clear that something isn’t right. ")   
                         .pauseFor(1000)
-                        .typeString("Every entrant in the competition sacrifices their life, and the energies of the losers are used to empower the new deity. ")
+                        .typeString("The player will find the corpse of a Redguard woman lying in the central room, with a Falmer sword next to her. ")
                         .pauseFor(1000)
-                        .typeString("If, in ten years, the deity has gathered enough followers to sustain their godhood they continue to live.")
+                        .typeString("By the fireplace will be a Chaurus carcass and a wooden ax laying among the remains, hinting that the woman put up a fight but ultimately lost.")
                         .start();
                         }}
                         />
@@ -40,4 +40,4 @@ function Transition2() {
 
 }
 
-export default Transition2
+export default Transition3

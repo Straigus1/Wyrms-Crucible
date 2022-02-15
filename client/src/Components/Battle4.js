@@ -165,7 +165,7 @@ function Battle4 () {
 
     function continueClick (e) {
         e.preventDefault()
-        navigate("/battlefive")
+        navigate("/transition-five")
     }
 
     function startOverClick (e) {

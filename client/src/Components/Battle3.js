@@ -143,7 +143,7 @@ function Battle3 () {
 
     function continueClick (e) {
         e.preventDefault()
-        navigate("/battlefour")
+        navigate("/transition-four")
     }
 
     function startOverClick (e) {
