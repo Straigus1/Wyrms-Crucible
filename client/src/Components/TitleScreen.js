@@ -6,6 +6,7 @@ import title from '../Images/title-pic.png'
 import { useNavigate } from 'react-router-dom'
 import Sound from 'react-sound'
 import ambientSound from '../Music/ambient-theme-capstone-project.mp3'
+import ReactAudioPlayer from 'react-audio-player'
 
 
 function TitleScreen ({player, setPlayer}) {
@@ -25,22 +26,11 @@ function TitleScreen ({player, setPlayer}) {
 
     return (
         <div id="title-background" className="game-box">
-            {/* <Sound
-                url={ambientSound}
-                playStatus={Sound.status.Playing}
-                autoLoad={true}
-                loop={true}
-            /> */}
-
-        <iframe
+        <ReactAudioPlayer
             src={ambientSound}
-            allow="autoplay"
-            style={{ display: "none" }}
-            id="iframeAudio"
-        ></iframe>
-
-            
-            
+            autoPlay
+            loop
+            /> 
             <div id="title-menu">
                 <img src={title} id="title" alt="title" />
                 {player ? 

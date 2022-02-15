@@ -9,6 +9,7 @@ import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
 import battleTheme from '../Music/capstone-battle.mp3'
+import ReactAudioPlayer from 'react-audio-player'
 
 function Battle4 () {
     const [enemyHealth, setEnemyHealth] = useState(400)
@@ -291,12 +292,11 @@ function Battle4 () {
     
     return (
         <div id="battle-four-background" className='game-box'>
-            <iframe
+            <ReactAudioPlayer
             src={battleTheme}
-            allow="autoplay"
-            style={{ display: "none" }}
-            id="iframeAudio"
-        ></iframe>
+            autoPlay
+            loop
+            /> 
             <BattleLog battleLog={battleLog}/>
             <img 
             className='round-container'
