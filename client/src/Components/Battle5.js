@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProgressBar } from 'react-bootstrap'
 import dragon from '../Images/dragon-pic.png'
@@ -11,7 +11,7 @@ import SorcererUI from './SorcererUI'
 // import useDelayedState from 'use-delayed-state'
 
 function Battle5 () {
-    const [enemyHealth, setEnemyHealth] = useState(275)
+    const [enemyHealth, setEnemyHealth] = useState(500)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
@@ -27,7 +27,7 @@ function Battle5 () {
     const [battleLog, setBattleLog] = useState([])
 
     function enemyDamageModifier() {
-        return (Math.floor(Math.random() * 11 + 2) + 10)
+        return (Math.floor(Math.random() * 6 + 1) + 15)
     }
     const enemyAttack = enemyDamageModifier()
 
@@ -85,7 +85,7 @@ function Battle5 () {
         
         
     }
-    const healthBar = ((enemyHealth / 275) * 100)
+    const healthBar = ((enemyHealth / 500) * 100)
 
     const navigate = useNavigate()
 
@@ -110,7 +110,7 @@ function Battle5 () {
 
     }
 
-    const enemyArmorClass = 13
+    const enemyArmorClass = 14
 
     function poisonDamageModifier() {
         return (Math.floor(Math.random() * 4 + 1) + 4)
@@ -202,7 +202,7 @@ function Battle5 () {
     function playerLost () {
         if (rogueHealth <= 0 && sorcererHealth <= 0 && paladinHealth <= 0) {
             return <div className='lose'>
-                You Lose...
+                You Lose
                 <button className='continue' id='lose-button' onClick={startOverClick}> Game Over... </button>
             </div>
         }
@@ -214,7 +214,7 @@ function Battle5 () {
         
         if (enemyHealth > 0) {
             return <div> 
-                <h2 className='dragon-health-value'>{enemyHealth}/275 </h2>
+                <h2 className='dragon-health-value'>{enemyHealth}/500 </h2>
                 <ProgressBar variant="danger" id='dragon-hp' now={healthBar} />
                 <img src={renderEnemy()} alt='dragon' id='dragon' />
             {playerLost()}
@@ -233,6 +233,7 @@ function Battle5 () {
         <div id="battle-five-background" className='game-box'>
             
             <BattleLog battleLog={battleLog}/>
+            {renderCurrentOutcome()}
             <img 
             className='round-container'
             src={roundContainer}
@@ -241,7 +242,6 @@ function Battle5 () {
             <div className='round-tracker'>
                 <h3>Round: {round} </h3>
             </div>
-            {renderCurrentOutcome()}
             
             
             <div className='party-box'>

@@ -148,12 +148,18 @@ function SorcererUI ({
 
     } 
     function sorcererStatus() {
-        if (sorcererHealth > 0 && blessStatus === 0 && sorStunStatus === false) {
-            return sorcererpic
+        if (sorcererHealth > 0 && blessStatus === 0) {
+            if (sorStunStatus) {
+                return sorcererstun
+            } else {
+                return sorcererpic
+            }
         } else if (blessStatus && sorcererHealth > 0) {
-            return sorcererbless
-        } else if (sorcererHealth > 0 && sorStunStatus === true) {
-            return sorcererstun
+            if (sorStunStatus) {
+                return sorcererstun
+            } else {
+                return sorcererbless
+            }
         } else {
             return sorcererdead
         }

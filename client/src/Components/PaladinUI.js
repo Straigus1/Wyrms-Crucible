@@ -140,12 +140,18 @@ function PaladinUI ({
     } 
 
     function paladinStatus() {
-        if (paladinHealth > 0 && blessStatus === 0 && palStunStatus === false) {
-            return paladinpic
+        if (paladinHealth > 0 && blessStatus === 0) {
+            if (palStunStatus) {
+                return paladinstun
+            } else {
+                return paladinpic
+            }
         } else if (blessStatus && paladinHealth > 0) {
-            return paladinbless
-        } else if (paladinHealth > 0 && palStunStatus === true) {
-            return paladinstun
+            if (palStunStatus) {
+                return paladinstun
+            } else {
+                return paladinbless
+            }
         } else {
             return paladindead
         }

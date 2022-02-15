@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProgressBar } from 'react-bootstrap'
 import lizard from '../Images/lizard-pic.png'
@@ -202,7 +202,7 @@ function Battle1 () {
     function playerLost () {
         if (rogueHealth <= 0 && sorcererHealth <= 0 && paladinHealth <= 0) {
             return <div className='lose'>
-                You Lose...
+                You Lose
                 <button className='continue' id='lose-button' onClick={startOverClick}> Game Over... </button>
             </div>
         }

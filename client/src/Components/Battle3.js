@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProgressBar } from 'react-bootstrap'
 import werewolf from '../Images/werewolf-pic.png'
@@ -11,7 +11,7 @@ import SorcererUI from './SorcererUI'
 // import useDelayedState from 'use-delayed-state'
 
 function Battle3 () {
-    const [enemyHealth, setEnemyHealth] = useState(275)
+    const [enemyHealth, setEnemyHealth] = useState(300)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
@@ -30,14 +30,14 @@ function Battle3 () {
     const [battleLog, setBattleLog] = useState([])
 
     function enemyDamageModifier() {
-        return (Math.floor(Math.random() * 11 + 1) + 11)
+        return (Math.floor(Math.random() * 11 + 1) + 12)
     }
     const enemyAttack = enemyDamageModifier()
 
     const diceRoll = Math.floor(Math.random() * 20 + 1)
     
     function enemyDiceRoll() {
-        return (diceRoll) + 8
+        return (diceRoll) + 10
     }
     const enemyRoll = enemyDiceRoll()
 
@@ -55,44 +55,44 @@ function Battle3 () {
     function enemyTarget () {
         const variant = Math.floor(Math.random() * 10 + 1)
         let target = Math.floor(Math.random() * 10)
-        if (variant <= 10) {
+        if (variant <= 6) {
             if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
                 let damage = (rogueHealth) - (electricAttack)                
                 if (enemyRoll >= 15) {
                     updateBattleLog(
-                        `Werewolf rolled 🎲(${diceRoll}) + 8 against Iris.`,
+                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Iris.`,
                         `Werewolf electricfied Iris for ${electricAttack} damage, and applied stun!`)
                     setRogStunStatus(true)
                     setRogueHealth(damage)
                 } else {
                     updateBattleLog(
-                        `Werewolf rolled 🎲(${diceRoll}) + 8 against Iris.`,
+                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Iris.`,
                         'Iris avoided the attack!')
                 }
             } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
                 let damage = (sorcererHealth) - (electricAttack)
                 if (enemyRoll >= 14) {
                     updateBattleLog(
-                        `Werewolf rolled 🎲(${diceRoll}) + 8 against Juhl.`,
+                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Juhl.`,
                         `Werewolf electricfied Juhl for ${electricAttack} damage, and applied stun!`)
                     setSorStunStatus(true)
                     setSorcererHealth(damage)
                 } else {
                     updateBattleLog(
-                        `Werewolf rolled 🎲(${diceRoll}) + 8 against Juhl.`,
-                        'Juhl resisted the assault!')
+                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Juhl.`,
+                        'Juhl dispelled the assault!')
                 }
             } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
                 let damage = (paladinHealth) - (electricAttack)
                 if (enemyRoll >= 19) {
                     updateBattleLog(
-                        `Werewolf rolled 🎲(${diceRoll}) + 8 against Deus.`,
+                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Deus.`,
                         `Werewolf electrified Deus for ${electricAttack} damage, and applied stun!`)
                     setPalStunStatus(true)
                     setPaladinHealth(damage)
                 } else {
                     updateBattleLog(
-                        `Werewolf rolled 🎲(${diceRoll}) + 8 against Deus.`,
+                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Deus.`,
                         'Deus blocked the strike!')
                 }
             }
@@ -101,43 +101,43 @@ function Battle3 () {
             let damage = (rogueHealth) - (enemyAttack)                
             if (enemyRoll >= 15) {
                 updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 8 against Iris.`,
+                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Iris.`,
                     `Werewolf attacked Iris for ${enemyAttack} damage!`)
                 setRogueHealth(damage)
             } else {
                 updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 8 against Iris.`,
+                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Iris.`,
                     'Iris avoided the attack!')
             }
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             let damage = (sorcererHealth) - (enemyAttack)
             if (enemyRoll >= 14) {
                 updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 8 against Juhl.`,
+                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Juhl.`,
                     `Werewolf attacked Juhl for ${enemyAttack} damage!`)
                 setSorcererHealth(damage)
             } else {
                 updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 8 against Juhl.`,
+                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Juhl.`,
                     'Juhl resisted the assault!')
             }
         } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             let damage = (paladinHealth) - (enemyAttack)
             if (enemyRoll >= 19) {
                 updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 8 against Deus.`,
+                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Deus.`,
                     `Werewolf attacked Deus for ${enemyAttack} damage!`)
                 setPaladinHealth(damage)
             } else {
                 updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 8 against Deus.`,
+                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Deus.`,
                     'Deus blocked the strike!')
             }
         }
         
     }
     }
-    const healthBar = ((enemyHealth / 275) * 100)
+    const healthBar = ((enemyHealth / 300) * 100)
 
     const navigate = useNavigate()
 
@@ -256,7 +256,7 @@ function Battle3 () {
     function playerLost () {
         if (rogueHealth <= 0 && sorcererHealth <= 0 && paladinHealth <= 0) {
             return <div className='lose'>
-                You Lose...
+                You Lose
                 <button className='continue' id='lose-button' onClick={startOverClick}> Game Over... </button>
             </div>
         }
@@ -268,7 +268,7 @@ function Battle3 () {
         
         if (enemyHealth > 0) {
             return <div> 
-                <h2 className='werewolf-health-value'>{enemyHealth}/275 </h2>
+                <h2 className='werewolf-health-value'>{enemyHealth}/300 </h2>
                 <ProgressBar variant="danger" id='werewolf-hp' now={healthBar} />
                 <img src={renderEnemy()} alt='werewolf' id='werewolf' />
             {playerLost()}

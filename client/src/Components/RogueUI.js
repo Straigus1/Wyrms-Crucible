@@ -163,12 +163,18 @@ function RogueUI ({
     } 
 
     function rogueStatus() {
-        if (rogueHealth > 0 && blessStatus === 0 && rogStunStatus === false) {
-            return roguepic
+        if (rogueHealth > 0 && blessStatus === 0) {
+            if (rogStunStatus) {
+                return roguestun
+            } else {
+                return roguepic
+            }
         } else if (blessStatus && rogueHealth > 0) {
-            return roguebless
-        } else if (rogueHealth > 0 && rogStunStatus === true) {
-            return roguestun
+            if (rogStunStatus) {
+                return roguestun
+            } else {
+                return roguebless
+            }
         } else {
             return roguedead
         }
