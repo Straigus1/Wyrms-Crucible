@@ -1,8 +1,11 @@
 import React from 'react'
+// import useSound from 'use-sound'
 // import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import title from '../Images/title-pic.png'
 import { useNavigate } from 'react-router-dom'
+import Sound from 'react-sound'
+import ambientSound from '../Music/ambient-theme-capstone-project.mp3'
 
 
 
@@ -22,6 +25,12 @@ function TitleScreen ({player, setPlayer}) {
 
     return (
         <div id="title-background" className="game-box">
+            <Sound
+                url={ambientSound}
+                playStatus={Sound.status.Playing}
+                autoLoad={true}
+                loop={true}
+            />
             
             <div id="title-menu">
                 <img src={title} id="title" alt="title" />
