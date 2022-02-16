@@ -14,7 +14,7 @@ import breathSound from '../Music/dragon-breath.mp3'
 // import useDelayedState from 'use-delayed-state'
 
 function Battle5 () {
-    const [enemyHealth, setEnemyHealth] = useState(475)
+    const [enemyHealth, setEnemyHealth] = useState(430)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
@@ -113,7 +113,7 @@ function Battle5 () {
         
     }
     }
-    const healthBar = ((enemyHealth / 475) * 100)
+    const healthBar = ((enemyHealth / 430) * 100)
 
     const navigate = useNavigate()
 
@@ -245,7 +245,7 @@ function Battle5 () {
         
         if (enemyHealth > 0) {
             return <div> 
-                <h2 className='dragon-health-value'>{enemyHealth}/475 </h2>
+                <h2 className='dragon-health-value'>{enemyHealth}/430 </h2>
                 <ProgressBar variant="danger" id='dragon-hp' now={healthBar} />
                 <img src={renderEnemy()} alt='dragon' id='dragon' />
             {playerLost()}
