@@ -208,7 +208,7 @@ function PaladinUI ({
     }
 
     function potionRestoreModifier () {
-        return (Math.floor(Math.random() * 8 + 1) + 12)
+        return (Math.floor(Math.random() * 6 + 1) + 14)
     }
 
     const potionRestore = potionRestoreModifier()
