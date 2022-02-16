@@ -4,7 +4,6 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import title from '../Images/title-pic.png'
 import { useNavigate } from 'react-router-dom'
-import Sound from 'react-sound'
 import ambientSound from '../Music/ambient-theme-capstone-project.mp3'
 import ReactAudioPlayer from 'react-audio-player'
 

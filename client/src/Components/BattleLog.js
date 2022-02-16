@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import React from 'react'
 import battlelog from '../Images/battle-log.png'
 
 function BattleLog({battleLog}) {
