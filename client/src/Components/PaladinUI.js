@@ -9,6 +9,9 @@ import potionused from '../Images/healing-potion-used.png'
 import deus from '../Images/paladin-name.png'
 import { ProgressBar } from 'react-bootstrap'
 import press from '../Music/button-press.mp3'
+import potionSound from '../Music/potion-use.mp3'
+import smiteSound from '../Music/smite-sound.mp3'
+import missSound from '../Music/miss-sound.mp3'
 
 
 
@@ -64,6 +67,18 @@ function PaladinUI ({
         new Audio(press).play()
     }
 
+    function potionAudio() {
+        new Audio(potionSound).play()
+    }
+
+    function smiteAudio() {
+        new Audio(smiteSound).play()
+    }
+
+    function missAudio() {
+        new Audio(missSound).play()
+    }
+
     function palAttack() {
         const damage = (enemyHealth) - (paladinAttack)
         if (paladinRoll >= enemyArmorClass) {
@@ -106,15 +121,17 @@ function PaladinUI ({
                     `Deus gave divine judgement for ${smiteAttack} damage!!`)
             }
             setEnemyHealth(damage)
+            smiteAudio()
         } else {
             updateBattleLog(
                 `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                 `Deus whiffed his holy swing!`)
+            missAudio()
         }
         setPotionCD(true)
         setPalTurn(2)
         setSmiteCD(0)
-        pressAudio()
+        
     }
 
     function palBlessAction() {
@@ -199,6 +216,7 @@ function PaladinUI ({
     function drinkPotion() {
         const restore = (paladinHealth) + (potionRestore)
         if (potionCD === true && palTurn === 1 && potionAmount > 0 && paladinHealth > 0) {
+            potionAudio()
             setPaladinHealth(restore)
             setPotionAmount(potionAmount - 1)
             setPotionCD(false)

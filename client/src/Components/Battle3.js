@@ -63,7 +63,7 @@ function Battle3 () {
                 if (enemyRoll >= 15) {
                     updateBattleLog(
                         `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Iris.`,
-                        `Werewolf electricfied Iris for ${electricAttack} damage, and applied stun!`)
+                        `Werewolf electricfied Iris for ${electricAttack} damage and applied stun!`)
                     setRogStunStatus(true)
                     setRogueHealth(damage)
                 } else {
@@ -76,7 +76,7 @@ function Battle3 () {
                 if (enemyRoll >= 14) {
                     updateBattleLog(
                         `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Juhl.`,
-                        `Werewolf electricfied Juhl for ${electricAttack} damage, and applied stun!`)
+                        `Werewolf electricfied Juhl for ${electricAttack} damage and applied stun!`)
                     setSorStunStatus(true)
                     setSorcererHealth(damage)
                 } else {
@@ -89,7 +89,7 @@ function Battle3 () {
                 if (enemyRoll >= 19) {
                     updateBattleLog(
                         `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Deus.`,
-                        `Werewolf electrified Deus for ${electricAttack} damage, and applied stun!`)
+                        `Werewolf electrified Deus for ${electricAttack} damage and applied stun!`)
                     setPalStunStatus(true)
                     setPaladinHealth(damage)
                 } else {
@@ -289,7 +289,9 @@ function Battle3 () {
         <div id="battle-three-background" className='game-box'>
             <ReactAudioPlayer
             src={battleTheme}
+            className="music-control-battle"
             autoPlay
+            controls
             loop
             /> 
             <BattleLog battleLog={battleLog}/>

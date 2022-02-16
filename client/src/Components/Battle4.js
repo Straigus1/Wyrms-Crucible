@@ -10,6 +10,7 @@ import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
 import battleTheme from '../Music/capstone-battle.mp3'
 import ReactAudioPlayer from 'react-audio-player'
+import meteorSound from '../Music/meteor-sound.mp3'
 
 function Battle4 () {
     const [enemyHealth, setEnemyHealth] = useState(400)
@@ -51,6 +52,10 @@ function Battle4 () {
         return (Math.floor(Math.random() * 6 + 1) + 18)
     }
 
+    function meteorAudio() {
+        new Audio(meteorSound).play()
+    }
+
     const upheavalAttack = upheavalDamage()
     // No longer attack dead heroes
     function enemyTarget () {
@@ -72,6 +77,7 @@ function Battle4 () {
             if (paladinHealth > 0) {
                 setPaladinHealth(1)
             }
+            meteorAudio()
         } else {
         if (variant <= 4) {
             if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
@@ -294,7 +300,9 @@ function Battle4 () {
         <div id="battle-four-background" className='game-box'>
             <ReactAudioPlayer
             src={battleTheme}
+            className="music-control-battle"
             autoPlay
+            controls
             loop
             /> 
             <BattleLog battleLog={battleLog}/>

@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import battlelog from '../Images/battle-log.png'
 
 function BattleLog({battleLog}) {
+    
 
     function displayBattleLog() {
         const log = battleLog.map((log) => {
@@ -21,7 +22,6 @@ function BattleLog({battleLog}) {
             alt='battle log'
             />
             <ul id="scroll">{displayBattleLog()}</ul>
-           
         </div>
     )
 

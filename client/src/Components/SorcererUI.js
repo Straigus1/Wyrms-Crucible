@@ -9,6 +9,8 @@ import potionused from '../Images/healing-potion-used.png'
 import juhl from '../Images/sorcerer-name.png'
 import { ProgressBar } from 'react-bootstrap'
 import press from '../Music/button-press.mp3'
+import potionSound from '../Music/potion-use.mp3'
+import lightning from '../Music/lightning.mp3'
 
 function SorcererUI ({
     sorStunStatus,
@@ -57,6 +59,14 @@ function SorcererUI ({
 
     function pressAudio() {
         new Audio(press).play()
+    }
+
+    function potionAudio() {
+        new Audio(potionSound).play()
+    }
+
+    function lightningAudio() {
+        new Audio(lightning).play()
     }
 
     function sorAttack() {
@@ -128,7 +138,7 @@ function SorcererUI ({
         setPotionCD(true)
         setSorTurn(2)
         setLightningCD(0)
-        pressAudio()
+        lightningAudio()
     }
 
     
@@ -208,6 +218,7 @@ function SorcererUI ({
     function drinkPotion() {
         const restore = (sorcererHealth) + (potionRestore)
         if (potionCD === true && sorTurn === 1 && potionAmount > 0 && sorcererHealth > 0) {
+            potionAudio()
             setSorcererHealth(restore)
             setPotionAmount(potionAmount - 1)
             setPotionCD(false)

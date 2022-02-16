@@ -11,6 +11,7 @@ import ReactAudioPlayer from 'react-audio-player'
 
 function TitleScreen ({player, setPlayer}) {
 
+
     const navigate = useNavigate();
 
     function handleLogoutClick() {
@@ -22,15 +23,14 @@ function TitleScreen ({player, setPlayer}) {
         navigate('/', { replace: true });
       }
 
+    
+    
       
+    
 
     return (
         <div id="title-background" className="game-box">
-        <ReactAudioPlayer
-            src={ambientSound}
-            autoPlay
-            loop
-            /> 
+        
             <div id="title-menu">
                 <img src={title} id="title" alt="title" />
                 {player ? 
@@ -43,7 +43,9 @@ function TitleScreen ({player, setPlayer}) {
                 <Button onClick={handleLogoutClick}>
                     Logout
                 </Button>
-                <Button>Credits</Button>
+                <Button onClick={() => navigate("/credits")}>
+                    Credits
+                </Button>
                 <Button>Tutorials/Tips</Button>
                 </> : 
                 <>
@@ -55,13 +57,20 @@ function TitleScreen ({player, setPlayer}) {
                 <Button onClick={() => navigate("/signup")}>
                     Signup
                 </Button>
-                <Button onClick={() => navigate("/")}>
+                <Button onClick={() => navigate("/credits")}>
                     Credits
                 </Button>
                 <Button onClick={() => navigate("/")}>
                     Tutorials/Tips
                 </Button>
                 </>}
+                <ReactAudioPlayer
+                    src={ambientSound}
+                    className="music-control-title"
+                    controls
+                    autoPlay
+                    loop
+                /> 
             </div>
         </div>
     )

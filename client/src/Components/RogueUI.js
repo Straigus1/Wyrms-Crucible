@@ -9,6 +9,9 @@ import potionused from '../Images/healing-potion-used.png'
 import iris from '../Images/rogue-name.png'
 import { ProgressBar } from 'react-bootstrap'
 import press from '../Music/button-press.mp3'
+import potionSound from '../Music/potion-use.mp3'
+import phantomSound from '../Music/phantom-sound.wav'
+import missSound from '../Music/miss-sound.mp3'
 
 
 
@@ -59,6 +62,18 @@ function RogueUI ({
         new Audio(press).play()
     }
     
+    function potionAudio() {
+        new Audio(potionSound).play()
+    }
+
+    function phantomAudio() {
+        new Audio(phantomSound).play()
+    }
+
+    function missAudio() {
+        new Audio(missSound).play()
+    }
+
     function rogAttack() {
         const damage = (enemyHealth) - (rogueAttack)
         if (rogueRoll >= enemyArmorClass) {
@@ -97,7 +112,7 @@ function RogueUI ({
         if (rogueRoll >= enemyArmorClass) {
             updateBattleLog(
                     `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
-                    `Iris dealt ${venomAttack} damage, and poisoned the enemy!`)
+                    `Iris dealt ${venomAttack} damage and poisoned the enemy!`)
             
             setEnemyHealth(damage)
             setPoisonStatus(3)
@@ -130,15 +145,17 @@ function RogueUI ({
                     `Iris rolled 🎲(${diceRoll}) + 11 against the enemy.`,
                     `Iris eviscerated the enemy for ${phantomAttack} damage! `)
             setEnemyHealth(damage)
+            phantomAudio()
         } else {
             updateBattleLog(
                 `Iris rolled 🎲(${diceRoll}) + 11 against the enemy.`,
                 'Iris lamentably missed the mark.')
+            missAudio()
         }
         setPotionCD(true)
         setRogTurn(2)
         setPhantomCD(0)
-        pressAudio()
+        
     }
 
     if (rogueHealth < 0) {
@@ -225,6 +242,7 @@ function RogueUI ({
     function drinkPotion() {
         const restore = (rogueHealth) + (potionRestore)
         if (potionCD === true && rogTurn === 1 && potionAmount > 0 && rogueHealth > 0) {
+            potionAudio()
             setRogueHealth(restore)
             setPotionAmount(potionAmount - 1)
             setPotionCD(false)

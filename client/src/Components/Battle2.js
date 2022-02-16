@@ -255,7 +255,9 @@ function Battle2 () {
         <div id="battle-two-background" className='game-box'>
             <ReactAudioPlayer
             src={battleTheme}
+            className="music-control-battle"
             autoPlay
+            controls
             loop
             /> 
             <BattleLog battleLog={battleLog}/>

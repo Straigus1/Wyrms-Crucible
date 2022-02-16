@@ -15,6 +15,7 @@ import Battle2 from "./Components/Battle2";
 import Battle3 from "./Components/Battle3";
 import Battle4 from "./Components/Battle4";
 import Battle5 from "./Components/Battle5";
+import Credits  from "./Components/Credits";
 // import Sample from "./Music/ambient-theme-capstone-project.mp3"
 
 
@@ -53,6 +54,7 @@ function App() {
           <Route path="/battle-three" element={<Battle3 player={player} setPlayer={setPlayer}/> }/>
           <Route path="/battle-four" element={<Battle4 player={player} setPlayer={setPlayer}/> }/>
           <Route path="/battle-five" element={<Battle5 player={player} setPlayer={setPlayer}/> }/>
+          <Route path="/credits" element={<Credits player={player} setPlayer={setPlayer}/> }/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -10,6 +10,7 @@ import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
 import battleTheme from '../Music/capstone-battle.mp3'
 import ReactAudioPlayer from 'react-audio-player'
+import breathSound from '../Music/dragon-breath.mp3'
 // import useDelayedState from 'use-delayed-state'
 
 function Battle5 () {
@@ -52,6 +53,10 @@ function Battle5 () {
     const breathAttack = dragonBreathDamage()
 
     const breathRecharge = Math.floor(Math.random() * 6 + 1)
+
+    function breathAudio() {
+        new Audio(breathSound).play()
+    }
     // No longer attack dead heroes
     function enemyTarget () {
         let target = Math.floor(Math.random() * 10)
@@ -66,6 +71,7 @@ function Battle5 () {
             setRogueHealth(damageFRog)
             setSorcererHealth(damageFSor)
             setPaladinHealth(damageFPal)
+            breathAudio()
         } else {
         if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
             let damage = (rogueHealth) - (enemyAttack)                
@@ -113,7 +119,7 @@ function Battle5 () {
 
     function continueClick (e) {
         e.preventDefault()
-        navigate("/")
+        navigate("/credits")
     }
 
     function startOverClick (e) {
@@ -249,7 +255,7 @@ function Battle5 () {
         } else { 
             return <div className='victory'>
             Victory!
-            <button className='continue' onClick={continueClick}> Continue </button>
+            <button className='continue' onClick={continueClick}> Credits </button>
         </div>
         }
     }
@@ -258,7 +264,9 @@ function Battle5 () {
         <div id="battle-five-background" className='game-box'>
             <ReactAudioPlayer
             src={battleTheme}
+            className="music-control-battle"
             autoPlay
+            controls
             loop
             /> 
             <BattleLog battleLog={battleLog}/>
