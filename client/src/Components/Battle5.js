@@ -31,7 +31,7 @@ function Battle5 () {
     const [battleLog, setBattleLog] = useState([])
 
     function enemyDamageModifier() {
-        return (Math.floor(Math.random() * 6 + 1) + 9)
+        return (Math.floor(Math.random() * 8 + 1) + 7)
     }
     const enemyAttack = enemyDamageModifier()
 
