@@ -30,16 +30,18 @@ function Transition3() {
                         typewriter
                         .pauseFor(200)
                         .changeDelay(10)
-                        .typeString("Upon entering the lighthouse, it immediately becomes clear that something isn’t right. ")   
-                        .pauseFor(1000)
-                        .typeString("The player will find the corpse of a Redguard woman lying in the central room, with a Falmer sword next to her. ")
-                        .pauseFor(1000)
-                        .typeString("By the fireplace will be a Chaurus carcass and a wooden ax laying among the remains, hinting that the woman put up a fight but ultimately lost.")
+                        .typeString("The Party is intercepted on one training quest by Delphine, a member of the order of the Blades, who in ancient times had served the Dragonborn. Delphine arranges for the Dragonborn to infiltrate the Thalmor Embassy to gain information; they learn that another member of the Blades, named Esbern, is in hiding in Riften. When Delphine and the Dragonborn find him, he reveals that the ancient Blades had carved a massive engraving in a temple in the Reach, an unstable region in Skyrim's west. This carving, called Alduin's Wall, depicted the dragon's defeat at the hands of the ancient Nords, and Esbern deciphers that those warriors had used a special shout to remove his ability to fly.")
                         .start();
                         }}
                         />
                     <button className='continue-exposition' onClick={continueClick}>Continue</button>
                 </div>
+            </div>
+            <div id='spinner' class="spinner-border text-warning" role="status">
+                
+            </div>
+            <div className='loader'>
+                <h3>Loading...</h3>
             </div>
 
         </div>

@@ -30,16 +30,18 @@ function Transition2() {
                         typewriter
                         .pauseFor(200)
                         .changeDelay(10)
-                        .typeString("Once every ten years, the gods host the Divinity Games - an event where mortals can compete for deification. ")   
-                        .pauseFor(1000)
-                        .typeString("Every entrant in the competition sacrifices their life, and the energies of the losers are used to empower the new deity. ")
-                        .pauseFor(1000)
-                        .typeString("If, in ten years, the deity has gathered enough followers to sustain their godhood they continue to live.")
+                        .typeString("Imperial soldiers catch the Dragonborn illegally crossing the border into Skyrim and mistake them for a Stormcloak rebel, a crime for which the player receives a death sentence. The execution of the player character by the Imperials in Helgen, a small settlement in Skyrim's south, is interrupted when Alduin starts laying waste to the village. The player manages to escape through the tunnels underneath the keep, and heads to the nearby village of Riverwood, whose inhabitants ask the player to inform the Jarl of Whiterun, a large town to the north, of the dragon attack. After meeting with Jarl Balgruuf, and retrieving a tablet with information about the dragons from a nearby barrow on his behalf, the player kills a dragon which attacks nearby and absorbs its soul. After shouting, the player is informed that they must be Dragonborn, and is soon summoned by the Greybeard monks. After a long journey and climb up the Throat of the World, the tallest mountain in Tamriel and home of the Greybeards, the Dragonborn is informed by Arngeir of their heritage and role in stopping Alduin, and begins their training.")
                         .start();
                         }}
                         />
                     <button className='continue-exposition' onClick={continueClick}>Continue</button>
                 </div>
+            </div>
+            <div id='spinner' class="spinner-border text-warning" role="status">
+                
+            </div>
+            <div className='loader'>
+                <h3>Loading...</h3>
             </div>
 
         </div>

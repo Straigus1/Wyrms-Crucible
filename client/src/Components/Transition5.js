@@ -30,16 +30,18 @@ function Transition5() {
                         typewriter
                         .pauseFor(200)
                         .changeDelay(10)
-                        .typeString("Upon entering the lighthouse, it immediately becomes clear that something isn’t right. ")   
-                        .pauseFor(1000)
-                        .typeString("The player will find the corpse of a Redguard woman lying in the central room, with a Falmer sword next to her. ")
-                        .pauseFor(1000)
-                        .typeString("By the fireplace will be a Chaurus carcass and a wooden ax laying among the remains, hinting that the woman put up a fight but ultimately lost.")
+                        .typeString("The Party learns from Esbern how to summon a dragon named Odahviing, whom they trap in Whiterun with Jarl Balgruuf's assistance. Odahviing, believing that the Dragonborn is mightier than Alduin, turns on his former leader and reveals that he has gone to recover his strength in Sovngarde, the Nordic afterlife, where he feeds on the souls of the dead. Since the portal to Sovngarde cannot be reached on foot, Odahviing bargains his freedom in exchange for flying the Dragonborn there. Entering Sovngarde, the Dragonborn meets the three heroes who had defeated Alduin originally; with their help, the Dragonborn kills Alduin.")
                         .start();
                         }}
                         />
                     <button className='continue-exposition' onClick={continueClick}>Continue</button>
                 </div>
+            </div>
+            <div id='spinner' class="spinner-border text-warning" role="status">
+                
+            </div>
+            <div className='loader'>
+                <h3>Loading...</h3>
             </div>
 
         </div>

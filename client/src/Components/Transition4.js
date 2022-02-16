@@ -30,16 +30,18 @@ function Transition4() {
                         typewriter
                         .pauseFor(200)
                         .changeDelay(10)
-                        .typeString("Upon entering the lighthouse, it immediately becomes clear that something isn’t right. ")   
-                        .pauseFor(1000)
-                        .typeString("The player will find the corpse of a Redguard woman lying in the central room, with a Falmer sword next to her. ")
-                        .pauseFor(1000)
-                        .typeString("By the fireplace will be a Chaurus carcass and a wooden ax laying among the remains, hinting that the woman put up a fight but ultimately lost.")
+                        .typeString("The Party questions Arngeir, who reveals that the shout goes against the creeds of the Greybeards. He directs the Dragonborn to Paarthurnax, who lives on the summit of the Throat, to better conceal his existence. Paarthurnax reveals that although neither he nor anyone else knows the shout, Alduin's defeat through the power of an Elder Scroll had left a gash in time, and theorizes that reading a Scroll would allow the Dragonborn to look through time and learn the shout from those who created it. Having delved into a massive Dwemer city called Blackreach, far below the ground, the Dragonborn retrieves the Scroll and reads it on the Throat, the site of the ancient battle. Alduin arrives and fights with Paarthurnax and the Dragonborn, who has learned the shout and overpowers Alduin, who flees.")
                         .start();
                         }}
                         />
                     <button className='continue-exposition' onClick={continueClick}>Continue</button>
                 </div>
+            </div>
+            <div id='spinner' class="spinner-border text-warning" role="status">
+                
+            </div>
+            <div className='loader'>
+                <h3>Loading...</h3>
             </div>
 
         </div>
