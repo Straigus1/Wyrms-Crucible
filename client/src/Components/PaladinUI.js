@@ -64,19 +64,27 @@ function PaladinUI ({
     }
 
     function pressAudio() {
-        new Audio(press).play()
+        const audio = new Audio(press);
+       audio.volume = 0.3
+       audio.play()
     }
 
     function potionAudio() {
-        new Audio(potionSound).play()
+        const audio = new Audio(potionSound);
+       audio.volume = 0.3
+       audio.play()
     }
 
     function smiteAudio() {
-        new Audio(smiteSound).play()
+        const audio = new Audio(smiteSound);
+       audio.volume = 0.3
+       audio.play()
     }
 
     function missAudio() {
-        new Audio(missSound).play()
+        const audio = new Audio(missSound);
+       audio.volume = 0.3
+       audio.play()
     }
 
     function palAttack() {

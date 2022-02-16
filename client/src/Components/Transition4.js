@@ -18,6 +18,7 @@ function Transition4() {
             src={ambientSound}
             autoPlay
             loop
+            volume={0.3}
             /> 
             <div>
                 <h1 className='top-expo'>Eerie Sounds</h1>

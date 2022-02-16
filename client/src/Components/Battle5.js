@@ -55,7 +55,9 @@ function Battle5 () {
     const breathRecharge = Math.floor(Math.random() * 6 + 1)
 
     function breathAudio() {
-        new Audio(breathSound).play()
+        const audio = new Audio(breathSound);
+       audio.volume = 0.3
+       audio.play()
     }
     // No longer attack dead heroes
     function enemyTarget () {
@@ -268,6 +270,7 @@ function Battle5 () {
             autoPlay
             controls
             loop
+            volume={0.2}
             /> 
             <BattleLog battleLog={battleLog}/>
             {renderCurrentOutcome()}

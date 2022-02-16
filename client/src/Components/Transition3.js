@@ -18,6 +18,7 @@ function Transition3() {
             src={ambientSound}
             autoPlay
             loop
+            volume={0.3}
             /> 
             <div>
                 <h1 className='top-expo'>Entering the Lair</h1>

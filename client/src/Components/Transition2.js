@@ -18,6 +18,7 @@ function Transition2() {
             src={ambientSound}
             autoPlay
             loop
+            volume={0.3}
             /> 
             <div>
                 <h1 className='top-expo'>Discovering the Crucible</h1>

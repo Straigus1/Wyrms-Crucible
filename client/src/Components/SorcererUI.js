@@ -58,15 +58,22 @@ function SorcererUI ({
     const sorcererRoll = sorcererDiceRoll()
 
     function pressAudio() {
-        new Audio(press).play()
+       const audio = new Audio(press);
+       audio.volume = 0.3
+       audio.play()
+       
     }
 
     function potionAudio() {
-        new Audio(potionSound).play()
+        const audio = new Audio(potionSound);
+       audio.volume = 0.3
+       audio.play()
     }
 
     function lightningAudio() {
-        new Audio(lightning).play()
+        const audio = new Audio(lightning);
+       audio.volume = 0.3
+       audio.play()
     }
 
     function sorAttack() {

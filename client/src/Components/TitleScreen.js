@@ -59,7 +59,7 @@ function TitleScreen ({player, setPlayer}) {
                 <Button onClick={() => navigate("/credits")}>
                     Credits
                 </Button>
-                <Button onClick={() => navigate("/")}>
+                <Button onClick={() => navigate("/transition-one")}>
                     Tutorials/Tips
                 </Button>
                 </>}
@@ -69,6 +69,7 @@ function TitleScreen ({player, setPlayer}) {
                     controls
                     autoPlay
                     loop
+                    volume={0.3}
                 /> 
             </div>
         </div>

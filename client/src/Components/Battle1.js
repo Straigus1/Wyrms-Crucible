@@ -239,6 +239,7 @@ function Battle1 () {
             autoPlay
             controls
             loop
+            volume={0.2}
             /> 
             <BattleLog battleLog={battleLog}/>
             <img 

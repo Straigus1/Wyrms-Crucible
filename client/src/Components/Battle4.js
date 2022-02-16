@@ -53,7 +53,9 @@ function Battle4 () {
     }
 
     function meteorAudio() {
-        new Audio(meteorSound).play()
+        const audio = new Audio(meteorSound);
+       audio.volume = 0.3
+       audio.play()
     }
 
     const upheavalAttack = upheavalDamage()
@@ -304,6 +306,7 @@ function Battle4 () {
             autoPlay
             controls
             loop
+            volume={0.2}
             /> 
             <BattleLog battleLog={battleLog}/>
             <img 

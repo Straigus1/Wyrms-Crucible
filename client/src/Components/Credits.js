@@ -29,6 +29,7 @@ function Credits() {
                 className="music-control-title"
                 autoPlay
                 loop
+                volume={0.3}
             /> 
             <img 
             className='fin'
