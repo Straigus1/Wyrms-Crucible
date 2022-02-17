@@ -69,7 +69,7 @@ function TitleScreen ({player, setPlayer}) {
                     controls
                     autoPlay
                     loop
-                    volume={0.3}
+                    volume={0.5}
                 /> 
             </div>
         </div>

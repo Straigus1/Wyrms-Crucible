@@ -17,26 +17,27 @@ function Credits() {
         <div id="credits-background" className='game-box'>
             <div>
                 <h2 className='credits-header'>Game Developer</h2>
-                <p className='credits-name'>Dayton Houston</p>
+                <p className='credits-name'>Dayton Lyrik Houston</p>
                 <h2 className='credits-header'>Music Producer</h2>
                 <p className='credits-name'>Tyler Smith</p>
                 <h2 className='credits-header'>Special Thanks</h2>
                 <p className='credits-name'>Akeem Smith</p>
                 <p className='credits-name'>Babe Abulaila</p>
+                <p className='credits-name'>Nick Lunn</p>
             </div>
             <ReactAudioPlayer
                 src={ambientSound}
                 className="music-control-title"
                 autoPlay
                 loop
-                volume={0.3}
+                volume={0.5} 
             /> 
             <img 
             className='fin'
             src={fin}
             alt='fin'
             />
-            <button className='continue-exposition' onClick={continueClick}>Continue</button>
+            <button id='credits-button' className='continue-exposition' onClick={continueClick}>Continue</button>
         </div>
     )
 }

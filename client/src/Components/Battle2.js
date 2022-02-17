@@ -250,7 +250,7 @@ function Battle2 () {
         </div>
         }
     }
-    
+
     return (
         <div id="battle-two-background" className='game-box'>
             <ReactAudioPlayer
@@ -259,7 +259,7 @@ function Battle2 () {
             autoPlay
             controls
             loop
-            volume={0.2}
+            volume={0.4}
             /> 
             <BattleLog battleLog={battleLog}/>
             <img 

@@ -18,7 +18,7 @@ function Transition5() {
             src={ambientSound}
             autoPlay
             loop
-            volume={0.3}
+            volume={0.5}
             /> 
             <div>
                 <h1 className='top-expo'>Teleportation Trap</h1>

@@ -31,7 +31,7 @@ function Battle5 () {
     const [battleLog, setBattleLog] = useState([])
 
     function enemyDamageModifier() {
-        return (Math.floor(Math.random() * 8 + 1) + 7)
+        return (Math.floor(Math.random() * 8 + 1) + 3)
     }
     const enemyAttack = enemyDamageModifier()
 
@@ -52,7 +52,7 @@ function Battle5 () {
 
     const breathAttack = dragonBreathDamage()
 
-    const breathRecharge = Math.floor(Math.random() * 6 + 1)
+    const breathRecharge = Math.floor(Math.random() * 7 + 1)
 
     function breathAudio() {
         const audio = new Audio(breathSound);
@@ -204,7 +204,7 @@ function Battle5 () {
         setRogTurn(0)
         setSorTurn(0)
         setPalTurn(0)
-        if (breathReady === false && breathRecharge >= 5 ) {
+        if (breathReady === false && breathRecharge >= 6 ) {
             setBreathReady(true)
         }
         if (phantomCD >= 0 && phantomCD < 4 ){
@@ -257,7 +257,7 @@ function Battle5 () {
         } else { 
             return <div className='victory'>
             Victory!
-            <button className='continue' onClick={continueClick}> Credits </button>
+            <button className='continue' onClick={continueClick}> The End </button>
         </div>
         }
     }
@@ -270,7 +270,7 @@ function Battle5 () {
             autoPlay
             controls
             loop
-            volume={0.2}
+            volume={0.4}
             /> 
             <BattleLog battleLog={battleLog}/>
             {renderCurrentOutcome()}

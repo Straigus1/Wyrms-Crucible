@@ -49,7 +49,7 @@ function Battle4 () {
     }
 
     function upheavalDamage() {
-        return (Math.floor(Math.random() * 6 + 1) + 18)
+        return (Math.floor(Math.random() * 6 + 1) + 12)
     }
 
     function meteorAudio() {
@@ -88,7 +88,7 @@ function Battle4 () {
                     updateBattleLog(
                         `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Iris.`,
                         `Behemoth lifted Iris sky high for ${upheavalAttack} damage, may apply stun!`)
-                    if (stunChance <= 6) {
+                    if (stunChance <= 2) {
                         setRogStunStatus(true)
                     }
                     setRogueHealth(damage)
@@ -103,7 +103,7 @@ function Battle4 () {
                     updateBattleLog(
                         `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Juhl.`,
                         `Behemoth lifted Juhl sky high for ${upheavalAttack} damage, may apply stun!`)
-                        if (stunChance <= 6) {
+                        if (stunChance <= 2) {
                             setSorStunStatus(true)
                         }
                     setSorcererHealth(damage)
@@ -118,7 +118,7 @@ function Battle4 () {
                     updateBattleLog(
                         `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Deus.`,
                         `Behemoth lifted Deus sky high for ${upheavalAttack} damage, may apply stun!`)
-                        if (stunChance <= 6) {
+                        if (stunChance <= 2) {
                             setPalStunStatus(true)
                         }
                     setPaladinHealth(damage)
@@ -306,7 +306,7 @@ function Battle4 () {
             autoPlay
             controls
             loop
-            volume={0.2}
+            volume={0.4}
             /> 
             <BattleLog battleLog={battleLog}/>
             <img 
