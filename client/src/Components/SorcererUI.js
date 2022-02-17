@@ -32,7 +32,7 @@ function SorcererUI ({
     const [potionCD, setPotionCD] = useState(true)
 
     function sorcererDamageModifier() {
-        return (Math.floor(Math.random() * 12 + 1) + 4)
+        return (Math.floor(Math.random() * 11 + 1) + 5)
     }
 
     const sorcererAttack = sorcererDamageModifier()

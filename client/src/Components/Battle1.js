@@ -43,7 +43,7 @@ function Battle1 () {
     function updateBattleLog(roll, info) {
         setBattleLog([...battleLog, roll, info])
     }
-
+    
     // No longer attack dead heroes
     function enemyTarget () {
         let target = Math.floor(Math.random() * 10)

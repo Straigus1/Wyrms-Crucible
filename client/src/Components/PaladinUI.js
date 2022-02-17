@@ -36,7 +36,7 @@ function PaladinUI ({
     const [potionCD, setPotionCD] = useState(true)
 
     function paladinDamageModifier() {
-        return (Math.floor(Math.random() * 6 + 1) + 4)
+        return (Math.floor(Math.random() * 6 + 1) + 5)
     }
     const paladinAttack = paladinDamageModifier()
 

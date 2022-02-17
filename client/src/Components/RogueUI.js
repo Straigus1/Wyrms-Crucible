@@ -37,7 +37,7 @@ function RogueUI ({
     // const [damageValue, setDamageValue] = useState(0)
 
     function rogueDamageModifier() {
-        return (Math.floor(Math.random() * 12 + 1) + 7)
+        return (Math.floor(Math.random() * 11 + 1) + 8)
     }
 
     const rogueAttack = rogueDamageModifier()
