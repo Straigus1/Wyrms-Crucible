@@ -111,7 +111,7 @@ function PaladinUI ({
     }
 
     function paladinDivineSmiteModifier() {
-        return (Math.floor(Math.random() * 12 + 1) + 11)
+        return (Math.floor(Math.random() * 11 + 1) + 12)
     }
 
     const smiteAttack = paladinDivineSmiteModifier()
@@ -119,7 +119,7 @@ function PaladinUI ({
     function palDivineSmite() {
         const damage = (enemyHealth) - (smiteAttack)
         if (paladinRoll >= enemyArmorClass) {
-            if (smiteAttack <= 11) {
+            if (smiteAttack <= 17) {
                 updateBattleLog(
                     `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                     `Deus smited the enemy for ${smiteAttack} damage!`)
