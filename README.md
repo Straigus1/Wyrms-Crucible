@@ -1,24 +1,24 @@
-# README
+## Wyrm's Crucible
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A role-playing game that uses D&D dice rolling system to determine attack accuracy and effectiveness. Control 3 characters with varies abilities to prevail against 5 unique enemies. Enemies have access to varies actions and use an intuitive targetting structure. Every action is recorded in the battle log for users to discern all outcomes.
+------------------
+### Future Updates
 
-Things you may want to cover:
+#### Deployment
+-Having issues gaining permission to alter PostgresSQL files to work with app. Currently fixing to hopefully deploy with Heroku.
 
-* Ruby version
+#### Critical Attacks
+-Adding D&D natural d20(20 sided die) critical modifier
 
-* System dependencies
+#### Battle Log
+-Adjusting battle log to default to the bottom of the log.
 
-* Configuration
+#### Animations
+-Learning how to effectively use animations as an ally or enemy uses an action
+-Adding animations
 
-* Database creation
+#### Tooltips
+-Implementing tooltips for information on actions for user knowledge
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Tutorial/Tips Page
+-Creating a page for players to access for detailed guide of all the games rules and systems
