@@ -110,7 +110,7 @@ function SorcererUI ({
     function sorMagicMissle() {
         const damage = (enemyHealth) - (magicMissleAttack)
         updateBattleLog(
-                `Juhl cast Magic Missle.`,
+                `Juhl cast Magic Missile.`,
                 `Juhl pelted the enemy for ${magicMissleAttack} damage!`)
         
         setEnemyHealth(damage)
@@ -246,7 +246,7 @@ function SorcererUI ({
                     className='attack-turn'
                     id='magic-missle'
                     onClick={sorMagicMissle}>
-                        Magic Missle
+                        Magic Missile
                 </button>
                 {lightningAvailable()}
                 </div>
@@ -262,7 +262,7 @@ function SorcererUI ({
                 <button
                     className='attack'
                     id='second-action'>
-                        Magic Missle
+                        Magic Missile
                 </button>
                 <button
                     className='attack'

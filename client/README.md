@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+## Wyrm's Crucible
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A role-playing game that uses D&D dice rolling system to determine attack accuracy and effectiveness. Control 3 characters with varies abilities to prevail against 5 unique enemies. Enemies have access to varies actions and use an intuitive targetting structure. Every action is recorded in the battle log for users to discern all outcomes.
+------------------
+### Future Updates
 
-## Available Scripts
+#### Deployment
+-Having issues gaining permission to alter PostgresSQL files to work with app. Currently fixing to hopefully deploy with Heroku.
 
-In the project directory, you can run:
+#### Critical Attacks
+-Adding D&D natural d20(20 sided die) critical modifier
 
-### `npm start`
+#### Battle Log
+-Adjusting battle log to default to the bottom of the log.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Animations
+-Learning how to effectively use animations as an ally or enemy uses an action
+-Adding animations
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Tooltips
+-Implementing tooltips for information on actions for user knowledge
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Tutorial/Tips Page
+-Creating a page for players to access for detailed guide of all the games rules and systems
