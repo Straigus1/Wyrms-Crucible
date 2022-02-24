@@ -1,6 +1,6 @@
 ## Wyrm's Crucible
-------------------
-A role-playing game that uses D&D dice rolling system to determine attack accuracy and effectiveness. Control 3 characters with varies abilities to prevail against 5 unique enemies. Enemies have access to varies actions and use an intuitive targeting structure. Every action is recorded in the battle log for users to discern all outcomes.
+
+-A role-playing game that uses D&D dice rolling system to determine attack accuracy and effectiveness. Control 3 characters with varies abilities to prevail against 5 unique enemies. Enemies have access to varies actions and use an intuitive targeting structure. Every action is recorded in the battle log for users to discern all outcomes.
 ------------------
 ### Future Updates
 
