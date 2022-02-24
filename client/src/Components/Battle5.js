@@ -56,7 +56,7 @@ function Battle5 () {
 
     function breathAudio() {
         const audio = new Audio(breathSound);
-       audio.volume = 0.3
+       audio.volume = 0.2
        audio.play()
     }
     // No longer attack dead heroes
@@ -270,7 +270,7 @@ function Battle5 () {
             autoPlay
             controls
             loop
-            volume={0.3}
+            volume={0.25}
             /> 
             <BattleLog battleLog={battleLog}/>
             {renderCurrentOutcome()}
