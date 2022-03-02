@@ -115,7 +115,7 @@ function RogueUI ({
     }
     
 // Damage modificataion
-// Rolls 1d6(one 6 sided die) with a +3 to the base damage.
+// Rolls 1d6(One 6 sided die) with a +3 to the base damage.
     function rogueVenomStrikeModifier() {
         return (Math.floor(Math.random() * 6 + 1) + 3)
     }
@@ -164,7 +164,7 @@ function RogueUI ({
 // This function rolls against the enemy armor class determined in Battle# Components then records the damage done as well as
 // setting enemy hp to the difference of the attack value and its current hp. 
 // Resets potion to true if it was used and continues the turn order.
-// Sets Phantom Assault cooldown to 0 upon use. Phantom Assault value goes increments by 1 each round, determined in Battle# components. 
+// Sets Phantom Assault cooldown to 0 upon use. Phantom Assault cooldown value goes increments by 1 each round, determined in Battle# components. 
 // Phantom Assault usable again at the value of 4.
     function rogPhantomAssault() {
         const damage = (enemyHealth) - (phantomAttack)
@@ -243,7 +243,7 @@ function potionStatus() {
 
     } 
 
-// Determines the icon used to display Rogue's status based on buffs/debuffs.
+// Determines the icon used to display Rogue's status based on truthy values buffs/debuffs.
     function rogueStatus() {
         if (rogueHealth > 0 && blessStatus === 0) {
             if (rogStunStatus) {

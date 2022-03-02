@@ -35,58 +35,62 @@ function PaladinUI ({
     const [potionAmount, setPotionAmount] = useState(3)
     const [potionCD, setPotionCD] = useState(true)
 
-    function paladinDamageModifier() {
-        return (Math.floor(Math.random() * 6 + 1) + 5)
-    }
-    const paladinAttack = paladinDamageModifier()
-
-    const blessRoll = (Math.floor(Math.random() * 4 + 1))
-
-    let diceRoll = 
-        blessStatus > 0 
-        ? (Math.floor(Math.random() * 20 + 1)) + (blessRoll)
-        : (Math.floor(Math.random() * 20 + 1))
-    
-
-    function paladinDiceRoll() {
-        return (diceRoll) + 7
-    }
-    const paladinRoll = paladinDiceRoll()
-
-   
-
-    function className() {
-        if (palTurn === 1) {
-            return 'characterUI-turn'
-        } else {
-            return 'characterUI'
-        }
-    }
-
+// Sound effects for clicking abilities, potions, and missing signature actions.
     function pressAudio() {
         const audio = new Audio(press);
-       audio.volume = 0.3
-       audio.play()
+        audio.volume = 0.3
+        audio.play()
     }
 
     function potionAudio() {
         const audio = new Audio(potionSound);
-       audio.volume = 0.3
-       audio.play()
+        audio.volume = 0.3
+        audio.play()
     }
 
     function smiteAudio() {
         const audio = new Audio(smiteSound);
-       audio.volume = 0.3
-       audio.play()
+        audio.volume = 0.3
+        audio.play()
     }
 
     function missAudio() {
         const audio = new Audio(missSound);
-       audio.volume = 0.3
-       audio.play()
+        audio.volume = 0.3
+        audio.play()
     }
 
+    
+// Setting up accuracy rolling for Paladin. Uses a d20 (20 sided die) to determine if attack is successful
+// Paladin's Bless ability adds a d4 (4 sided die) to the d20 value with total of both the d4 and d20.
+    const blessRoll = (Math.floor(Math.random() * 4 + 1))
+    
+    let diceRoll = 
+    blessStatus > 0 
+    ? (Math.floor(Math.random() * 20 + 1)) + (blessRoll)
+    : (Math.floor(Math.random() * 20 + 1))
+    
+    
+// Paladin attacks have a +7 to the base hit die(dice).
+// Ex: Paladin rolls a 8 on the (d20). 8 + 7 = 15 total roll. 
+    function paladinDiceRoll() {
+        return (diceRoll) + 7
+    }
+
+    const paladinRoll = paladinDiceRoll()
+    
+// Base attack damage modification for basic Attack.
+// Rolls 1d6 (One 6 sided die) with a +5 to the base damage.
+    function paladinDamageModifier() {
+        return (Math.floor(Math.random() * 6 + 1) + 5)
+    }
+
+// Made the paladinAttack variable to keep the value of the damage modifier consistent with the damage it does and the message sent to the battle log.
+    const paladinAttack = paladinDamageModifier()
+
+// This function rolls against the enemy armor class determined in Battle# Components then records the damage done as well as
+// setting enemy hp to the difference of the attack value and its current hp. 
+// Also resets potion to true if it was used and continues the turn order.
     function palAttack() {
         const damage = (enemyHealth) - (paladinAttack)
         if (paladinRoll >= enemyArmorClass) {
@@ -110,12 +114,20 @@ function PaladinUI ({
         pressAudio()
     }
 
+// Damage modificataion
+// Rolls 2d6(Two 6 sided dice) with a +11 to the base damage.
     function paladinDivineSmiteModifier() {
         return (Math.floor(Math.random() * 11 + 1) + 12)
     }
 
     const smiteAttack = paladinDivineSmiteModifier()
 
+// This function rolls against the enemy armor class determined in Battle# Components then records the damage done as well as
+// setting enemy hp to the difference of the attack value and its current hp. 
+// Resets potion to true if it was used and continues the turn order.
+// Sets Divine Smite cooldown to 0 upon use. Divine Smite cooldown value goes increments by 1 eac round.
+// Determined in the Battle# components.
+// Divine Smite usable again at the value of 3. 
     function palDivineSmite() {
         const damage = (enemyHealth) - (smiteAttack)
         if (paladinRoll >= enemyArmorClass) {
@@ -142,6 +154,8 @@ function PaladinUI ({
         
     }
 
+// Grants the party Bless that increases the hit die roll (d20) by an additional d4(One 4 sided die).
+// Sets the blessStatus to 6 that is decremented at the end of each round altered in Battle# components.
     function palBlessAction() {
         setBattleLog([...battleLog, "Deus blessed the team, increasing dice rolls!" ])
         setPotionCD(true)
@@ -149,16 +163,51 @@ function PaladinUI ({
         setPalTurn(2)
         pressAudio()
     }
+
+// Potion Modification
+// Rolls 1d6(One 6 sided die) with a +14 to the base.
+    function potionRestoreModifier () {
+        return (Math.floor(Math.random() * 6 + 1) + 14)
+    }
+
+    const potionRestore = potionRestoreModifier()
+
+// Allows Paladin/player to use potion if it's ready, the Paladin's Turn, and if the Paladin is alive.
+// Reduce the potionAmount and sets it to false allowing only 1 potion to be used per turn.
+// Records the information into the Battle Log.
+    function drinkPotion() {
+        const restore = (paladinHealth) + (potionRestore)
+        if (potionCD === true && palTurn === 1 && potionAmount > 0 && paladinHealth > 0) {
+            potionAudio()
+            setPaladinHealth(restore)
+            setPotionAmount(potionAmount - 1)
+            setPotionCD(false)
+            setBattleLog([...battleLog, `Deus restored ${potionRestore} health.`])
+        } 
+    }
+
+// Changes the UI element of the potion from red to greyscale based on availability.
+    function potionStatus() {
+        if (potionCD) {
+            return healingpotion
+        } else {
+            return potionused
+        }
+    }
+
+// Prevents Paladin's health from going above its max and lower than 0. 
     if (paladinHealth < 0) {
         setPaladinHealth(0)
     } else if (paladinHealth > 47) {
         setPaladinHealth(47)
     }
 
+// To make the progress bar display a percentage of the health/cooldown value.
     const healthBar = ((paladinHealth / 47) * 100)
 
     const cooldownBar = ((smiteCD/3) * 100)
 
+// Changes the color of the progress bar based on the percentage of the Paladin's remaining Health.
     function progressBarClass () {
         if (healthBar < 100 && healthBar >= 50) {
             return "success"
@@ -172,6 +221,7 @@ function PaladinUI ({
 
     } 
 
+// Determines the icon used to display Paladin's status based on truthy values of buffs/debuffs.
     function paladinStatus() {
         if (paladinHealth > 0 && blessStatus === 0) {
             if (palStunStatus) {
@@ -190,14 +240,8 @@ function PaladinUI ({
         }
     }
 
-    function potionStatus() {
-        if (potionCD) {
-            return healingpotion
-        } else {
-            return potionused
-        }
-    }
-
+// Conditionally renders based on the availability of Divine Smite. smiteCD is state that increments by 1 within the Battle# Component.
+// smiteCD updates at the end of each Round and becomes available for use at 3.
     function smiteAvailable() {
         if (smiteCD === 3 ) {
             return <button
@@ -215,23 +259,7 @@ function PaladinUI ({
         }
     }
 
-    function potionRestoreModifier () {
-        return (Math.floor(Math.random() * 6 + 1) + 14)
-    }
-
-    const potionRestore = potionRestoreModifier()
-
-    function drinkPotion() {
-        const restore = (paladinHealth) + (potionRestore)
-        if (potionCD === true && palTurn === 1 && potionAmount > 0 && paladinHealth > 0) {
-            potionAudio()
-            setPaladinHealth(restore)
-            setPotionAmount(potionAmount - 1)
-            setPotionCD(false)
-            setBattleLog([...battleLog, `Deus restored ${potionRestore} health.`])
-        } 
-    }
-
+// Conditionally renders the Paladin UI for when it is or not the Paladin's turn.
     function renderActions() {
         if (palTurn === 1) {
             return (
@@ -270,6 +298,16 @@ function PaladinUI ({
                 </button>
                 </div>
                 )
+        }
+    }
+
+// Changes Paladin UI class based on turn value to allow players to use Paladin actions.
+// When no longer Paladin's turn, actions go gray and are not usable. 
+    function className() {
+        if (palTurn === 1) {
+            return 'characterUI-turn'
+        } else {
+            return 'characterUI'
         }
     }
 
