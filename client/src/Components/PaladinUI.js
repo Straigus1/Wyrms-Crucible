@@ -115,9 +115,9 @@ function PaladinUI ({
     }
 
 // Damage modificataion
-// Rolls 3d6(Three 6 sided dice) with a +7 to the base damage.
+// Rolls 3d6(Three 6 sided dice) with a +11 to the base damage.
     function paladinDivineSmiteModifier() {
-        return (Math.floor(Math.random() * 16 + 1) + 9)
+        return (Math.floor(Math.random() * 16 + 1) + 13)
     }
 
     const smiteAttack = paladinDivineSmiteModifier()
