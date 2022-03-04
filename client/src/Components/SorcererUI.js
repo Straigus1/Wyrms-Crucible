@@ -102,13 +102,13 @@ function SorcererUI ({
     function sorcererMagicMissleModifier() {
         const variant = Math.floor(Math.random() * 3 + 1)
         if (variant === 3) {
-// Rolls 1d10(One 10 sided die) with a +6 to the base damage.
+    // Rolls 1d10(One 10 sided die) with a +6 to the base damage.
             return (Math.floor(Math.random() * 10 + 1) + 6)
         } else if (variant === 2) {
-// Rolls 1d6(One 6 sided die) with a +4 to the base damage.
+    // Rolls 1d6(One 6 sided die) with a +4 to the base damage.
             return (Math.floor(Math.random() * 6 + 1) + 4)
         } else {
-// Rolls 1d4(One 4 sided die) with a +2 to the base damage.
+    // Rolls 1d4(One 4 sided die) with a +2 to the base damage.
             return (Math.floor(Math.random() * 4 + 1) + 2)
         }
     }
@@ -136,10 +136,10 @@ function SorcererUI ({
     function sorcererLightningBoltModifier() {
         const variant = Math.floor(Math.random() * 4 + 1)
         if (variant >= 2) {
-// Rolls 4d6(Four 6 sided die) with a +24 to the base damage.
+    // Rolls 4d6(Four 6 sided die) with a +24 to the base damage.
             return (Math.floor(Math.random() * 21 + 1) + 27)
         } else {
-// Does not necessarily roll. Simply emulates doing half damage.
+    // Does not necessarily roll. Simply emulates doing half damage.
             return (Math.floor(Math.random() * 11 + 1) + 13)
         }
     }
@@ -166,8 +166,8 @@ function SorcererUI ({
         lightningAudio()
     }
 
- // Potion Modification
-    // Rolls 1d6(One 6 sided die) with a +14 to the base.
+// Potion Modification
+// Rolls 1d6(One 6 sided die) with a +14 to the base.
     function potionRestoreModifier () {
         return (Math.floor(Math.random() * 6 + 1) + 14)
     }
