@@ -139,7 +139,7 @@ function SorcererUI ({
 // Rolls 4d6(Four 6 sided die) with a +24 to the base damage.
             return (Math.floor(Math.random() * 21 + 1) + 27)
         } else {
-// Does not necessarily roll. Simply eumlates doing half damage.
+// Does not necessarily roll. Simply emulates doing half damage.
             return (Math.floor(Math.random() * 11 + 1) + 13)
         }
     }
