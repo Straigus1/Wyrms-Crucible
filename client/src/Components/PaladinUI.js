@@ -154,7 +154,7 @@ function PaladinUI ({
         
     }
 
-// Grants the party Bless that increases the hit die roll (d20) by an additional d4(One 4 sided die).
+// Grants the party Bless that increases the hit die roll (d20) by an additional 1d4(One 4 sided die).
 // Sets the blessStatus to 6 that is decremented at the end of each round altered in Battle# components.
     function palBlessAction() {
         setBattleLog([...battleLog, "Deus blessed the team, increasing dice rolls!" ])

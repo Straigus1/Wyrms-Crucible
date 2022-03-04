@@ -11,7 +11,7 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 -Adding D&D natural d20(20 sided die) critical modifier
 
 #### Battle Log
--Adjusting battle log to default to the bottom of the log.
+-Adjusting battle log to default to the bottom of the log
 
 #### Animations
 -Learning how to effectively use animations as an ally or enemy uses an action
@@ -22,3 +22,4 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 
 #### Tutorial/Tips Page
 -Creating a page for players to access for detailed guide of all the games rules and systems
+
