@@ -34,12 +34,12 @@ function Battle2 () {
     }
     const enemyAttack = enemyDamageModifier()
 
-    const diceRoll = Math.floor(Math.random() * 20 + 1)
+    const d20Roll = Math.floor(Math.random() * 20 + 1)
     
-    function enemyDiceRoll() {
-        return (diceRoll) + 8
+    function enemyd20Roll() {
+        return (d20Roll) + 8
     }
-    const enemyRoll = enemyDiceRoll()
+    const enemyRoll = enemyd20Roll()
 
     function updateBattleLog(roll, info) {
         setBattleLog([...battleLog, roll, info])
@@ -55,13 +55,39 @@ function Battle2 () {
     // No longer attack dead heroes.
     // Needs major refactoring.
     function enemyTarget () {
+        let damage = 0
+        let critAttack = (enemyAttack + Math.floor(Math.random() * 6 + 1))
+        let target = Math.floor(Math.random() * 10)
         // Using "variant" variable to determine if Feather Rain is used.
         const variant = Math.floor(Math.random() * 10 + 1)
-        let target = Math.floor(Math.random() * 10)
-        
         let damageFRog = (rogueHealth) - (featherAttack)
         let damageFSor = (sorcererHealth) - (featherAttack)
         let damageFPal = (paladinHealth) - (featherAttack)
+        function alterDamageValueBasedOnDiceRoll(characterHealth) {
+            if (d20Roll === 20) {
+                damage = (characterHealth) - (critAttack)
+            } else {
+                damage = (characterHealth) - (enemyAttack)
+            }
+        }
+        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string) {
+            if (enemyRoll >= armorClass) {
+                if (d20Roll === 20) {
+                    updateBattleLog(
+                        `Harpy rolled a natural 🎲(20) against ${name}!`,
+                        `Harpy attacked ${name} for ${critAttack} damage!!!`)
+                } else {
+                    updateBattleLog(
+                        `Harpy rolled 🎲(${d20Roll}) + 8 against ${name}.`,
+                        `Harpy attacked ${name} for ${enemyAttack} damage!`)
+                }  
+                setCharacterHealth(damage)
+                } else {
+                updateBattleLog(
+                    `Harpy rolled 🎲(${d20Roll}) + 8 against ${name}.`,
+                    string)
+                }
+        }
         if (variant <= 4) { 
             updateBattleLog(
                 'Harpy used Feather Rain!',
@@ -72,41 +98,14 @@ function Battle2 () {
             setPaladinHealth(damageFPal)
         } else {  
         if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
-            let damage = (rogueHealth) - (enemyAttack)           
-            if (enemyRoll >= 15) {
-                updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Iris.`,
-                    `Harpy attacked Iris for ${enemyAttack} damage!`)
-                setRogueHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Iris.`,
-                    'Iris avoided the attack!')
-            }
+            alterDamageValueBasedOnDiceRoll(rogueHealth)
+            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack')
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
-            let damage = (sorcererHealth) - (enemyAttack)
-            if (enemyRoll >= 14) {
-                updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Juhl.`,
-                    `Harpy attacked Juhl for ${enemyAttack} damage!`)
-                setSorcererHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Juhl.`,
-                    'Juhl resisted the assault!')
-            }
+            alterDamageValueBasedOnDiceRoll(sorcererHealth)
+            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
         } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
-            let damage = (paladinHealth) - (enemyAttack)
-            if (enemyRoll >= 19) {
-                updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Deus.`,
-                    `Harpy attacked Deus for ${enemyAttack} damage!`)
-                setPaladinHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Harpy rolled 🎲(${diceRoll}) + 8 against Deus.`,
-                    'Deus blocked the strike!')
-            }
+            alterDamageValueBasedOnDiceRoll(paladinHealth)
+            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
         }
         }   
         

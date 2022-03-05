@@ -74,13 +74,13 @@ function Battle1 () {
                         `Lizard attacked ${name} for ${critAttack} damage!!!`)
                 } else {
                     updateBattleLog(
-                        `Lizard rolled 🎲(${d20Roll}) + 7 against Iris.`,
+                        `Lizard rolled 🎲(${d20Roll}) + 7 against ${name}.`,
                         `Lizard attacked ${name} for ${enemyAttack} damage!`)
                 }  
                 setCharacterHealth(damage)
                 } else {
                 updateBattleLog(
-                    `Lizard rolled 🎲(${d20Roll}) + 7 against Iris.`,
+                    `Lizard rolled 🎲(${d20Roll}) + 7 against ${name}.`,
                     string)
                 }
         }
