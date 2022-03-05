@@ -54,11 +54,12 @@ function SorcererUI ({
 // Setting up accuracy rolling for Sorcerer. Uses a d20 (20 sided die) to determine if attack is successful
 // Paladin's Bless ability adds a d4 (4 sided die) to the d20 value with total of both the d4 and d20.
     const blessRoll = (Math.floor(Math.random() * 4 + 1))
+    const d20Roll = (Math.floor(Math.random() * 20 + 1))
 
-    let diceRoll = 
+    const diceRoll = 
         blessStatus > 0 
-        ? (Math.floor(Math.random() * 20 + 1)) + (blessRoll)
-        : (Math.floor(Math.random() * 20 + 1))
+        ? d20Roll + (blessRoll)
+        : d20Roll
 
 // Sorcerer attacks have a +5 to the base hit die(dice).
 // Ex: Sorcerer rolls a 17 on the (d20). 17 + 5 = 22 total roll. 
@@ -67,7 +68,7 @@ function SorcererUI ({
     }
     const sorcererRoll = sorcererDiceRoll() 
     
-// Damage modification for Rogue basic Attack.
+// Damage modification for Sorcerer basic Attack.
 // Rolls 2d6 (Two 6 sided dice) with a +4 to the base damage.
     function sorcererDamageModifier() {
         return (Math.floor(Math.random() * 11 + 1) + 5)
@@ -80,12 +81,23 @@ function SorcererUI ({
 // setting enemy hp to the difference of the attack value and its current hp. 
 // Also resets potion to true if it was used and continues the turn order.
     function sorAttack() {
-        const damage = (enemyHealth) - (sorcererAttack)
+        let damage = enemyHealth
+        const critAttack = (sorcererAttack + (Math.floor(Math.random() * 11 + 1) + 1))
+        if (d20Roll === 20) {
+            damage = (enemyHealth) - (critAttack)
+        } else {
+            damage = (enemyHealth) - (sorcererAttack)
+        }
         if (sorcererRoll >= enemyArmorClass) {
-            updateBattleLog(
-                `Juhl rolled 🎲(${diceRoll}) + 5 against the enemy.`,
-                `Juhl blasted the enemy for ${sorcererAttack} damage!`)
-             
+            if (d20Roll === 20) {
+                updateBattleLog(
+                    `Juhl rolled a natural 🎲(20) against the enemy!`,
+                    `Juhl blasted the enemy for ${critAttack} damage!!!`)
+            } else {
+                updateBattleLog(
+                    `Juhl rolled 🎲(${diceRoll}) + 5 against the enemy.`,
+                    `Juhl blasted the enemy for ${sorcererAttack} damage!`)
+            }   
         setEnemyHealth(damage)
         } else {
             updateBattleLog(
@@ -174,7 +186,7 @@ function SorcererUI ({
 
     const potionRestore = potionRestoreModifier()
 
-// Allows Sorcerer/player to use potion if it's ready, the Sorcerer's Turn, and if the Rogue is alive.
+// Allows Sorcerer/player to use potion if it's ready, the Sorcerer's Turn, and if Sorcerer is alive.
 // Reduce the potionAmount and sets it to false allowing only 1 potion to be used per turn.
 // Records the information into the Battle Log.
     function drinkPotion() {
@@ -322,7 +334,7 @@ function SorcererUI ({
             <img 
             className='character-pics'
             src={sorcererStatus()}
-            alt='rogue pic'
+            alt='sorcerer pic'
             />
             <img 
             className='healing-potion-sor'
