@@ -54,8 +54,8 @@ function Battle1 () {
 // Algorithm to determine which party member an enemy attacks. "target" variable value chooses who will get attacked. Paladin innately has a higher chance of being the target.
 // Needs major refactoring.
     function enemyTarget () {
+        const critAttack = (enemyAttack + Math.floor(Math.random() * 6 + 1))
         let damage = 0
-        let critAttack = (enemyAttack + Math.floor(Math.random() * 6 + 1))
         let target = Math.floor(Math.random() * 10)
         // Critcal Attacks occur when a d20 roll equals 20 and doubles the amount of dice rolled.
         function alterDamageValueBasedOnDiceRoll(characterHealth) {

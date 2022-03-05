@@ -37,12 +37,12 @@ function Battle3 () {
     }
     const enemyAttack = enemyDamageModifier()
 
-    const diceRoll = Math.floor(Math.random() * 20 + 1)
+    const d20Roll = Math.floor(Math.random() * 20 + 1)
     
-    function enemyDiceRoll() {
-        return (diceRoll) + 10
+    function enemyd20Roll() {
+        return (d20Roll) + 10
     }
-    const enemyRoll = enemyDiceRoll()
+    const enemyRoll = enemyd20Roll()
 
     function updateBattleLog(roll, info) {
         setBattleLog([...battleLog, roll, info])
@@ -58,87 +58,77 @@ function Battle3 () {
     // No longer attack dead heroes.
     // Needs major, major refactoring.
     function enemyTarget () {
-        const variant = Math.floor(Math.random() * 10 + 1)
+        const baseCritAttack = (enemyAttack + (Math.floor(Math.random() * 11 + 1) + 1))
+        const surgeCritAttack = (electricAttack + (Math.floor(Math.random() * 11 + 1) + 1))
+        let damage = 0
         let target = Math.floor(Math.random() * 10)
+        const variant = Math.floor(Math.random() * 10 + 1)
+        function alterDamageValueBasedOnDiceRoll(characterHealth, normalAttack, critAttack) {
+            if (d20Roll === 20) {
+                damage = (characterHealth) - (critAttack)
+            } else {
+                damage = (characterHealth) - (normalAttack)
+            }
+        }
+        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string) {
+            if (enemyRoll >= armorClass) {
+                if (d20Roll === 20) {
+                    updateBattleLog(
+                        `Werewolf rolled a natural 🎲(20) against ${name}!`,
+                        `Werewolf attacked ${name} for ${baseCritAttack} damage!!!`)
+                } else {
+                    updateBattleLog(
+                        `Werewolf rolled 🎲(${d20Roll}) + 10 against ${name}.`,
+                        `Werewolf attacked ${name} for ${enemyAttack} damage!`)
+                }  
+                setCharacterHealth(damage)
+                } else {
+                updateBattleLog(
+                    `Werewolf rolled 🎲(${d20Roll}) + 10 against ${name}.`,
+                    string)
+                }
+        }
+        function updateLogWithElectricSurgeInfo(armorClass, name, setCharacterHealth, setCharacterStunStatus, string) {
+            if (enemyRoll >= armorClass) {
+                if (d20Roll === 20) {
+                    updateBattleLog(
+                        `Werewolf cast Electric Surge, rolled a natural 🎲(20) against ${name}!`,
+                        `Werewolf electrocuted ${name} for ${surgeCritAttack} damage and applied stun!!!`)
+                } else {
+                    updateBattleLog(
+                        `Werewolf cast Electric Surge, rolled 🎲(${d20Roll}) + 10 against ${name}.`,
+                        `Werewolf electrified ${name} for ${electricAttack} damage and applied stun!`)
+                } 
+                setCharacterStunStatus(true) 
+                setCharacterHealth(damage)
+                } else {
+                updateBattleLog(
+                    `Werewolf cast Electric Surge, rolled 🎲(${d20Roll}) + 10 against ${name}.`,
+                    string)
+                }
+        }
         // Electric Surge applies stun when it is successful, forcing the target to lose its next turn.
         if (variant <= 6) {
             if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
-                let damage = (rogueHealth) - (electricAttack)                
-                if (enemyRoll >= 15) {
-                    updateBattleLog(
-                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Iris.`,
-                        `Werewolf electricfied Iris for ${electricAttack} damage and applied stun!`)
-                    setRogStunStatus(true)
-                    setRogueHealth(damage)
-                } else {
-                    updateBattleLog(
-                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Iris.`,
-                        'Iris avoided the attack!')
-                }
+                alterDamageValueBasedOnDiceRoll(rogueHealth, electricAttack, surgeCritAttack)
+                updateLogWithElectricSurgeInfo(15, 'Iris', setRogueHealth, setRogStunStatus, 'Iris avoided the attack!')
             } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
-                let damage = (sorcererHealth) - (electricAttack)
-                if (enemyRoll >= 14) {
-                    updateBattleLog(
-                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Juhl.`,
-                        `Werewolf electricfied Juhl for ${electricAttack} damage and applied stun!`)
-                    setSorStunStatus(true)
-                    setSorcererHealth(damage)
-                } else {
-                    updateBattleLog(
-                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Juhl.`,
-                        'Juhl dispelled the assault!')
-                }
+                alterDamageValueBasedOnDiceRoll(sorcererHealth, electricAttack, surgeCritAttack)
+                updateLogWithElectricSurgeInfo(14, 'Juhl', setSorcererHealth, setSorStunStatus, 'Juhl resisted the assault!')
             } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
-                let damage = (paladinHealth) - (electricAttack)
-                if (enemyRoll >= 19) {
-                    updateBattleLog(
-                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Deus.`,
-                        `Werewolf electrified Deus for ${electricAttack} damage and applied stun!`)
-                    setPalStunStatus(true)
-                    setPaladinHealth(damage)
-                } else {
-                    updateBattleLog(
-                        `Werewolf cast Electric Surge, rolled 🎲(${diceRoll}) + 10 against Deus.`,
-                        'Deus blocked the strike!')
-                }
+                alterDamageValueBasedOnDiceRoll(paladinHealth, electricAttack, surgeCritAttack)
+                updateLogWithElectricSurgeInfo(19, 'Deus', setPaladinHealth, setPalStunStatus, 'Deus blocked the strike')
             }
         } else {
         if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
-            let damage = (rogueHealth) - (enemyAttack)                
-            if (enemyRoll >= 15) {
-                updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Iris.`,
-                    `Werewolf attacked Iris for ${enemyAttack} damage!`)
-                setRogueHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Iris.`,
-                    'Iris avoided the attack!')
-            }
+            alterDamageValueBasedOnDiceRoll(rogueHealth, enemyAttack, baseCritAttack)               
+            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
-            let damage = (sorcererHealth) - (enemyAttack)
-            if (enemyRoll >= 14) {
-                updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Juhl.`,
-                    `Werewolf attacked Juhl for ${enemyAttack} damage!`)
-                setSorcererHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Juhl.`,
-                    'Juhl resisted the assault!')
-            }
+            alterDamageValueBasedOnDiceRoll(sorcererHealth, enemyAttack, baseCritAttack)
+            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
         } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
-            let damage = (paladinHealth) - (enemyAttack)
-            if (enemyRoll >= 19) {
-                updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Deus.`,
-                    `Werewolf attacked Deus for ${enemyAttack} damage!`)
-                setPaladinHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Werewolf rolled 🎲(${diceRoll}) + 10 against Deus.`,
-                    'Deus blocked the strike!')
-            }
+            alterDamageValueBasedOnDiceRoll(paladinHealth, enemyAttack, baseCritAttack)
+            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
         }
         
     }

@@ -55,11 +55,11 @@ function Battle2 () {
     // No longer attack dead heroes.
     // Needs major refactoring.
     function enemyTarget () {
+        const critAttack = (enemyAttack + Math.floor(Math.random() * 6 + 1))
+        const variant = Math.floor(Math.random() * 10 + 1)
         let damage = 0
-        let critAttack = (enemyAttack + Math.floor(Math.random() * 6 + 1))
         let target = Math.floor(Math.random() * 10)
         // Using "variant" variable to determine if Feather Rain is used.
-        const variant = Math.floor(Math.random() * 10 + 1)
         let damageFRog = (rogueHealth) - (featherAttack)
         let damageFSor = (sorcererHealth) - (featherAttack)
         let damageFPal = (paladinHealth) - (featherAttack)
@@ -99,7 +99,7 @@ function Battle2 () {
         } else {  
         if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(rogueHealth)
-            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack')
+            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(sorcererHealth)
             updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
