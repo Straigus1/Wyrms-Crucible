@@ -59,7 +59,7 @@ function RogueUI ({
         audio.volume = 0.3
         audio.play()
     }
-        
+
 // Setting up accuracy rolling for Rogue. Uses a d20 (20 sided die) to determine if attack is successful
 // Paladin's Bless ability adds a d4 (4 sided die) to the d20 value with total of both the d4 and d20.
     const blessRoll = (Math.floor(Math.random() * 4 + 1))
@@ -98,7 +98,6 @@ function RogueUI ({
         } else {
             damage = (enemyHealth) - (rogueAttack)
         }
-        
         if (rogueRoll >= enemyArmorClass) {
             if (d20Roll === 20) {
                 updateBattleLog(

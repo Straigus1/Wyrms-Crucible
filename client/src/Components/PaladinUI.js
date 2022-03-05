@@ -64,11 +64,12 @@ function PaladinUI ({
 // Setting up accuracy rolling for Paladin. Uses a d20 (20 sided die) to determine if attack is successful
 // Paladin's Bless ability adds a d4 (4 sided die) to the d20 value with total of both the d4 and d20.
     const blessRoll = (Math.floor(Math.random() * 4 + 1))
+    const d20Roll = (Math.floor(Math.random() * 20 + 1))
     
-    let diceRoll = 
+    const diceRoll = 
     blessStatus > 0 
-    ? (Math.floor(Math.random() * 20 + 1)) + (blessRoll)
-    : (Math.floor(Math.random() * 20 + 1))
+    ? d20Roll + (blessRoll)
+    : d20Roll
     
     
 // Paladin attacks have a +7 to the base hit die(dice).
@@ -92,16 +93,26 @@ function PaladinUI ({
 // setting enemy hp to the difference of the attack value and its current hp. 
 // Also resets potion to true if it was used and continues the turn order.
     function palAttack() {
-        const damage = (enemyHealth) - (paladinAttack)
+        let damage = enemyHealth
+        const critAttack = (paladinAttack + Math.floor(Math.random() * 6 + 1))
+        if (d20Roll === 20) {
+            damage = (enemyHealth) - (critAttack)
+        } else {
+            damage = (enemyHealth) - (paladinAttack)
+        }
         if (paladinRoll >= enemyArmorClass) {
-            if (paladinAttack <= 9) {
+            if (d20Roll === 20) {
                 updateBattleLog(
-                    `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
-                    `Deus attacked the enemy for ${paladinAttack} damage!`)
-            } else {
+                    `Deus rolled a natural 🎲(20) against the enemy!`,
+                    `Deus critically struck the enemy for ${critAttack} damage!!!`)
+            } else if (paladinAttack >= 9 && d20Roll !== 20) {
                 updateBattleLog(
                     `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                     `Deus crushed the target for ${paladinAttack} damage!!`)
+            } else {
+                updateBattleLog(
+                    `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
+                    `Deus attacked the enemy for ${paladinAttack} damage!`)
             }
             setEnemyHealth(damage)
         } else {
@@ -129,16 +140,26 @@ function PaladinUI ({
 // Determined in the Battle# components.
 // Divine Smite usable again at the value of 3. 
     function palDivineSmite() {
-        const damage = (enemyHealth) - (smiteAttack)
+        let damage = enemyHealth
+        const critAttack = (smiteAttack + (Math.floor(Math.random() * 16 + 1) + 2))
+        if (d20Roll === 20) {
+            damage = (enemyHealth) - (critAttack)
+        } else {
+            damage = (enemyHealth) - (smiteAttack)
+        }
         if (paladinRoll >= enemyArmorClass) {
-            if (smiteAttack <= 17) {
+            if (d20Roll === 20) {
                 updateBattleLog(
-                    `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
-                    `Deus smited the enemy for ${smiteAttack} damage!`)
-            } else {
+                    `Deus rolled a natural 🎲(20) against the enemy!`,
+                    `Deus critically demolished the enemy for ${critAttack} damage!`)
+            } else if (smiteAttack >= 17 && d20Roll !== 20){
                 updateBattleLog(
                     `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                     `Deus gave divine judgement for ${smiteAttack} damage!!`)
+            } else {
+                updateBattleLog(
+                    `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
+                    `Deus smited the enemy for ${smiteAttack} damage!`)
             }
             setEnemyHealth(damage)
             smiteAudio()
