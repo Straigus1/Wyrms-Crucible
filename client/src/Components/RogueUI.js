@@ -63,11 +63,12 @@ function RogueUI ({
 // Setting up accuracy rolling for Rogue. Uses a d20 (20 sided die) to determine if attack is successful
 // Paladin's Bless ability adds a d4 (4 sided die) to the d20 value with total of both the d4 and d20.
     const blessRoll = (Math.floor(Math.random() * 4 + 1))
+    const d20Roll = (Math.floor(Math.random() * 20 + 1))
 
-    let diceRoll = 
+    const diceRoll = 
         blessStatus > 0 
-        ? (Math.floor(Math.random() * 20 + 1)) + (blessRoll)
-        : (Math.floor(Math.random() * 20 + 1))
+        ? d20Roll + (blessRoll)
+        : d20Roll
 
 // Rogue attacks have a +6 to the base hit die(dice).
 // Ex: Rogue rolls a 13 on the (d20). 13 + 6 = 19 total roll. 
@@ -90,16 +91,27 @@ function RogueUI ({
 // setting enemy hp to the difference of the attack value and its current hp. 
 // Also resets potion to true if it was used and continues the turn order.
     function rogAttack() {
-        const damage = (enemyHealth) - (rogueAttack)
+        let damage = enemyHealth
+        const critAttack = (rogueAttack + (Math.floor(Math.random() * 11 + 1) + 1))
+        if (d20Roll === 20) {
+            damage = (enemyHealth) - (critAttack)
+        } else {
+            damage = (enemyHealth) - (rogueAttack)
+        }
+        
         if (rogueRoll >= enemyArmorClass) {
-            if (rogueAttack <= 12) {
+            if (d20Roll === 20) {
                 updateBattleLog(
-                    `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
-                    `Iris slashed the enemy for ${rogueAttack} damage! `)
-            } else {
+                    `Iris rolled a natural 🎲(20) against the enemy!`,
+                    `Iris crtically struck the enemy for ${critAttack} damage!!! `)
+            } else if (rogueAttack >= 13 && d20Roll !== 20){
                 updateBattleLog(
                     `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                     `Iris mutilated the target for ${rogueAttack} damage!!`)
+            } else {
+                updateBattleLog(
+                    `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
+                    `Iris slashed the enemy for ${rogueAttack} damage! `)
             }
             setEnemyHealth(damage)
             
@@ -127,12 +139,24 @@ function RogueUI ({
 // Resets potion to true if it was used and continues the turn order.
 // Also sets poisonStatus to 3 which is lowered each round via the Battle# Component. Damage value can be seen in Battle# components.
     function rogVenomStrike() {
-        const damage = (enemyHealth) - (venomAttack)
+        let damage = enemyHealth
+        const critAttack = (venomAttack + Math.floor(Math.random() * 6 + 1))
+        if (d20Roll === 20) {
+            damage = (enemyHealth) - (critAttack)
+        } else {
+            damage = (enemyHealth) - (venomAttack)
+        }
         if (rogueRoll >= enemyArmorClass) {
-            updateBattleLog(
+            if (d20Roll === 20) {
+                updateBattleLog(
+                    `Iris rolled a natural 🎲(20) against the enemy!`,
+                    `Iris dealt ${critAttack} critical damage and poisoned the enemy!!!`)
+
+            } else {
+                updateBattleLog(
                     `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                     `Iris dealt ${venomAttack} damage and poisoned the enemy!`)
-            
+            }
             setEnemyHealth(damage)
             setPoisonStatus(3)
         } else {
@@ -167,11 +191,24 @@ function RogueUI ({
 // Sets Phantom Assault cooldown to 0 upon use. Phantom Assault cooldown value goes increments by 1 each round, determined in Battle# components. 
 // Phantom Assault usable again at the value of 4.
     function rogPhantomAssault() {
-        const damage = (enemyHealth) - (phantomAttack)
+        let damage = enemyHealth
+        const critAttack = (phantomAttack + (Math.floor(Math.random() * 16 + 1) + 2))
+        if (d20Roll === 20) {
+            damage = (enemyHealth) - (critAttack)
+        } else {
+            damage = (enemyHealth) - (phantomAttack)
+        }
         if (phantomRoll >= enemyArmorClass) {
-            updateBattleLog(
+            if (d20Roll === 20) {
+                updateBattleLog(
+                    `Iris rolled a natural 🎲(20) against the enemy!`,
+                    `Iris critically slaughtered the enemy for ${critAttack} damage!!! `)
+            } else {
+                updateBattleLog(
                     `Iris rolled 🎲(${diceRoll}) + 11 against the enemy.`,
                     `Iris eviscerated the enemy for ${phantomAttack} damage! `)
+            }
+            
             setEnemyHealth(damage)
             phantomAudio()
         } else {
