@@ -37,13 +37,13 @@ function Battle1 () {
     const enemyAttack = enemyDamageModifier()
 
 // Setting up enemy accuracy. Uses a d20(20 sided die) to determine if attack is successful.
-    const diceRoll = Math.floor(Math.random() * 20 + 1)
+    const d20Roll = Math.floor(Math.random() * 20 + 1)
     
 // Adding a base to hit chance.
-    function enemyDiceRoll() {
-        return (diceRoll) + 7
+    function enemyd20Roll() {
+        return (d20Roll) + 7
     }
-    const enemyRoll = enemyDiceRoll()
+    const enemyRoll = enemyd20Roll()
 
 // Update Battle Log with total roll value and outcome of the attack.
     function updateBattleLog(roll, info) {
@@ -54,45 +54,46 @@ function Battle1 () {
 // Algorithm to determine which party member an enemy attacks. "target" variable value chooses who will get attacked. Paladin innately has a higher chance of being the target.
 // Needs major refactoring.
     function enemyTarget () {
+        let damage = 0
+        let critAttack = (enemyAttack + Math.floor(Math.random() * 6 + 1))
         let target = Math.floor(Math.random() * 10)
+        // Critcal Attacks occur when a d20 roll equals 20 and doubles the amount of dice rolled.
+        function alterDamageValueBasedOnDiceRoll(characterHealth) {
+            if (d20Roll === 20) {
+                damage = (characterHealth) - (critAttack)
+            } else {
+                damage = (characterHealth) - (enemyAttack)
+            }
+        }
+        // Enemy enemyRoll must meet or exceed their target's Armor Class.     
+        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string) {
+            if (enemyRoll >= armorClass) {
+                if (d20Roll === 20) {
+                    updateBattleLog(
+                        `Lizard rolled a natural 🎲(20) against ${name}!`,
+                        `Lizard attacked ${name} for ${critAttack} damage!!!`)
+                } else {
+                    updateBattleLog(
+                        `Lizard rolled 🎲(${d20Roll}) + 7 against Iris.`,
+                        `Lizard attacked ${name} for ${enemyAttack} damage!`)
+                }  
+                setCharacterHealth(damage)
+                } else {
+                updateBattleLog(
+                    `Lizard rolled 🎲(${d20Roll}) + 7 against Iris.`,
+                    string)
+                }
+        }
         // Additional conditionals are to prevent the enemy from targeting dead party members.
         if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
-            let damage = (rogueHealth) - (enemyAttack)    
-            // Enemy enemyRoll must meet or exceed their target's Armor Class (the integer in the if statement).            
-            if (enemyRoll >= 15) {
-                updateBattleLog(
-                    `Lizard rolled 🎲(${diceRoll}) + 7 against Iris.`,
-                    `Lizard attacked Iris for ${enemyAttack} damage!`)
-                setRogueHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Lizard rolled 🎲(${diceRoll}) + 7 against Iris.`,
-                    'Iris avoided the attack!')
-            }
+            alterDamageValueBasedOnDiceRoll(rogueHealth)  
+            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')             
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
-            let damage = (sorcererHealth) - (enemyAttack)
-            if (enemyRoll >= 14) {
-                updateBattleLog(
-                    `Lizard rolled 🎲(${diceRoll}) + 7 against Juhl.`,
-                    `Lizard attacked Juhl for ${enemyAttack} damage!`)
-                setSorcererHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Lizard rolled 🎲(${diceRoll}) + 7 against Juhl.`,
-                    'Juhl resisted the assault!')
-            }
+            alterDamageValueBasedOnDiceRoll(sorcererHealth)
+            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
         } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
-            let damage = (paladinHealth) - (enemyAttack)
-            if (enemyRoll >= 19) {
-                updateBattleLog(
-                    `Lizard rolled 🎲(${diceRoll}) + 7 against Deus.`,
-                    `Lizard attacked Deus for ${enemyAttack} damage!`)
-                setPaladinHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Lizard rolled 🎲(${diceRoll}) + 7 against Deus.`,
-                    'Deus blocked the strike!')
-            }
+            alterDamageValueBasedOnDiceRoll(paladinHealth)
+            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
         }
         
         

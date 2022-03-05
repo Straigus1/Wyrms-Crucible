@@ -92,6 +92,7 @@ function RogueUI ({
 // Also resets potion to true if it was used and continues the turn order.
     function rogAttack() {
         let damage = enemyHealth
+    // Critcal Attacks occur when a d20 roll equals 20 and doubles the amount of dice rolled.
         const critAttack = (rogueAttack + (Math.floor(Math.random() * 11 + 1) + 1))
         if (d20Roll === 20) {
             damage = (enemyHealth) - (critAttack)
