@@ -43,15 +43,17 @@ function Battle2 () {
     function updateBattleLog(roll, info) {
         setBattleLog([...battleLog, roll, info])
     }
-
+// Harpy unique action, Feather Rain. Uses random variance to decide if it is used.
+// Rolls 1d4(One 4 sided die) with a +5 to the base damage.
     function featherRainDamage() {
-        return (Math.floor(Math.random() * 3 + 1) + 6)
+        return (Math.floor(Math.random() * 4 + 1) + 5)
     }
 
     const featherAttack = featherRainDamage()
 
     // No longer attack dead heroes
     function enemyTarget () {
+        // Using "variant" variable to determine if Feather Rain is used.
         const variant = Math.floor(Math.random() * 10 + 1)
         let target = Math.floor(Math.random() * 10)
         
@@ -62,6 +64,7 @@ function Battle2 () {
             updateBattleLog(
                 'Harpy used Feather Rain!',
                 `The Party was dealt ${featherAttack} damage!`)
+            // Attacks all characters in the form of an AoE(Area of Effect)
             setRogueHealth(damageFRog)
             setSorcererHealth(damageFSor)
             setPaladinHealth(damageFPal)
