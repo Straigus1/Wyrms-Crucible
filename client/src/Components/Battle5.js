@@ -52,7 +52,7 @@ function Battle5 () {
 
     const breathAttack = dragonBreathDamage()
 
-    const breathRecharge = Math.floor(Math.random() * 7 + 1)
+    const breathRecharge = Math.floor(Math.random() * 6 + 1)
 
     function breathAudio() {
         const audio = new Audio(breathSound);
@@ -204,7 +204,7 @@ function Battle5 () {
         setRogTurn(0)
         setSorTurn(0)
         setPalTurn(0)
-        if (breathReady === false && breathRecharge >= 6 ) {
+        if (breathReady === false && breathRecharge >= 5 ) {
             setBreathReady(true)
         }
         if (phantomCD >= 0 && phantomCD < 4 ){

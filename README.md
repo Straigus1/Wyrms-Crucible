@@ -6,7 +6,7 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 ### Future Updates
 
 #### Deployment
-- Having issues gaining permission to alter PostgresSQL files to work with app. Currently fixing to hopefully deploy with Heroku.
+- Having issues gaining permission to alter PostgreSQL files to work with app. Currently fixing to hopefully deploy with Heroku.
 
 #### Critical Attacks
 - Adding D&D natural d20(20 sided die) critical modifier.

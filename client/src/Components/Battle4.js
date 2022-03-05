@@ -88,7 +88,7 @@ function Battle4 () {
                     updateBattleLog(
                         `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Iris.`,
                         `Behemoth lifted Iris sky high for ${upheavalAttack} damage, may apply stun!`)
-                    if (stunChance <= 2) {
+                    if (stunChance <= 4) {
                         setRogStunStatus(true)
                     }
                     setRogueHealth(damage)
@@ -103,7 +103,7 @@ function Battle4 () {
                     updateBattleLog(
                         `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Juhl.`,
                         `Behemoth lifted Juhl sky high for ${upheavalAttack} damage, may apply stun!`)
-                        if (stunChance <= 2) {
+                        if (stunChance <= 4) {
                             setSorStunStatus(true)
                         }
                     setSorcererHealth(damage)
@@ -118,7 +118,7 @@ function Battle4 () {
                     updateBattleLog(
                         `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Deus.`,
                         `Behemoth lifted Deus sky high for ${upheavalAttack} damage, may apply stun!`)
-                        if (stunChance <= 2) {
+                        if (stunChance <= 4) {
                             setPalStunStatus(true)
                         }
                     setPaladinHealth(damage)

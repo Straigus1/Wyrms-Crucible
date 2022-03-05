@@ -28,27 +28,37 @@ function Battle1 () {
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
 
+// Damage Modification
+// Rolls 1d6(One 6 sided die) with a +9 to the base damage.
     function enemyDamageModifier() {
         return (Math.floor(Math.random() * 6 + 1) + 9)
     }
+// Made enemyAttack variable to keep value consistent for logging.
     const enemyAttack = enemyDamageModifier()
 
+// Setting up enemy accuracy. Uses a d20(20 sided die) to determine if attack is successful.
     const diceRoll = Math.floor(Math.random() * 20 + 1)
     
+// Adding a base to hit chance.
     function enemyDiceRoll() {
         return (diceRoll) + 7
     }
     const enemyRoll = enemyDiceRoll()
 
+// Update Battle Log with total roll value and outcome of the attack.
     function updateBattleLog(roll, info) {
         setBattleLog([...battleLog, roll, info])
     }
     
-    // No longer attack dead heroes
+
+// Algorithm to determine which party member an enemy attacks. "target" variable value chooses who will get attacked. Paladin innately has a higher chance of being the target.
+// Needs major refactoring.
     function enemyTarget () {
         let target = Math.floor(Math.random() * 10)
+        // Additional conditionals are to prevent the enemy from targeting dead party members.
         if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
-            let damage = (rogueHealth) - (enemyAttack)                
+            let damage = (rogueHealth) - (enemyAttack)    
+            // Enemy enemyRoll must meet or exceed their target's Armor Class (the integer in the if statement).            
             if (enemyRoll >= 15) {
                 updateBattleLog(
                     `Lizard rolled 🎲(${diceRoll}) + 7 against Iris.`,
@@ -87,8 +97,10 @@ function Battle1 () {
         
         
     }
+// Makes the progress bar display a pecentage of the enemy's current health value.
     const healthBar = ((enemyHealth / 175) * 100)
 
+// Setting up navigation for "Continue"/"Game Over..." button after victory/loss.
     const navigate = useNavigate()
 
     function continueClick (e) {
@@ -101,6 +113,7 @@ function Battle1 () {
         navigate('/')
     }
 
+// Displays if the enemy is poisoned by adding a green hue to icon. 
     function renderEnemy() {
         if (enemyHealth > 0 && poisonStatus <= 0) {
             return lizard
@@ -112,8 +125,11 @@ function Battle1 () {
 
     }
 
+// To be passed down to character UIs for determining if their attacks are successful.
     const enemyArmorClass = 11
 
+// Poison damage taken at the end of the turn if the Rogue applies it.
+// Rolls 1d4(One 4 sided die) with a +4 to the base damage.
     function poisonDamageModifier() {
         return (Math.floor(Math.random() * 4 + 1) + 4)
     }
@@ -126,7 +142,7 @@ function Battle1 () {
         setPoisonStatus(0)
     }
     // Trying to add delay after paladin's turn, failing miserably.
-    // Whenever delayed is added, boss attacks twice. 
+    // Whenever delay is added, boss attacks twice. 
 
     // function enemyReadiesAttack() {
     //     setTimeout(enemyTarget, 1000);
@@ -141,7 +157,7 @@ function Battle1 () {
     // }
     
     
-
+// Turn system using state integers to segue between turns
     // Rogue Turn
     if (rogTurn === 0 && rogueHealth > 0) {
         setRogTurn(1)
@@ -176,6 +192,7 @@ function Battle1 () {
         setRogTurn(0)
         setSorTurn(0)
         setPalTurn(0)
+        // At the end of the Round, increase the Signature Action state value to emulate a cooldown.
         if (phantomCD >= 0 && phantomCD < 4 ){
             setPhantomCD(phantomCD + 1)
         }
@@ -185,10 +202,13 @@ function Battle1 () {
         if (smiteCD >= 0 && smiteCD < 3){
             setSmiteCD(smiteCD + 1)
         }
+        // Slowly decrements blessStatus to emulate it having a 5 round duration.
         if (blessStatus > 0) {
             setBlessStatus(blessStatus - 1)
         }
+        // Updating Round counter to display how many rounds have occurred.
         setRound(round + 1)
+        // Reducing poisonStatus state to emulate the duration lasting 3 rounds.
         if (poisonStatus > 0) {
             setEnemyHealth(damagePoison)
             setPoisonStatus(poisonStatus - 1)
@@ -201,6 +221,7 @@ function Battle1 () {
         }
     }
 
+// If all allies are dead, display "You Lose" and a button to return to the title screen.
     function playerLost () {
         if (rogueHealth <= 0 && sorcererHealth <= 0 && paladinHealth <= 0) {
             return <div className='lose'>
@@ -211,7 +232,7 @@ function Battle1 () {
     }
 
     
-
+// Displays enemy icon and hp. Conditionally renders winning or losing.
     function renderCurrentOutcome () {
         
         if (enemyHealth > 0) {
