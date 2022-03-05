@@ -60,9 +60,9 @@ function Battle3 () {
     function enemyTarget () {
         const baseCritAttack = (enemyAttack + (Math.floor(Math.random() * 11 + 1) + 1))
         const surgeCritAttack = (electricAttack + (Math.floor(Math.random() * 11 + 1) + 1))
+        const variant = Math.floor(Math.random() * 10 + 1)
         let damage = 0
         let target = Math.floor(Math.random() * 10)
-        const variant = Math.floor(Math.random() * 10 + 1)
         function alterDamageValueBasedOnDiceRoll(characterHealth, normalAttack, critAttack) {
             if (d20Roll === 20) {
                 damage = (characterHealth) - (critAttack)
@@ -75,7 +75,7 @@ function Battle3 () {
                 if (d20Roll === 20) {
                     updateBattleLog(
                         `Werewolf rolled a natural 🎲(20) against ${name}!`,
-                        `Werewolf attacked ${name} for ${baseCritAttack} damage!!!`)
+                        `Werewolf critically struck ${name} for ${baseCritAttack} damage!!!`)
                 } else {
                     updateBattleLog(
                         `Werewolf rolled 🎲(${d20Roll}) + 10 against ${name}.`,
@@ -93,7 +93,7 @@ function Battle3 () {
                 if (d20Roll === 20) {
                     updateBattleLog(
                         `Werewolf cast Electric Surge, rolled a natural 🎲(20) against ${name}!`,
-                        `Werewolf electrocuted ${name} for ${surgeCritAttack} damage and applied stun!!!`)
+                        `Werewolf electrocuted ${name} for ${surgeCritAttack} critical damage and applied stun!!!`)
                 } else {
                     updateBattleLog(
                         `Werewolf cast Electric Surge, rolled 🎲(${d20Roll}) + 10 against ${name}.`,

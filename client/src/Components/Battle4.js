@@ -38,12 +38,12 @@ function Battle4 () {
     }
     const enemyAttack = enemyDamageModifier()
 
-    const diceRoll = Math.floor(Math.random() * 20 + 1)
+    const d20Roll = Math.floor(Math.random() * 20 + 1)
     
-    function enemyDiceRoll() {
-        return (diceRoll) + 11
+    function enemyd20Roll() {
+        return (d20Roll) + 11
     }
-    const enemyRoll = enemyDiceRoll()
+    const enemyRoll = enemyd20Roll()
 
     function updateBattleLog(roll, info) {
         setBattleLog([...battleLog, roll, info])
@@ -63,9 +63,61 @@ function Battle4 () {
     const upheavalAttack = upheavalDamage()
     // No longer attack dead heroes
     function enemyTarget () {
+        const baseCritAttack = (enemyAttack + (Math.floor(Math.random() * 6 + 1)))
+        const upheavalCritAttack = (upheavalAttack + (Math.floor(Math.random() * 15 + 1) + 1))
         const variant = Math.floor(Math.random() * 10 + 1)
         const stunChance = Math.floor(Math.random() * 10 + 1)
         let target = Math.floor(Math.random() * 10)
+        let damage = 0
+        function alterDamageValueBasedOnDiceRoll(characterHealth, normalAttack, critAttack) {
+            if (d20Roll === 20) {
+                damage = (characterHealth) - (critAttack)
+            } else {
+                damage = (characterHealth) - (normalAttack)
+            }
+        }
+        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string) {
+            if (enemyRoll >= armorClass) {
+                if (d20Roll === 20) {
+                    updateBattleLog(
+                        `Behemoth rolled a natural 🎲(20) against ${name}!`,
+                        `Behemoth critically struck ${name} for ${baseCritAttack} damage!!!`)
+                } else {
+                    updateBattleLog(
+                        `Behemoth rolled 🎲(${d20Roll}) + 11 against ${name}.`,
+                        `Behemoth attacked ${name} for ${enemyAttack} damage!`)
+                }  
+                setCharacterHealth(damage)
+                } else {
+                updateBattleLog(
+                    `Behemoth rolled 🎲(${d20Roll}) + 11 against ${name}.`,
+                    string)
+                }
+        }
+        function updateLogWithUpheavalInfo(armorClass, name, setCharacterHealth, setCharacterStunStatus, string) {
+            if (enemyRoll >= armorClass) {
+                if (d20Roll === 20) {
+                    updateBattleLog(
+                        `Behemoth used Upheaval, rolled a natural 🎲(20) against ${name}!`,
+                        `Behemoth ejected ${name} sky high for ${upheavalCritAttack} critical damage and applied stun!!!`)
+                    setCharacterStunStatus(true) 
+                    
+                } else {
+                    updateBattleLog(
+                        `Behemoth used Upheaval, rolled 🎲(${d20Roll}) + 11 against ${name}.`,
+                        `Behemoth lifted ${name} high for ${upheavalAttack} damage and may apply stun!`)
+                    // Using "stunChance" to determine if target is stunned.
+                    if (stunChance <= 4) {
+                        setCharacterStunStatus(true) 
+                    }
+                } 
+                setCharacterHealth(damage)
+                } else {
+                updateBattleLog(
+                    `Behemoth used Upheaval, rolled 🎲(${d20Roll}) + 11 against ${name}.`,
+                    string)
+                }
+        }
         // Cast meteor when reduced below 30% hp, only once.
         if (enemyHealth < 120 && meteorAvailable === true) {
             updateBattleLog(
@@ -84,92 +136,28 @@ function Battle4 () {
             }
             meteorAudio()
         } else {
-        // Using "variant" to determine if Upheaval is used.
-        // Using "stunChance" to determine if target is stunned.
+        // Using "variant" to determine if Upheaval is used.   
         if (variant <= 4) {
             if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
-                let damage = (rogueHealth) - (upheavalAttack)                
-                if (enemyRoll >= 15) {
-                    updateBattleLog(
-                        `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Iris.`,
-                        `Behemoth lifted Iris sky high for ${upheavalAttack} damage, may apply stun!`)
-                    if (stunChance <= 4) {
-                        setRogStunStatus(true)
-                    }
-                    setRogueHealth(damage)
-                } else {
-                    updateBattleLog(
-                        `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Iris.`,
-                        'Iris avoided the attack!')
-                }
+                alterDamageValueBasedOnDiceRoll(rogueHealth, upheavalAttack, upheavalCritAttack)            
+                updateLogWithUpheavalInfo(15, 'Iris', setRogueHealth, setRogStunStatus, 'Iris avoided the attack!')
             } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
-                let damage = (sorcererHealth) - (upheavalAttack)
-                if (enemyRoll >= 14) {
-                    updateBattleLog(
-                        `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Juhl.`,
-                        `Behemoth lifted Juhl sky high for ${upheavalAttack} damage, may apply stun!`)
-                        if (stunChance <= 4) {
-                            setSorStunStatus(true)
-                        }
-                    setSorcererHealth(damage)
-                } else {
-                    updateBattleLog(
-                        `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Juhl.`,
-                        'Juhl resisted the assault!')
-                }
+                alterDamageValueBasedOnDiceRoll(sorcererHealth, upheavalAttack, upheavalCritAttack)            
+                updateLogWithUpheavalInfo(14, 'Juhl', setSorcererHealth, setSorStunStatus, 'Juhl resisted the assault!')
             } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
-                let damage = (paladinHealth) - (upheavalAttack)
-                if (enemyRoll >= 19) {
-                    updateBattleLog(
-                        `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Deus.`,
-                        `Behemoth lifted Deus sky high for ${upheavalAttack} damage, may apply stun!`)
-                        if (stunChance <= 4) {
-                            setPalStunStatus(true)
-                        }
-                    setPaladinHealth(damage)
-                } else {
-                    updateBattleLog(
-                        `Behemoth used Upheaval, rolled 🎲(${diceRoll}) + 11 against Deus.`,
-                        'Deus blocked the strike!')
-                }
+                alterDamageValueBasedOnDiceRoll(paladinHealth, upheavalAttack, upheavalCritAttack)            
+                updateLogWithUpheavalInfo(19, 'Deus', setPaladinHealth, setPalStunStatus, 'Deus blocked the strike!')
             }
         } else {
         if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
-            let damage = (rogueHealth) - (enemyAttack)                
-            if (enemyRoll >= 15) {
-                updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 11 against Iris.`,
-                    `Behemoth attacked Iris for ${enemyAttack} damage!`)
-                setRogueHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 11 against Iris.`,
-                    'Iris avoided the attack!')
-            }
+            alterDamageValueBasedOnDiceRoll(rogueHealth, enemyAttack, baseCritAttack)               
+            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
-            let damage = (sorcererHealth) - (enemyAttack)
-            if (enemyRoll >= 14) {
-                updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 11 against Juhl.`,
-                    `Behemoth attacked Juhl for ${enemyAttack} damage!`)
-                setSorcererHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 11 against Juhl.`,
-                    'Juhl resisted the assault!')
-            }
+            alterDamageValueBasedOnDiceRoll(sorcererHealth, enemyAttack, baseCritAttack)
+            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
         } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
-            let damage = (paladinHealth) - (enemyAttack)
-            if (enemyRoll >= 19) {
-                updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 11 against Deus.`,
-                    `Behemoth attacked Deus for ${enemyAttack} damage!`)
-                setPaladinHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Behemoth rolled 🎲(${diceRoll}) + 11 against Deus.`,
-                    'Deus blocked the strike!')
-            }
+            alterDamageValueBasedOnDiceRoll(paladinHealth, enemyAttack, baseCritAttack)
+            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
         }
     }
     }
