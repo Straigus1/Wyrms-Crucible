@@ -450,6 +450,12 @@ ul::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
 }
 
+.healing-potion-rog:hover {
+  width: 85px;
+  height: 85px;
+  left: 117px
+}
+
 .potion-amount-rog {
   position: absolute;
   font-size: 30px;
@@ -466,6 +472,12 @@ ul::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
 }
 
+.healing-potion-sor:hover {
+  width: 85px;
+  height: 85px;
+  left: 649px
+}
+
 .potion-amount-sor {
   position: absolute;
   font-size: 30px;
@@ -480,6 +492,12 @@ ul::-webkit-scrollbar-thumb:hover {
   width: 80px;
   height: 80px;
   cursor: pointer;
+}
+
+.healing-potion-pld:hover {
+  width: 85px;
+  height: 85px;
+  left: 1182px
 }
 
 .potion-amount-pld {
