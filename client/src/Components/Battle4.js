@@ -32,6 +32,7 @@ function Battle4 () {
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
 
+// Rolls 1d6(One 6 sided die) with a +14 to the base damage.
     function enemyDamageModifier() {
         return (Math.floor(Math.random() * 6 + 1) + 14)
     }
@@ -48,8 +49,9 @@ function Battle4 () {
         setBattleLog([...battleLog, roll, info])
     }
 
+// Rolls 2d8(Two 8 sided dice) with a +7 to the base damage.
     function upheavalDamage() {
-        return (Math.floor(Math.random() * 6 + 1) + 12)
+        return (Math.floor(Math.random() * 15 + 1) + 8)
     }
 
     function meteorAudio() {
@@ -64,6 +66,7 @@ function Battle4 () {
         const variant = Math.floor(Math.random() * 10 + 1)
         const stunChance = Math.floor(Math.random() * 10 + 1)
         let target = Math.floor(Math.random() * 10)
+        // Cast meteor when reduced below 30% hp, only once.
         if (enemyHealth < 120 && meteorAvailable === true) {
             updateBattleLog(
                 "Behemoth cast Meteor!!",
@@ -81,6 +84,8 @@ function Battle4 () {
             }
             meteorAudio()
         } else {
+        // Using "variant" to determine if Upheaval is used.
+        // Using "stunChance" to determine if target is stunned.
         if (variant <= 4) {
             if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
                 let damage = (rogueHealth) - (upheavalAttack)                

@@ -28,6 +28,7 @@ function Battle2 () {
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
 
+// Rolls 1d6(One sided die) with a +10 to the base damage.
     function enemyDamageModifier() {
         return (Math.floor(Math.random() * 6 + 1) + 10)
     }
@@ -51,7 +52,8 @@ function Battle2 () {
 
     const featherAttack = featherRainDamage()
 
-    // No longer attack dead heroes
+    // No longer attack dead heroes.
+    // Needs major refactoring.
     function enemyTarget () {
         // Using "variant" variable to determine if Feather Rain is used.
         const variant = Math.floor(Math.random() * 10 + 1)

@@ -31,6 +31,7 @@ function Battle3 () {
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
 
+// Rolls 2d6(Two 6 sided dice) with a +11 to the base damage
     function enemyDamageModifier() {
         return (Math.floor(Math.random() * 11 + 1) + 12)
     }
@@ -46,17 +47,20 @@ function Battle3 () {
     function updateBattleLog(roll, info) {
         setBattleLog([...battleLog, roll, info])
     }
-
+//Werewolf unique action, Electrical Surge.
+//Rolls 2d6(Two 6 sided dice) with a +8 to the base damage.
     function electricalSurgeDamage () {
         return (Math.floor(Math.random() * 11 + 1) + 9)
     }
 
     const electricAttack = electricalSurgeDamage()
 
-    // No longer attack dead heroes
+    // No longer attack dead heroes.
+    // Needs major, major refactoring.
     function enemyTarget () {
         const variant = Math.floor(Math.random() * 10 + 1)
         let target = Math.floor(Math.random() * 10)
+        // Electric Surge applies stun when it is successful, forcing the target to lose its next turn.
         if (variant <= 6) {
             if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
                 let damage = (rogueHealth) - (electricAttack)                
