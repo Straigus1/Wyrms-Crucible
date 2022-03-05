@@ -75,7 +75,7 @@ function Battle2 () {
                 if (d20Roll === 20) {
                     updateBattleLog(
                         `Harpy rolled a natural 🎲(20) against ${name}!`,
-                        `Harpy critically ${name} for ${critAttack} damage!!!`)
+                        `Harpy critically struck ${name} for ${critAttack} damage!!!`)
                 } else {
                     updateBattleLog(
                         `Harpy rolled 🎲(${d20Roll}) + 8 against ${name}.`,

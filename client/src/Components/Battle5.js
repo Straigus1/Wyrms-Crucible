@@ -30,28 +30,31 @@ function Battle5 () {
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
 
+// Rolls 1d8(One 8 sided die) with a +3 to the base damage.
     function enemyDamageModifier() {
         return (Math.floor(Math.random() * 8 + 1) + 3)
     }
     const enemyAttack = enemyDamageModifier()
 
-    const diceRoll = Math.floor(Math.random() * 20 + 1)
+    const d20Roll = Math.floor(Math.random() * 20 + 1)
     
-    function enemyDiceRoll() {
-        return (diceRoll) + 12
+    function enemyd20Roll() {
+        return (d20Roll) + 12
     }
-    const enemyRoll = enemyDiceRoll()
+    const enemyRoll = enemyd20Roll()
 
     function updateBattleLog(roll, info) {
         setBattleLog([...battleLog, roll, info])
     }
 
+// Rolls 1d4(One 4 sided die) with a +12 to the base damage.
     function dragonBreathDamage() {
         return (Math.floor(Math.random() * 4 + 1) + 12)
     }
 
     const breathAttack = dragonBreathDamage()
 
+// At the end of the Round rolls 1d6, if the value is 5 or higher, recharge Dragon Breath attack.
     const breathRecharge = Math.floor(Math.random() * 6 + 1)
 
     function breathAudio() {
@@ -61,10 +64,37 @@ function Battle5 () {
     }
     // No longer attack dead heroes
     function enemyTarget () {
+        const critAttack = (enemyAttack + Math.floor(Math.random() * 8 + 1))
+        let damage = 0
         let target = Math.floor(Math.random() * 10)
         let damageFRog = (rogueHealth) - (breathAttack)
         let damageFSor = (sorcererHealth) - (breathAttack)
         let damageFPal = (paladinHealth) - (breathAttack)
+        function alterDamageValueBasedOnDiceRoll(characterHealth) {
+            if (d20Roll === 20) {
+                damage = (characterHealth) - (critAttack)
+            } else {
+                damage = (characterHealth) - (enemyAttack)
+            }
+        }
+        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string) {
+            if (enemyRoll >= armorClass) {
+                if (d20Roll === 20) {
+                    updateBattleLog(
+                        `Dragon rolled a natural 🎲(20) against ${name}!`,
+                        `Dragon critically struck ${name} for ${critAttack} damage!!!`)
+                } else {
+                    updateBattleLog(
+                        `Dragon rolled 🎲(${d20Roll}) + 12 against ${name}.`,
+                        `Dragon attacked ${name} for ${enemyAttack} damage!`)
+                }  
+                setCharacterHealth(damage)
+                } else {
+                updateBattleLog(
+                    `Dragon rolled 🎲(${d20Roll}) + 12 against ${name}.`,
+                    string)
+                }
+        }
         if (breathReady) {
             updateBattleLog(
                 'Dragon used Dragon Breath!',
@@ -76,41 +106,14 @@ function Battle5 () {
             breathAudio()
         } else {
         if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
-            let damage = (rogueHealth) - (enemyAttack)                
-            if (enemyRoll >= 15) {
-                updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 12 against Iris.`,
-                    `Dragon attacked Iris for ${enemyAttack} damage!`)
-                setRogueHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 12 against Iris.`,
-                    'Iris avoided the attack!')
-            }
+            alterDamageValueBasedOnDiceRoll(rogueHealth)
+            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')
         } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
-            let damage = (sorcererHealth) - (enemyAttack)
-            if (enemyRoll >= 14) {
-                updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 12 against Juhl.`,
-                    `Dragon attacked Juhl for ${enemyAttack} damage!`)
-                setSorcererHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 12 against Juhl.`,
-                    'Juhl resisted the assault!')
-            }
+            alterDamageValueBasedOnDiceRoll(sorcererHealth)
+            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
         } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
-            let damage = (paladinHealth) - (enemyAttack)
-            if (enemyRoll >= 19) {
-                updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 12 against Deus.`,
-                    `Dragon attacked Deus for ${enemyAttack} damage!`)
-                setPaladinHealth(damage)
-            } else {
-                updateBattleLog(
-                    `Dragon rolled 🎲(${diceRoll}) + 12 against Deus.`,
-                    'Deus blocked the strike!')
-            }
+            alterDamageValueBasedOnDiceRoll(paladinHealth)
+            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
         }
         
     }
