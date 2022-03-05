@@ -23,3 +23,7 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 #### Tutorial/Tips Page
 -Creating a page for players to access for detailed guide of all the games rules and systems
 
+#### Refactoring
+-Refactor code where ever possible.
+-Implement Redux
+
