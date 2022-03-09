@@ -23,7 +23,7 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 - Update backend to retain party Hit Points and Potions.
 - Rebalance damage, potion restoration, and potion amount.
 
-#### Tooltips
+#### Tooltips :white_check_mark:
 - Implementing tooltips for information on actions for user knowledge.
 
 #### Tutorial/Tips Page

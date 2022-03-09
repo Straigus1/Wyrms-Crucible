@@ -949,3 +949,15 @@ body {
 #button-tooltip > .tooltip-arrow {
   border-top: 5px solid black
 }
+
+#potion-tooltip > .tooltip-inner {
+  background-color: black;
+  color: white;
+  border: 1px solid rgb(255, 94, 0);
+  opacity: 95%;
+}
+
+#potion-tooltip > .tooltip-arrow {
+  border-bottom: 5px solid black;
+  
+}

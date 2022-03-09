@@ -204,7 +204,7 @@ function SorcererUI ({
 
 // Changes the UI element of the potion from red to greyscale based on availability 
     function potionStatus() {
-        if (potionCD) {
+        if (potionCD && sorTurn === 1 && potionAmount > 0) {
             return healingpotion
         } else {
             return potionused
@@ -328,6 +328,40 @@ function overlayTooltipAndAction(action, skillName, id, description) {
         }
     }
 
+// Render potion available and tooltip.
+    function renderPotionAndTooltip () {
+        if (sorTurn === 1) {
+            return (
+                <OverlayTrigger
+            placement="bottom"
+            delay={{show: 300, hide: 70}}
+            overlay={
+                <Tooltip id="potion-tooltip">
+                    {"Restores 15-20 HP. \n Can only be used once per character's turn. \n Does not end Turn."}
+                </Tooltip>
+            }
+            >
+                <img 
+                    className='healing-potion-sor'
+                    src={potionStatus()}
+                    alt='healing-potion'
+                    onClick={drinkPotion}
+                />
+            </OverlayTrigger>
+            )
+        } else {
+            return (
+                <img 
+                    className='healing-potion-sor'
+                    src={potionStatus()}
+                    alt='healing-potion'
+                    onClick={drinkPotion}
+                />
+            )
+        }
+        
+    }
+
 // Changes Sorcerer UI class based on turn value to allow players to use Sorcerer actions.
 // When no longer Sorcerer's turn, actions go gray and are not usable. 
     function className() {
@@ -345,12 +379,7 @@ function overlayTooltipAndAction(action, skillName, id, description) {
             src={sorcererStatus()}
             alt='sorcerer pic'
             />
-            <img 
-            className='healing-potion-sor'
-            src={potionStatus()}
-            alt='healing-potion'
-            onClick={drinkPotion}
-            />
+            {renderPotionAndTooltip()}
             <h1 className='potion-amount-sor'>{potionAmount}</h1>
             <img 
             className='sorcerer-ac'
