@@ -8,6 +8,8 @@ import healingpotion from '../Images/healing-potion.png'
 import potionused from '../Images/healing-potion-used.png'
 import juhl from '../Images/sorcerer-name.png'
 import { ProgressBar } from 'react-bootstrap'
+import { OverlayTrigger } from 'react-bootstrap'
+import { Tooltip } from 'react-bootstrap'
 import press from '../Music/button-press.mp3'
 import potionSound from '../Music/potion-use.mp3'
 import lightning from '../Music/lightning.mp3'
@@ -146,7 +148,7 @@ function SorcererUI ({
 // Increased base damage significantly for balancing purposes. 
 // For a signature action, it should consistenly do more damage than base attacks.
     function sorcererLightningBoltModifier() {
-        const variant = Math.floor(Math.random() * 4 + 1)
+        const variant = Math.floor(Math.random() * 5 + 1)
         if (variant >= 2) {
     // Rolls 4d6(Four 6 sided die) with a +24 to the base damage.
             return (Math.floor(Math.random() * 21 + 1) + 27)
@@ -254,19 +256,35 @@ function SorcererUI ({
         }
     }
 
-
+// Renders a button when it's the character's turn and displays a tooltip of the action.
+function overlayTooltipAndAction(action, skillName, id, description) {
+    return (
+        <OverlayTrigger
+        placement="top"
+        delay={{show: 300, hide: 70}}
+        overlay={
+            <Tooltip id="button-tooltip">
+            {description} 
+            </Tooltip>
+        }
+        >
+            <button 
+                className='attack-turn'
+                id={id}
+                onClick={action}>
+                    {skillName} 
+            </button>
+        </OverlayTrigger>
+    )
+}
    
-
 // Conditionally renders based on the availability of Lightning Bolt. lightningCD is state that increments by 1 within the Battle# Component.
 // lightningCD updates at the end of each Round and becomes available for use at 5.
     function lightningAvailable() {
         if (lightningCD === 5) {
-            return <button
-            className='attack-turn'
-            id="lightning-bolt"
-            onClick={sorLightningBolt} >
-                Lightning Bolt
-        </button>
+            return (
+                overlayTooltipAndAction(sorLightningBolt, 'Lightning Bolt', 'lightning-bolt', 'Deals 28-48 damage. \n 20% chance of reducing damage done by half. \n Cooldown: 5 Rounds \n Cannot miss. ')
+            )
         } else {
             return <button
             className='attack'
@@ -282,17 +300,8 @@ function SorcererUI ({
         if (sorTurn === 1) {
             return (
                 <div className='attack-box' >
-                <button 
-                    className='attack-turn'
-                    onClick={sorAttack}>
-                        Fire Bolt
-                </button>
-                <button 
-                    className='attack-turn'
-                    id='magic-missle'
-                    onClick={sorMagicMissle}>
-                        Magic Missile
-                </button>
+                {overlayTooltipAndAction(sorAttack, 'Fire Bolt', '', 'Deals 6-16 damage. \n Hit Bonus: +5')}
+                {overlayTooltipAndAction(sorMagicMissle, 'Magic Missile', 'magic-missle', 'Deals varied damage. \n Variances: 3-6, 5-10, 7-16. \n Cannot miss.')}
                 {lightningAvailable()}
                 </div>
                

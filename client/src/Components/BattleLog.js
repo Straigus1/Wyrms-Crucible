@@ -3,6 +3,7 @@ import battlelog from '../Images/battle-log.png'
 
 function BattleLog({battleLog}) {
     
+    const battleLogEndRef = useRef(null)
 
     function displayBattleLog() {
         const log = battleLog.map((log) => {
@@ -10,7 +11,6 @@ function BattleLog({battleLog}) {
         })
         return log
     }
-    const battleLogEndRef = useRef(null)
 
     function scrolltoBottom() {
         battleLogEndRef.current?.scrollIntoView({behavior: "smooth"})
@@ -29,9 +29,9 @@ function BattleLog({battleLog}) {
             src={battlelog}
             alt='battle log'
             />
-            <div id="scroll">{displayBattleLog()}
+            <ul id="scroll">{displayBattleLog()}
             <div ref={battleLogEndRef} />
-            </div>
+            </ul>
             
         </div>
     )

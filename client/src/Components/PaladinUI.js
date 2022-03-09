@@ -8,6 +8,8 @@ import healingpotion from '../Images/healing-potion.png'
 import potionused from '../Images/healing-potion-used.png'
 import deus from '../Images/paladin-name.png'
 import { ProgressBar } from 'react-bootstrap'
+import { OverlayTrigger } from 'react-bootstrap'
+import { Tooltip } from 'react-bootstrap'
 import press from '../Music/button-press.mp3'
 import potionSound from '../Music/potion-use.mp3'
 import smiteSound from '../Music/smite-sound.mp3'
@@ -261,16 +263,35 @@ function PaladinUI ({
         }
     }
 
+// Renders a button when it's the character's turn and displays a tooltip of the action.
+    function overlayTooltipAndAction(action, skillName, id, description) {
+        return (
+            <OverlayTrigger
+            placement="top"
+            delay={{show: 300, hide: 70}}
+            overlay={
+                <Tooltip id="button-tooltip">
+                {description} 
+                </Tooltip>
+            }
+            >
+                <button 
+                    className='attack-turn'
+                    id={id}
+                    onClick={action}>
+                        {skillName} 
+                </button>
+            </OverlayTrigger>
+        )
+    }
+
 // Conditionally renders based on the availability of Divine Smite. smiteCD is state that increments by 1 within the Battle# Component.
 // smiteCD updates at the end of each Round and becomes available for use at 3.
     function smiteAvailable() {
-        if (smiteCD === 3 ) {
-            return <button
-            className='attack-turn'
-            id="divine-smite"
-            onClick={palDivineSmite} >
-                Divine Smite
-        </button>
+        if (smiteCD === 3 ) { 
+            return (
+                overlayTooltipAndAction(palDivineSmite, 'Divine Smite', 'divine-smite', 'Deals 14-29 damage. \n Cooldown: 3 Rounds \n Hit Bonus: +7')
+            )
         } else {
             return <button
             className='attack'
@@ -285,17 +306,8 @@ function PaladinUI ({
         if (palTurn === 1) {
             return (
                 <div className='attack-box' >
-                <button 
-                    className='attack-turn'
-                    onClick={palAttack}>
-                        Attack
-                </button>
-                <button 
-                    className='attack-turn'
-                    id='bless-action'
-                    onClick={palBlessAction}>
-                        Bless
-                </button>
+                {overlayTooltipAndAction(palAttack, 'Attack', '', 'Deals 6-11 damage. \n Hit Bonus: +7')}
+                {overlayTooltipAndAction(palBlessAction, 'Bless', 'bless-action', 'Increase party total hit value by 1-4 for 5 Rounds. Adds the value directly to the dice roll.')}
                 {smiteAvailable()}
                 </div>
                

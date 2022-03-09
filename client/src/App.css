@@ -522,6 +522,7 @@ body {
 
 .character-hp {
   position: relative;
+  font-size: 16px;
   font-weight: bolder;
   left: 3%;
   color: white
@@ -932,4 +933,19 @@ body {
 
 #credits-button {
   left: 755px;
+}
+
+.tooltip-inner {
+  white-space:pre-wrap
+}
+
+#button-tooltip > .tooltip-inner {
+  background-color: black;
+  color: white;
+  border: 1px solid goldenrod;
+  opacity: 95%;
+}
+
+#button-tooltip > .tooltip-arrow {
+  border-top: 5px solid black
 }

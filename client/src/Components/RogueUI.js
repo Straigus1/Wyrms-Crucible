@@ -8,6 +8,8 @@ import healingpotion from '../Images/healing-potion.png'
 import potionused from '../Images/healing-potion-used.png'
 import iris from '../Images/rogue-name.png'
 import { ProgressBar } from 'react-bootstrap'
+import { OverlayTrigger } from 'react-bootstrap'
+import { Tooltip } from 'react-bootstrap'
 import press from '../Music/button-press.mp3'
 import potionSound from '../Music/potion-use.mp3'
 import phantomSound from '../Music/phantom-sound.wav'
@@ -299,16 +301,36 @@ function potionStatus() {
         }
     }
 
+
+// Renders a button when it's the character's turn and displays a tooltip of the action.
+    function overlayTooltipAndAction(action, skillName, id, description) {
+        return (
+            <OverlayTrigger
+            placement="top"
+            delay={{show: 300, hide: 70}}
+            overlay={
+                <Tooltip id="button-tooltip">
+                {description} 
+                </Tooltip>
+            }
+            >
+                <button 
+                    className='attack-turn'
+                    id={id}
+                    onClick={action}>
+                        {skillName} 
+                </button>
+            </OverlayTrigger>
+        )
+    }
+
 // Conditionally renders based on the availability of Phantom Assault. phantomCD is state that increments by 1 within the Battle# Component.
 // phantomCD updates at the end of each Round and becomes available for use at 4.
     function phantomAvailable() {
         if (phantomCD === 4 ) {
-            return <button
-            className='attack-turn'
-            id="phantom-assault"
-            onClick={rogPhantomAssault} >
-                Phantom Assault
-        </button>
+            return (
+            overlayTooltipAndAction(rogPhantomAssault, 'Phantom Assault', 'phantom-assault', 'Deals 21-36 damage. \n Cooldown: 4 Rounds \n Hit Bonus: +11')
+            )
         } else {
             return <button
             className='attack'
@@ -317,23 +339,15 @@ function potionStatus() {
         </button>
         }
     }
+    
 
 // Conditionally renders the Rogue UI for when it is or not the Rogue's turn.
     function renderActions() {
         if (rogTurn === 1) {
             return (
                 <div className='attack-box' >
-                <button 
-                    className='attack-turn'
-                    onClick={rogAttack}>
-                        Attack
-                </button>
-                <button 
-                    className='attack-turn'
-                    id='venom-strike'
-                    onClick={rogVenomStrike}>
-                        Venomous Strike
-                </button>
+                {overlayTooltipAndAction(rogAttack,'Attack','', 'Deals 9-19 damage. \n Hit Bonus: +6')}
+                {overlayTooltipAndAction(rogVenomStrike, 'Venomous Strike', 'venom-strike', 'Deals 4-9 damage. \n Applies Poison for 3 turns. (5-8 damage per turn) \n Hit Bonus: +6')}
                 {phantomAvailable()}
                 </div>
                
