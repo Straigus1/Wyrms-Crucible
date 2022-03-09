@@ -33,7 +33,7 @@ body {
   /* left: 8%; */
 }
 
-ul {
+#scroll {
   overflow: auto;
   max-height: 556px;
   width: 100%;
@@ -42,24 +42,24 @@ ul {
 }
 
 /* width */
-ul::-webkit-scrollbar {
+#scroll::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
-ul::-webkit-scrollbar-track {
+#scroll::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey; 
   border-radius: 8px;
 }
  
 /* Handle */
-ul::-webkit-scrollbar-thumb {
+#scroll::-webkit-scrollbar-thumb {
   background: #FDE8BC; 
   border-radius: 10px;
 }
 
 /* Handle on hover */
-ul::-webkit-scrollbar-thumb:hover {
+#scroll::-webkit-scrollbar-thumb:hover {
   background: #b78846; 
 }
 

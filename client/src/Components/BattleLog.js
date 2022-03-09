@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import battlelog from '../Images/battle-log.png'
 
 function BattleLog({battleLog}) {
@@ -10,8 +10,16 @@ function BattleLog({battleLog}) {
         })
         return log
     }
+    const battleLogEndRef = useRef(null)
 
-    
+    function scrolltoBottom() {
+        battleLogEndRef.current?.scrollIntoView({behavior: "smooth"})
+    }
+
+    useEffect(() => {
+        scrolltoBottom()
+    }, [battleLog])
+   
        
 
     return (
@@ -21,7 +29,10 @@ function BattleLog({battleLog}) {
             src={battlelog}
             alt='battle log'
             />
-            <ul id="scroll">{displayBattleLog()}</ul>
+            <div id="scroll">{displayBattleLog()}
+            <div ref={battleLogEndRef} />
+            </div>
+            
         </div>
     )
 

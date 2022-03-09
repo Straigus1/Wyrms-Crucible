@@ -11,7 +11,7 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 #### Critical Attacks :white_check_mark:
 - Adding D&D natural d20(20 sided die) critical modifier.
 
-#### Battle Log
+#### Battle Log :white_check_mark:
 - Adjusting battle log to default to the bottom of the log.
 
 #### Animations
@@ -30,6 +30,6 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 - Creating a page for players to access for detailed guide of all the games rules and systems.
 
 #### Refactoring
--Refactor code where ever possible.
--Dice Rolling
--Implement Redux
+- Refactor code where ever possible.
+- Dice Rolling
+- Implement Redux
