@@ -14,6 +14,7 @@ import ReactAudioPlayer from 'react-audio-player'
 
 function Battle1 () {
     const [enemyHealth, setEnemyHealth] = useState(175)
+    
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
@@ -27,6 +28,8 @@ function Battle1 () {
     const [rogTurn, setRogTurn] = useState(0) 
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
+    
+    
 
 // Damage Modification
 // Rolls 1d6(One 6 sided die) with a +9 to the base damage.
@@ -56,7 +59,7 @@ function Battle1 () {
     function enemyTarget () {
         const critAttack = (enemyAttack + Math.floor(Math.random() * 6 + 1))
         let damage = 0
-        let target = Math.floor(Math.random() * 10)
+        let target = Math.floor(Math.random() * 10 + 1)
         // Critcal Attacks occur when a d20 roll equals 20 and doubles the amount of dice rolled.
         function alterDamageValueBasedOnDiceRoll(characterHealth) {
             if (d20Roll === 20) {
@@ -85,13 +88,13 @@ function Battle1 () {
                 }
         }
         // Additional conditionals are to prevent the enemy from targeting dead party members.
-        if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
+        if ((target <= 3 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(rogueHealth)  
             updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')             
-        } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
+        } else if ((target >= 4 && target <= 6 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(sorcererHealth)
             updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
-        } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
+        } else if ((target >= 7 && target <= 10 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(paladinHealth)
             updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
         }
@@ -262,7 +265,8 @@ function Battle1 () {
             controls
             loop
             volume={0.3}
-            /> 
+            />
+            {/* <h3 className='damage-value'>{damageDealt}</h3>  */}
             <BattleLog battleLog={battleLog}/>
             <img 
             className='round-container'
@@ -291,6 +295,7 @@ function Battle1 () {
                     setRogueHealth={setRogueHealth}
                     battleLog={battleLog}
                     setBattleLog={setBattleLog}
+                    
                 />
                 <SorcererUI
                     updateBattleLog={updateBattleLog} 

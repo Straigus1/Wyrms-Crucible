@@ -267,12 +267,12 @@ function PaladinUI ({
     function overlayTooltipAndAction(action, skillName, id, description) {
         return (
             <OverlayTrigger
-            placement="top"
-            delay={{show: 300, hide: 70}}
-            overlay={
-                <Tooltip id="button-tooltip">
-                {description} 
-                </Tooltip>
+                placement="top"
+                delay={{show: 300, hide: 70}}
+                overlay={
+                    <Tooltip id="button-tooltip">
+                    {description} 
+                    </Tooltip>
             }
             >
                 <button 
@@ -339,12 +339,12 @@ function PaladinUI ({
         if (palTurn === 1) {
             return (
                 <OverlayTrigger
-            placement="bottom"
-            delay={{show: 300, hide: 70}}
-            overlay={
-                <Tooltip id="potion-tooltip">
-                    {"Restores 15-20 HP. \n Can only be used once per character's turn. \n Does not end Turn."}
-                </Tooltip>
+                    placement="bottom"
+                    delay={{show: 300, hide: 70}}
+                    overlay={
+                        <Tooltip id="potion-tooltip">
+                            {"Restores 15-20 HP. \n Can only be used once per character's turn. \n Does not end Turn."}
+                        </Tooltip>
             }
             >
                 <img 

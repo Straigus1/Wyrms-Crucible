@@ -66,7 +66,7 @@ function Battle5 () {
     function enemyTarget () {
         const critAttack = (enemyAttack + Math.floor(Math.random() * 8 + 1))
         let damage = 0
-        let target = Math.floor(Math.random() * 10)
+        let target = Math.floor(Math.random() * 10 + 1)
         let damageFRog = (rogueHealth) - (breathAttack)
         let damageFSor = (sorcererHealth) - (breathAttack)
         let damageFPal = (paladinHealth) - (breathAttack)
@@ -105,13 +105,13 @@ function Battle5 () {
             setPaladinHealth(damageFPal)
             breathAudio()
         } else {
-        if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
+        if ((target <= 3 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(rogueHealth)
             updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')
-        } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
+        } else if ((target >= 4 && target <= 6 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(sorcererHealth)
             updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
-        } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
+        } else if ((target >= 7 && target <= 10 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(paladinHealth)
             updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
         }

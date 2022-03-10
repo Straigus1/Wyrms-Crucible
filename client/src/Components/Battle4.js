@@ -67,7 +67,7 @@ function Battle4 () {
         const upheavalCritAttack = (upheavalAttack + (Math.floor(Math.random() * 15 + 1) + 1))
         const variant = Math.floor(Math.random() * 10 + 1)
         const stunChance = Math.floor(Math.random() * 10 + 1)
-        let target = Math.floor(Math.random() * 10)
+        let target = Math.floor(Math.random() * 10 + 1)
         let damage = 0
         function alterDamageValueBasedOnDiceRoll(characterHealth, normalAttack, critAttack) {
             if (d20Roll === 20) {
@@ -138,24 +138,24 @@ function Battle4 () {
         } else {
         // Using "variant" to determine if Upheaval is used.   
         if (variant <= 4) {
-            if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
+            if ((target <= 3 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
                 alterDamageValueBasedOnDiceRoll(rogueHealth, upheavalAttack, upheavalCritAttack)            
                 updateLogWithUpheavalInfo(15, 'Iris', setRogueHealth, setRogStunStatus, 'Iris avoided the attack!')
-            } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
+            } else if ((target >= 4 && target <= 6 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
                 alterDamageValueBasedOnDiceRoll(sorcererHealth, upheavalAttack, upheavalCritAttack)            
                 updateLogWithUpheavalInfo(14, 'Juhl', setSorcererHealth, setSorStunStatus, 'Juhl resisted the assault!')
-            } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
+            } else if ((target >= 7 && target <= 10 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
                 alterDamageValueBasedOnDiceRoll(paladinHealth, upheavalAttack, upheavalCritAttack)            
                 updateLogWithUpheavalInfo(19, 'Deus', setPaladinHealth, setPalStunStatus, 'Deus blocked the strike!')
             }
         } else {
-        if ((target <= 2 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
+        if ((target <= 3 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(rogueHealth, enemyAttack, baseCritAttack)               
             updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')
-        } else if ((target >= 3 && target <= 5 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
+        } else if ((target >= 4 && target <= 6 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(sorcererHealth, enemyAttack, baseCritAttack)
             updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
-        } else if ((target >= 6 && target <= 9 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
+        } else if ((target >= 7 && target <= 10 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(paladinHealth, enemyAttack, baseCritAttack)
             updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
         }

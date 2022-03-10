@@ -32,7 +32,8 @@ function RogueUI ({
     setRogTurn, 
     rogueHealth, 
     enemyHealth, 
-    setEnemyHealth}) {
+    setEnemyHealth,
+    }) {
         
         const [potionAmount, setPotionAmount] = useState(3)
         const [potionCD, setPotionCD] = useState(true)
@@ -116,6 +117,7 @@ function RogueUI ({
                     `Iris slashed the enemy for ${rogueAttack} damage! `)
             }
             setEnemyHealth(damage)
+            
             
         } else {
             updateBattleLog(
@@ -306,12 +308,12 @@ function potionStatus() {
     function overlayTooltipAndAction(action, skillName, id, description) {
         return (
             <OverlayTrigger
-            placement="top"
-            delay={{show: 300, hide: 70}}
-            overlay={
-                <Tooltip id="button-tooltip">
-                {description} 
-                </Tooltip>
+                placement="top"
+                delay={{show: 300, hide: 10}}
+                overlay={
+                    <Tooltip id="button-tooltip">
+                    {description} 
+                    </Tooltip>
             }
             >
                 <button 
@@ -347,7 +349,7 @@ function potionStatus() {
             return (
                 <div className='attack-box' >
                 {overlayTooltipAndAction(rogAttack,'Attack','', 'Deals 9-19 damage. \n Hit Bonus: +6')}
-                {overlayTooltipAndAction(rogVenomStrike, 'Venomous Strike', 'venom-strike', 'Deals 4-9 damage. \n Applies Poison for 3 turns. (5-8 damage per turn) \n Hit Bonus: +6')}
+                {overlayTooltipAndAction(rogVenomStrike, 'Venomous Strike', 'venom-strike', 'Deals 4-9 damage. \n Applies Poison for 3 Rounds. (5-8 damage at the end of each Round) \n Hit Bonus: +6')}
                 {phantomAvailable()}
                 </div>
                
@@ -379,12 +381,12 @@ function potionStatus() {
         if (rogTurn === 1) {
             return (
                 <OverlayTrigger
-            placement="bottom"
-            delay={{show: 300, hide: 70}}
-            overlay={
-                <Tooltip id="potion-tooltip">
-                    {"Restores 15-20 HP. \n Can only be used once per character's turn. \n Does not end Turn."}
-                </Tooltip>
+                    placement="bottom"
+                    delay={{show: 300, hide: 70}}
+                    overlay={
+                        <Tooltip id="potion-tooltip">
+                            {"Restores 15-20 HP. \n Can only be used once per character's turn. \n Does not end Turn."}
+                        </Tooltip>
             }
             >
                 <img 

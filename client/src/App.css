@@ -961,3 +961,8 @@ body {
   border-bottom: 5px solid black;
   
 }
+
+.damage-value {
+  position: absolute;
+  color: white;
+}

@@ -260,12 +260,12 @@ function SorcererUI ({
 function overlayTooltipAndAction(action, skillName, id, description) {
     return (
         <OverlayTrigger
-        placement="top"
-        delay={{show: 300, hide: 70}}
-        overlay={
-            <Tooltip id="button-tooltip">
-            {description} 
-            </Tooltip>
+            placement="top"
+            delay={{show: 300, hide: 70}}
+            overlay={
+                <Tooltip id="button-tooltip">
+                {description} 
+                </Tooltip>
         }
         >
             <button 
@@ -283,7 +283,7 @@ function overlayTooltipAndAction(action, skillName, id, description) {
     function lightningAvailable() {
         if (lightningCD === 5) {
             return (
-                overlayTooltipAndAction(sorLightningBolt, 'Lightning Bolt', 'lightning-bolt', 'Deals 28-48 damage. \n 20% chance of reducing damage done by half. \n Cooldown: 5 Rounds \n Cannot miss. ')
+                overlayTooltipAndAction(sorLightningBolt, 'Lightning Bolt', 'lightning-bolt', 'Deals 28-48 damage. \n 20% chance of reducing damage dealt by half. \n Cooldown: 5 Rounds \n Cannot miss. ')
             )
         } else {
             return <button
@@ -333,12 +333,12 @@ function overlayTooltipAndAction(action, skillName, id, description) {
         if (sorTurn === 1) {
             return (
                 <OverlayTrigger
-            placement="bottom"
-            delay={{show: 300, hide: 70}}
-            overlay={
-                <Tooltip id="potion-tooltip">
-                    {"Restores 15-20 HP. \n Can only be used once per character's turn. \n Does not end Turn."}
-                </Tooltip>
+                    placement="bottom"
+                    delay={{show: 300, hide: 70}}
+                    overlay={
+                        <Tooltip id="potion-tooltip">
+                            {"Restores 15-20 HP. \n Can only be used once per character's turn. \n Does not end Turn."}
+                        </Tooltip>
             }
             >
                 <img 
