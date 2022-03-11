@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import paladinpic from '../Images/paladin-pic.png'
 import paladindead from '../Images/paladin-pic-dead.png'
 import paladinbless from '../Images/paladin-pic-bless.png'
@@ -32,10 +32,47 @@ function PaladinUI ({
     setPalTurn, 
     paladinHealth, 
     enemyHealth, 
-    setEnemyHealth}) {
+    setEnemyHealth,
+    setFloatingDamage,
+    palPopup}) {
     
     const [potionAmount, setPotionAmount] = useState(3)
     const [potionCD, setPotionCD] = useState(true)
+    const [restorePopup, setRestorePopup] = useState(0)
+
+    useEffect(() => {
+        let popup = document.createElement("h3");
+        let element = document.getElementById('popup-box-pal')
+        
+        if (palPopup > 0) {
+            
+            popup.className = "damage-float"
+            popup.textContent = `-${palPopup}`
+        }
+        if (palPopup === 'Miss') {
+            popup.className = "enemy-missed"
+            popup.textContent = `${palPopup}`
+        }
+        element.appendChild(popup)
+        setTimeout(() => {
+            popup.remove()
+        }, 1900)
+        
+}, [palPopup])
+
+    useEffect(() => {
+        let popup = document.createElement("h3");
+        let element = document.getElementById('popup-box-pal')
+        if (restorePopup !== 0) {
+            popup.className = "heal-float"
+            popup.textContent = `+${restorePopup}`
+        }
+        element.appendChild(popup)
+        setTimeout(() => {
+            popup.remove()
+        }, 1900)
+        
+    }, [restorePopup])
 
 // Sound effects for clicking abilities, potions, and missing signature actions.
     function pressAudio() {
@@ -107,20 +144,24 @@ function PaladinUI ({
                 updateBattleLog(
                     `Deus rolled a natural 🎲(20) against the enemy!`,
                     `Deus critically struck the enemy for ${critAttack} damage!!!`)
+                setFloatingDamage(critAttack)
             } else if (paladinAttack >= 9 && d20Roll !== 20) {
                 updateBattleLog(
                     `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                     `Deus crushed the target for ${paladinAttack} damage!!`)
+                setFloatingDamage(paladinAttack)
             } else {
                 updateBattleLog(
                     `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                     `Deus attacked the enemy for ${paladinAttack} damage!`)
+                setFloatingDamage(paladinAttack)
             }
             setEnemyHealth(damage)
         } else {
             updateBattleLog(
                 `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                 `Deus missed the mark.`)
+            setFloatingDamage('Miss')
         }
         setPotionCD(true)
         setPalTurn(2)
@@ -154,14 +195,17 @@ function PaladinUI ({
                 updateBattleLog(
                     `Deus rolled a natural 🎲(20) against the enemy!`,
                     `Deus critically demolished the enemy for ${critAttack} damage!`)
+                setFloatingDamage(critAttack)
             } else if (smiteAttack >= 17 && d20Roll !== 20){
                 updateBattleLog(
                     `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
-                    `Deus gave divine judgement for ${smiteAttack} damage!!`)
+                    `Deus delivered divine punishment for ${smiteAttack} damage!!`)
+                setFloatingDamage(smiteAttack)
             } else {
                 updateBattleLog(
                     `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                     `Deus smited the enemy for ${smiteAttack} damage!`)
+                setFloatingDamage(smiteAttack)
             }
             setEnemyHealth(damage)
             smiteAudio()
@@ -169,6 +213,7 @@ function PaladinUI ({
             updateBattleLog(
                 `Deus rolled 🎲(${diceRoll}) + 7 against the enemy.`,
                 `Deus whiffed his holy swing!`)
+            setFloatingDamage('Miss')
             missAudio()
         }
         setPotionCD(true)
@@ -202,6 +247,7 @@ function PaladinUI ({
         const restore = (paladinHealth) + (potionRestore)
         if (potionCD === true && palTurn === 1 && potionAmount > 0 && paladinHealth > 0) {
             potionAudio()
+            setRestorePopup(potionRestore)
             setPaladinHealth(restore)
             setPotionAmount(potionAmount - 1)
             setPotionCD(false)
@@ -401,7 +447,7 @@ function PaladinUI ({
             src={deus}
             alt='deus'
             />
-         
+            <div id='popup-box-pal'></div>
 
             
         </div>

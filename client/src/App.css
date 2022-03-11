@@ -963,6 +963,161 @@ body {
 }
 
 .damage-value {
+  font-style: oblique;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 35px;
+  text-shadow: 2px 2px rgb(36, 34, 27);
   position: absolute;
+  bottom: 0%;
+  opacity: 1;
   color: white;
+  animation: slide 2s;
+  animation-delay: .1s;
 }
+
+.high-damage-value {
+  font-style: oblique;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 40px;
+  text-shadow: 3px 3px#b78846;
+  position: absolute;
+  bottom: 0%;
+  opacity: 1;
+  color: white;
+  animation: slide 2s;
+  animation-delay: .1s;
+}
+
+.missed-attack {
+  font-style: oblique;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 25px;
+  text-shadow: 3px 3px gray;
+  position: absolute;
+  bottom: 0%;
+  opacity: 1;
+  color: white;
+  animation: slide 2s;
+  animation-delay: .1s;
+}
+
+@keyframes slide {
+  0% {
+    bottom: 0%;
+    opacity: 1;
+  }
+  100% {
+    bottom: 100%;
+    opacity: 0
+  }
+}
+
+#popup-box {
+  /* border: 3px solid red; */
+  height: 110px;
+  width: 30px;
+  position: absolute;
+  top: 45%
+}
+
+.heal-float {
+  font-style: oblique;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 55px;
+  text-shadow: -.5px 0px white;
+  position: absolute;
+  right: 10%;
+  bottom: 15%;
+  opacity: 1;
+  color: rgb(14, 182, 14);
+  animation: fadein 2s;
+  animation-delay: .1s;
+}
+
+
+
+@keyframes fadein {
+  0% {
+    opacity: 1
+  }
+  30% {
+    opacity: 1;
+    bottom: 25%;
+  }
+  100% {
+    opacity: 0;
+    bottom: 25%;
+  }
+}
+
+#popup-box-rog {
+  /* border: 3px solid red; */
+  height: 120px;
+  width: 120px;
+  position: relative;
+  left:6%;
+  bottom: 55%
+}
+
+#popup-box-sor {
+  /* border: 3px solid red; */
+  height: 120px;
+  width: 120px;
+  position: relative;
+  left:6%;
+  bottom: 55%
+}
+
+#popup-box-pal {
+  /* border: 3px solid red; */
+  height: 120px;
+  width: 120px;
+  position: relative;
+  left: 6%;
+  bottom: 60%
+}
+
+.damage-float {
+  font-style: oblique;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 55px;
+  text-shadow: -.5px 0px white;
+  position: absolute;
+  right: 10%;
+  bottom: 15%;
+  opacity: 1;
+  color: red;
+  animation: fadein 2s;
+  animation-delay: .1s;
+}
+
+.enemy-missed {
+  font-style: oblique;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 40px;
+  text-shadow: 1.5px 1.5px gray;
+  position: absolute;
+  right: 10%;
+  bottom: 15%;
+  opacity: 1;
+  color: white;
+  animation: fadein 2s;
+  animation-delay: .1s;
+}
+
+
+
+@keyframes fadein {
+  0% {
+    opacity: 1
+  }
+  30% {
+    opacity: 1;
+    bottom: 25%;
+  }
+  100% {
+    opacity: 0;
+    bottom: 25%;
+  }
+}
+

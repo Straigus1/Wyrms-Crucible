@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProgressBar } from 'react-bootstrap'
 import Behemoth from '../Images/behemoth-pic.png'
@@ -14,9 +14,13 @@ import meteorSound from '../Music/meteor-sound.mp3'
 
 function Battle4 () {
     const [enemyHealth, setEnemyHealth] = useState(400)
+    const [floatingDamage, setFloatingDamage] = useState(0)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
+    const [palPopup, setPalPopup] = useState(0)
+    const [rogPopup, setRogPopup] = useState(0)
+    const [sorPopup, setSorPopup] = useState(0)
     const [round, setRound] = useState(1)
     const [poisonStatus, setPoisonStatus] = useState(0)
     const [blessStatus, setBlessStatus] = useState(0)
@@ -31,6 +35,31 @@ function Battle4 () {
     const [rogTurn, setRogTurn] = useState(0) 
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
+
+    useEffect(() => {
+        let popup = document.createElement("h3");
+        let element = document.getElementById('popup-box')
+        
+        if (floatingDamage > 0) {
+            
+            if (floatingDamage >= 25) {
+                popup.className = "high-damage-value"
+                popup.textContent = `${floatingDamage}!`
+            } else {
+                popup.className = "damage-value"
+                popup.textContent = `${floatingDamage}`
+            }
+        }
+        if (floatingDamage === 'Miss') {
+            popup.className = "missed-attack"
+            popup.textContent = `${floatingDamage}`
+        }
+        element.appendChild(popup)
+        setTimeout(() => {
+            popup.remove()
+        }, 1900)
+        
+    }, [floatingDamage])
 
 // Rolls 1d6(One 6 sided die) with a +14 to the base damage.
     function enemyDamageModifier() {
@@ -76,31 +105,35 @@ function Battle4 () {
                 damage = (characterHealth) - (normalAttack)
             }
         }
-        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string) {
+        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string, setCharacterPopup) {
             if (enemyRoll >= armorClass) {
                 if (d20Roll === 20) {
                     updateBattleLog(
                         `Behemoth rolled a natural 🎲(20) against ${name}!`,
                         `Behemoth critically struck ${name} for ${baseCritAttack} damage!!!`)
+                    setCharacterPopup(baseCritAttack)
                 } else {
                     updateBattleLog(
                         `Behemoth rolled 🎲(${d20Roll}) + 11 against ${name}.`,
                         `Behemoth attacked ${name} for ${enemyAttack} damage!`)
+                    setCharacterPopup(enemyAttack)
                 }  
                 setCharacterHealth(damage)
                 } else {
                 updateBattleLog(
                     `Behemoth rolled 🎲(${d20Roll}) + 11 against ${name}.`,
                     string)
+                setCharacterPopup('Miss')
                 }
         }
-        function updateLogWithUpheavalInfo(armorClass, name, setCharacterHealth, setCharacterStunStatus, string) {
+        function updateLogWithUpheavalInfo(armorClass, name, setCharacterHealth, setCharacterStunStatus, string, setCharacterPopup) {
             if (enemyRoll >= armorClass) {
                 if (d20Roll === 20) {
                     updateBattleLog(
                         `Behemoth used Upheaval, rolled a natural 🎲(20) against ${name}!`,
                         `Behemoth ejected ${name} sky high for ${upheavalCritAttack} critical damage and applied stun!!!`)
-                    setCharacterStunStatus(true) 
+                    setCharacterStunStatus(true)
+                    setCharacterPopup(upheavalCritAttack) 
                     
                 } else {
                     updateBattleLog(
@@ -110,12 +143,14 @@ function Battle4 () {
                     if (stunChance <= 4) {
                         setCharacterStunStatus(true) 
                     }
+                    setCharacterPopup(upheavalAttack)
                 } 
                 setCharacterHealth(damage)
                 } else {
                 updateBattleLog(
                     `Behemoth used Upheaval, rolled 🎲(${d20Roll}) + 11 against ${name}.`,
                     string)
+                setCharacterPopup('Miss')
                 }
         }
         // Cast meteor when reduced below 30% hp, only once.
@@ -127,12 +162,15 @@ function Battle4 () {
             setMeteorAvailable(false)
             if (rogueHealth > 0) {
                 setRogueHealth(1)
+                setRogPopup(rogueHealth - 1)
             }
             if (sorcererHealth > 0) {
                 setSorcererHealth(1)
+                setSorPopup(sorcererHealth - 1)
             }
             if (paladinHealth > 0) {
                 setPaladinHealth(1)
+                setPalPopup(paladinHealth - 1)
             }
             meteorAudio()
         } else {
@@ -140,24 +178,24 @@ function Battle4 () {
         if (variant <= 4) {
             if ((target <= 3 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
                 alterDamageValueBasedOnDiceRoll(rogueHealth, upheavalAttack, upheavalCritAttack)            
-                updateLogWithUpheavalInfo(15, 'Iris', setRogueHealth, setRogStunStatus, 'Iris avoided the attack!')
+                updateLogWithUpheavalInfo(15, 'Iris', setRogueHealth, setRogStunStatus, 'Iris avoided the attack!', setRogPopup)
             } else if ((target >= 4 && target <= 6 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
                 alterDamageValueBasedOnDiceRoll(sorcererHealth, upheavalAttack, upheavalCritAttack)            
-                updateLogWithUpheavalInfo(14, 'Juhl', setSorcererHealth, setSorStunStatus, 'Juhl resisted the assault!')
+                updateLogWithUpheavalInfo(14, 'Juhl', setSorcererHealth, setSorStunStatus, 'Juhl resisted the assault!', setSorPopup)
             } else if ((target >= 7 && target <= 10 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
                 alterDamageValueBasedOnDiceRoll(paladinHealth, upheavalAttack, upheavalCritAttack)            
-                updateLogWithUpheavalInfo(19, 'Deus', setPaladinHealth, setPalStunStatus, 'Deus blocked the strike!')
+                updateLogWithUpheavalInfo(19, 'Deus', setPaladinHealth, setPalStunStatus, 'Deus blocked the strike!', setPalPopup)
             }
         } else {
         if ((target <= 3 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(rogueHealth, enemyAttack, baseCritAttack)               
-            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')
+            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!', setRogPopup)
         } else if ((target >= 4 && target <= 6 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(sorcererHealth, enemyAttack, baseCritAttack)
-            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
+            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!', setSorPopup)
         } else if ((target >= 7 && target <= 10 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(paladinHealth, enemyAttack, baseCritAttack)
-            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
+            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!', setPalPopup)
         }
     }
     }
@@ -312,7 +350,7 @@ function Battle4 () {
             </div>
             {renderCurrentOutcome()}
             
-            
+            <div id='popup-box'></div>
             <div className='party-box'>
                 <RogueUI 
                     rogStunStatus={rogStunStatus}
@@ -330,6 +368,8 @@ function Battle4 () {
                     setRogueHealth={setRogueHealth}
                     battleLog={battleLog}
                     setBattleLog={setBattleLog}
+                    setFloatingDamage={setFloatingDamage}
+                    rogPopup={rogPopup}
                 />
                 <SorcererUI
                     sorStunStatus={sorStunStatus}
@@ -346,6 +386,8 @@ function Battle4 () {
                     setSorcererHealth={setSorcererHealth}
                     battleLog={battleLog}
                     setBattleLog={setBattleLog}
+                    setFloatingDamage={setFloatingDamage}
+                    sorPopup={sorPopup}
                 />
                 <PaladinUI 
                     palStunStatus={palStunStatus}
@@ -363,6 +405,8 @@ function Battle4 () {
                     setSmiteCD={setSmiteCD}
                     enemyArmorClass={enemyArmorClass}
                     setPaladinHealth={setPaladinHealth}
+                    setFloatingDamage={setFloatingDamage}
+                    palPopup={palPopup}
                 />
             </div>
         </div>

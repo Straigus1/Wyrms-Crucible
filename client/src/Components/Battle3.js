@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProgressBar } from 'react-bootstrap'
 import werewolf from '../Images/werewolf-pic.png'
@@ -14,9 +14,13 @@ import ReactAudioPlayer from 'react-audio-player'
 
 function Battle3 () {
     const [enemyHealth, setEnemyHealth] = useState(300)
+    const [floatingDamage, setFloatingDamage] = useState(0)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
+    const [palPopup, setPalPopup] = useState(0)
+    const [rogPopup, setRogPopup] = useState(0)
+    const [sorPopup, setSorPopup] = useState(0)
     const [round, setRound] = useState(1)
     const [poisonStatus, setPoisonStatus] = useState(0)
     const [blessStatus, setBlessStatus] = useState(0)
@@ -30,6 +34,31 @@ function Battle3 () {
     const [rogTurn, setRogTurn] = useState(0) 
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
+
+    useEffect(() => {
+        let popup = document.createElement("h3");
+        let element = document.getElementById('popup-box')
+        
+        if (floatingDamage > 0) {
+            
+            if (floatingDamage >= 25) {
+                popup.className = "high-damage-value"
+                popup.textContent = `${floatingDamage}!`
+            } else {
+                popup.className = "damage-value"
+                popup.textContent = `${floatingDamage}`
+            }
+        }
+        if (floatingDamage === 'Miss') {
+            popup.className = "missed-attack"
+            popup.textContent = `${floatingDamage}`
+        }
+        element.appendChild(popup)
+        setTimeout(() => {
+            popup.remove()
+        }, 1900)
+        
+    }, [floatingDamage])
 
 // Rolls 2d6(Two 6 sided dice) with a +11 to the base damage
     function enemyDamageModifier() {
@@ -70,34 +99,39 @@ function Battle3 () {
                 damage = (characterHealth) - (normalAttack)
             }
         }
-        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string) {
+        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string, setCharacterPopup) {
             if (enemyRoll >= armorClass) {
                 if (d20Roll === 20) {
                     updateBattleLog(
                         `Werewolf rolled a natural 🎲(20) against ${name}!`,
                         `Werewolf critically struck ${name} for ${baseCritAttack} damage!!!`)
+                    setCharacterPopup(baseCritAttack)
                 } else {
                     updateBattleLog(
                         `Werewolf rolled 🎲(${d20Roll}) + 10 against ${name}.`,
                         `Werewolf attacked ${name} for ${enemyAttack} damage!`)
+                    setCharacterPopup(enemyAttack)
                 }  
                 setCharacterHealth(damage)
                 } else {
                 updateBattleLog(
                     `Werewolf rolled 🎲(${d20Roll}) + 10 against ${name}.`,
                     string)
+                setCharacterPopup('Miss')
                 }
         }
-        function updateLogWithElectricSurgeInfo(armorClass, name, setCharacterHealth, setCharacterStunStatus, string) {
+        function updateLogWithElectricSurgeInfo(armorClass, name, setCharacterHealth, setCharacterStunStatus, string, setCharacterPopup) {
             if (enemyRoll >= armorClass) {
                 if (d20Roll === 20) {
                     updateBattleLog(
                         `Werewolf cast Electric Surge, rolled a natural 🎲(20) against ${name}!`,
                         `Werewolf electrocuted ${name} for ${surgeCritAttack} critical damage and applied stun!!!`)
+                    setCharacterPopup(surgeCritAttack)
                 } else {
                     updateBattleLog(
                         `Werewolf cast Electric Surge, rolled 🎲(${d20Roll}) + 10 against ${name}.`,
                         `Werewolf electrified ${name} for ${electricAttack} damage and applied stun!`)
+                    setCharacterPopup(electricAttack)
                 } 
                 setCharacterStunStatus(true) 
                 setCharacterHealth(damage)
@@ -105,30 +139,31 @@ function Battle3 () {
                 updateBattleLog(
                     `Werewolf cast Electric Surge, rolled 🎲(${d20Roll}) + 10 against ${name}.`,
                     string)
+                setCharacterPopup('Miss')
                 }
         }
         // Electric Surge applies stun when it is successful, forcing the target to lose its next turn.
         if (variant <= 6) {
             if ((target <= 3 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
                 alterDamageValueBasedOnDiceRoll(rogueHealth, electricAttack, surgeCritAttack)
-                updateLogWithElectricSurgeInfo(15, 'Iris', setRogueHealth, setRogStunStatus, 'Iris avoided the attack!')
+                updateLogWithElectricSurgeInfo(15, 'Iris', setRogueHealth, setRogStunStatus, 'Iris avoided the attack!', setRogPopup)
             } else if ((target >= 4 && target <= 6 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
                 alterDamageValueBasedOnDiceRoll(sorcererHealth, electricAttack, surgeCritAttack)
-                updateLogWithElectricSurgeInfo(14, 'Juhl', setSorcererHealth, setSorStunStatus, 'Juhl resisted the assault!')
+                updateLogWithElectricSurgeInfo(14, 'Juhl', setSorcererHealth, setSorStunStatus, 'Juhl resisted the assault!', setSorPopup)
             } else if ((target >= 7 && target <= 10 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
                 alterDamageValueBasedOnDiceRoll(paladinHealth, electricAttack, surgeCritAttack)
-                updateLogWithElectricSurgeInfo(19, 'Deus', setPaladinHealth, setPalStunStatus, 'Deus blocked the strike')
+                updateLogWithElectricSurgeInfo(19, 'Deus', setPaladinHealth, setPalStunStatus, 'Deus blocked the strike', setPalPopup)
             }
         } else {
         if ((target <= 3 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(rogueHealth, enemyAttack, baseCritAttack)               
-            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')
+            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!', setRogPopup)
         } else if ((target >= 4 && target <= 6 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(sorcererHealth, enemyAttack, baseCritAttack)
-            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
+            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!', setSorPopup)
         } else if ((target >= 7 && target <= 10 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(paladinHealth, enemyAttack, baseCritAttack)
-            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
+            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!', setPalPopup)
         }
         
     }
@@ -300,7 +335,7 @@ function Battle3 () {
             </div>
             {renderCurrentOutcome()}
             
-            
+            <div id='popup-box'></div>
             <div className='party-box'>
                 <RogueUI 
                     rogStunStatus={rogStunStatus}
@@ -318,6 +353,8 @@ function Battle3 () {
                     setRogueHealth={setRogueHealth}
                     battleLog={battleLog}
                     setBattleLog={setBattleLog}
+                    setFloatingDamage={setFloatingDamage}
+                    rogPopup={rogPopup}
                 />
                 <SorcererUI
                     sorStunStatus={sorStunStatus}
@@ -334,6 +371,8 @@ function Battle3 () {
                     setSorcererHealth={setSorcererHealth}
                     battleLog={battleLog}
                     setBattleLog={setBattleLog}
+                    setFloatingDamage={setFloatingDamage}
+                    sorPopup={sorPopup}
                 />
                 <PaladinUI 
                     palStunStatus={palStunStatus}
@@ -351,6 +390,8 @@ function Battle3 () {
                     setSmiteCD={setSmiteCD}
                     enemyArmorClass={enemyArmorClass}
                     setPaladinHealth={setPaladinHealth}
+                    setFloatingDamage={setFloatingDamage}
+                    palPopup={palPopup}
                 />
             </div>
         </div>

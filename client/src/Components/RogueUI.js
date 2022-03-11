@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import roguepic from '../Images/rogue-pic.png'
 import roguedead from '../Images/rogue-pic-dead.png'
 import rogueac from '../Images/rogue-armor.png'
@@ -33,10 +33,46 @@ function RogueUI ({
     rogueHealth, 
     enemyHealth, 
     setEnemyHealth,
-    }) {
+    setFloatingDamage,
+    rogPopup}) {
         
         const [potionAmount, setPotionAmount] = useState(3)
         const [potionCD, setPotionCD] = useState(true)
+        const [restorePopup, setRestorePopup] = useState(0)
+
+    useEffect(() => {
+        let popup = document.createElement("h3");
+        let element = document.getElementById('popup-box-rog')
+        
+        if (rogPopup > 0) {
+            
+            popup.className = "damage-float"
+            popup.textContent = `-${rogPopup}`
+        }
+        if (rogPopup === 'Miss') {
+            popup.className = "enemy-missed"
+            popup.textContent = `${rogPopup}`
+        }
+        element.appendChild(popup)
+        setTimeout(() => {
+            popup.remove()
+        }, 1900)
+        
+    }, [rogPopup])
+
+    useEffect(() => {
+        let popup = document.createElement("h3");
+        let element = document.getElementById('popup-box-rog')
+        if (restorePopup !== 0) {
+            popup.className = "heal-float"
+            popup.textContent = `+${restorePopup}`
+        }
+        element.appendChild(popup)
+        setTimeout(() => {
+            popup.remove()
+        }, 1900)
+        
+    }, [restorePopup])
 
 // Sound effects for clicking abilities, potions, and missing signature actions.
     function pressAudio() {
@@ -107,14 +143,17 @@ function RogueUI ({
                 updateBattleLog(
                     `Iris rolled a natural 🎲(20) against the enemy!`,
                     `Iris crtically struck the enemy for ${critAttack} damage!!! `)
+                setFloatingDamage(critAttack)
             } else if (rogueAttack >= 13 && d20Roll !== 20){
                 updateBattleLog(
                     `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                     `Iris mutilated the target for ${rogueAttack} damage!!`)
+                setFloatingDamage(rogueAttack)
             } else {
                 updateBattleLog(
                     `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                     `Iris slashed the enemy for ${rogueAttack} damage! `)
+                setFloatingDamage(rogueAttack)
             }
             setEnemyHealth(damage)
             
@@ -123,6 +162,7 @@ function RogueUI ({
             updateBattleLog(
                 `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                 'Iris missed the target.')
+            setFloatingDamage('Miss')
         }
         setPotionCD(true)
         setRogTurn(2)
@@ -155,11 +195,13 @@ function RogueUI ({
                 updateBattleLog(
                     `Iris rolled a natural 🎲(20) against the enemy!`,
                     `Iris dealt ${critAttack} critical damage and poisoned the enemy!!!`)
+                setFloatingDamage(critAttack)
 
             } else {
                 updateBattleLog(
                     `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                     `Iris dealt ${venomAttack} damage and poisoned the enemy!`)
+                setFloatingDamage(venomAttack)
             }
             setEnemyHealth(damage)
             setPoisonStatus(3)
@@ -167,6 +209,7 @@ function RogueUI ({
             updateBattleLog(
                 `Iris rolled 🎲(${diceRoll}) + 6 against the enemy.`,
                 'Iris missed the target.')
+            setFloatingDamage('Miss')
         }
         setPotionCD(true)
         setRogTurn(2)
@@ -207,10 +250,12 @@ function RogueUI ({
                 updateBattleLog(
                     `Iris rolled a natural 🎲(20) against the enemy!`,
                     `Iris critically slaughtered the enemy for ${critAttack} damage!!! `)
+                setFloatingDamage(critAttack)
             } else {
                 updateBattleLog(
                     `Iris rolled 🎲(${diceRoll}) + 11 against the enemy.`,
                     `Iris eviscerated the enemy for ${phantomAttack} damage! `)
+                setFloatingDamage(phantomAttack)
             }
             
             setEnemyHealth(damage)
@@ -219,6 +264,7 @@ function RogueUI ({
             updateBattleLog(
                 `Iris rolled 🎲(${diceRoll}) + 11 against the enemy.`,
                 'Iris lamentably missed the mark.')
+            setFloatingDamage('Miss')
             missAudio()
         }
         setPotionCD(true)
@@ -242,6 +288,7 @@ function drinkPotion() {
     const restore = (rogueHealth) + (potionRestore)
     if (potionCD === true && rogTurn === 1 && potionAmount > 0 && rogueHealth > 0) {
         potionAudio()
+        setRestorePopup(potionRestore)
         setRogueHealth(restore)
         setPotionAmount(potionAmount - 1)
         setPotionCD(false)
@@ -444,7 +491,8 @@ function className() {
             src={iris}
             alt='iris'
             />
-            {/* <h1 className='damage-dealt'>{damageValue}</h1> */}
+            
+            <div id='popup-box-rog'></div>
         </div>
     )
 

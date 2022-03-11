@@ -39,7 +39,7 @@ function Transition1() {
                     <button className='continue-exposition' onClick={continueClick}>Continue</button>
                 </div>
             </div>
-            <div id='spinner' class="spinner-border text-warning" role="status">
+            <div id='spinner' className="spinner-border text-warning" role="status">
                 
             </div>
             <div className='loader'>

@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProgressBar } from 'react-bootstrap'
 import dragon from '../Images/dragon-pic.png'
@@ -15,9 +15,13 @@ import breathSound from '../Music/dragon-breath.mp3'
 
 function Battle5 () {
     const [enemyHealth, setEnemyHealth] = useState(430)
+    const [floatingDamage, setFloatingDamage] = useState(0)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
     const [sorcererHealth, setSorcererHealth] = useState(38)
+    const [palPopup, setPalPopup] = useState(0)
+    const [rogPopup, setRogPopup] = useState(0)
+    const [sorPopup, setSorPopup] = useState(0)
     const [round, setRound] = useState(1)
     const [breathReady, setBreathReady] = useState(true)
     const [poisonStatus, setPoisonStatus] = useState(0)
@@ -29,6 +33,31 @@ function Battle5 () {
     const [rogTurn, setRogTurn] = useState(0) 
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
+
+    useEffect(() => {
+        let popup = document.createElement("h3");
+        let element = document.getElementById('popup-box')
+        
+        if (floatingDamage > 0) {
+            
+            if (floatingDamage >= 25) {
+                popup.className = "high-damage-value"
+                popup.textContent = `${floatingDamage}!`
+            } else {
+                popup.className = "damage-value"
+                popup.textContent = `${floatingDamage}`
+            }
+        }
+        if (floatingDamage === 'Miss') {
+            popup.className = "missed-attack"
+            popup.textContent = `${floatingDamage}`
+        }
+        element.appendChild(popup)
+        setTimeout(() => {
+            popup.remove()
+        }, 1900)
+        
+    }, [floatingDamage])
 
 // Rolls 1d8(One 8 sided die) with a +3 to the base damage.
     function enemyDamageModifier() {
@@ -77,22 +106,25 @@ function Battle5 () {
                 damage = (characterHealth) - (enemyAttack)
             }
         }
-        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string) {
+        function updateLogWithDiceRollAndTarget(armorClass, name, setCharacterHealth, string, setCharacterPopup) {
             if (enemyRoll >= armorClass) {
                 if (d20Roll === 20) {
                     updateBattleLog(
                         `Dragon rolled a natural 🎲(20) against ${name}!`,
                         `Dragon critically struck ${name} for ${critAttack} damage!!!`)
+                    setCharacterPopup(critAttack)
                 } else {
                     updateBattleLog(
                         `Dragon rolled 🎲(${d20Roll}) + 12 against ${name}.`,
                         `Dragon attacked ${name} for ${enemyAttack} damage!`)
+                    setCharacterPopup(enemyAttack)
                 }  
                 setCharacterHealth(damage)
                 } else {
                 updateBattleLog(
                     `Dragon rolled 🎲(${d20Roll}) + 12 against ${name}.`,
                     string)
+                setCharacterPopup('Miss')
                 }
         }
         if (breathReady) {
@@ -100,20 +132,29 @@ function Battle5 () {
                 'Dragon used Dragon Breath!',
                 `The Party was dealt ${breathAttack} damage!`)
             setBreathReady(false)
-            setRogueHealth(damageFRog)
-            setSorcererHealth(damageFSor)
-            setPaladinHealth(damageFPal)
+            if (rogueHealth > 0) {
+                setRogueHealth(damageFRog)
+                setRogPopup(breathAttack)
+            }
+            if (sorcererHealth > 0) {
+                setSorcererHealth(damageFSor)
+                setSorPopup(breathAttack)
+            }
+            if (paladinHealth > 0) {
+                setPaladinHealth(damageFPal)
+                setPalPopup(breathAttack)
+            }
             breathAudio()
         } else {
         if ((target <= 3 && rogueHealth > 0) || (paladinHealth <= 0 && sorcererHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(rogueHealth)
-            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!')
+            updateLogWithDiceRollAndTarget(15, 'Iris', setRogueHealth, 'Iris avoided the attack!', setRogPopup)
         } else if ((target >= 4 && target <= 6 && sorcererHealth > 0) || (rogueHealth <= 0 && paladinHealth <= 0) || (target >= 6 && target <= 9 && paladinHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(sorcererHealth)
-            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!')
+            updateLogWithDiceRollAndTarget(14, 'Juhl', setSorcererHealth, 'Juhl resisted the assault!', setSorPopup)
         } else if ((target >= 7 && target <= 10 && paladinHealth > 0) || (rogueHealth <= 0 && sorcererHealth <= 0) || (target >= 3 && target <= 5 && sorcererHealth <= 0) || (target <= 2 && rogueHealth <= 0)) {
             alterDamageValueBasedOnDiceRoll(paladinHealth)
-            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!')
+            updateLogWithDiceRollAndTarget(19, 'Deus', setPaladinHealth, 'Deus blocked the strike!', setPalPopup)
         }
         
     }
@@ -286,7 +327,7 @@ function Battle5 () {
                 <h3>Round: {round} </h3>
             </div>
             
-            
+            <div id='popup-box'></div> 
             <div className='party-box'>
                 <RogueUI 
                     updateBattleLog={updateBattleLog}
@@ -303,6 +344,8 @@ function Battle5 () {
                     setRogueHealth={setRogueHealth}
                     battleLog={battleLog}
                     setBattleLog={setBattleLog}
+                    setFloatingDamage={setFloatingDamage}
+                    rogPopup={rogPopup}
                 />
                 <SorcererUI
                     updateBattleLog={updateBattleLog} 
@@ -318,6 +361,8 @@ function Battle5 () {
                     setSorcererHealth={setSorcererHealth}
                     battleLog={battleLog}
                     setBattleLog={setBattleLog}
+                    setFloatingDamage={setFloatingDamage}
+                    sorPopup={sorPopup}
                 />
                 <PaladinUI 
                     updateBattleLog={updateBattleLog} 
@@ -334,6 +379,8 @@ function Battle5 () {
                     setSmiteCD={setSmiteCD}
                     enemyArmorClass={enemyArmorClass}
                     setPaladinHealth={setPaladinHealth}
+                    setFloatingDamage={setFloatingDamage}
+                    palPopup={palPopup}
                 />
             </div>
         </div>

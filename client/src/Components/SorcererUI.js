@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import sorcererpic from '../Images/sorcerer-pic.png'
 import sorcererdead from '../Images/sorcerer-pic-dead.png'
 import sorcererbless from '../Images/sorcerer-pic-bless.png'
@@ -28,10 +28,47 @@ function SorcererUI ({
     setSorTurn, 
     sorcererHealth, 
     enemyHealth, 
-    setEnemyHealth}) {
+    setEnemyHealth,
+    setFloatingDamage,
+    sorPopup}) {
 
     const [potionAmount, setPotionAmount] = useState(3)
     const [potionCD, setPotionCD] = useState(true)
+    const [restorePopup, setRestorePopup] = useState(0)
+
+    useEffect(() => {
+        let popup = document.createElement("h3");
+        let element = document.getElementById('popup-box-sor')
+        
+        if (sorPopup > 0) {
+            
+            popup.className = "damage-float"
+            popup.textContent = `-${sorPopup}`
+        }
+        if (sorPopup === 'Miss') {
+            popup.className = "enemy-missed"
+            popup.textContent = `${sorPopup}`
+        }
+        element.appendChild(popup)
+        setTimeout(() => {
+            popup.remove()
+        }, 1900)
+        
+    }, [sorPopup])
+
+    useEffect(() => {
+        let popup = document.createElement("h3");
+        let element = document.getElementById('popup-box-sor')
+        if (restorePopup !== 0) {
+            popup.className = "heal-float"
+            popup.textContent = `+${restorePopup}`
+        }
+        element.appendChild(popup)
+        setTimeout(() => {
+            popup.remove()
+        }, 1900)
+        
+    }, [restorePopup])
 
 // Sound effects for clicking abilities and potions.
     function pressAudio() {
@@ -95,16 +132,19 @@ function SorcererUI ({
                 updateBattleLog(
                     `Juhl rolled a natural 🎲(20) against the enemy!`,
                     `Juhl blasted the enemy for ${critAttack} damage!!!`)
+                setFloatingDamage(critAttack)
             } else {
                 updateBattleLog(
                     `Juhl rolled 🎲(${diceRoll}) + 5 against the enemy.`,
                     `Juhl blasted the enemy for ${sorcererAttack} damage!`)
+                setFloatingDamage(sorcererAttack)
             }   
         setEnemyHealth(damage)
         } else {
             updateBattleLog(
                 `Juhl rolled 🎲(${diceRoll}) + 5 against the enemy.`,
                 `Juhl missed the target.`)
+            setFloatingDamage('Miss')
         }
         setPotionCD(true)
         setSorTurn(2)
@@ -136,7 +176,7 @@ function SorcererUI ({
         updateBattleLog(
                 `Juhl cast Magic Missile.`,
                 `Juhl pelted the enemy for ${magicMissleAttack} damage!`)
-        
+        setFloatingDamage(magicMissleAttack)
         setEnemyHealth(damage)
         setPotionCD(true)
         setSorTurn(2)
@@ -168,10 +208,12 @@ function SorcererUI ({
             updateBattleLog(
                 `Juhl cast Lightning Bolt!`,
                 `Juhl electrocuted the enemy for ${lightningBoltAttack} damage!`)
+            setFloatingDamage(lightningBoltAttack)
         } else {
             updateBattleLog(
                 `Juhl cast Lightning Bolt!`,
                 `Juhl obliterated the target for ${lightningBoltAttack} damage!!!`)
+            setFloatingDamage(lightningBoltAttack)
         }
         setEnemyHealth(damage)
         setPotionCD(true)
@@ -195,6 +237,7 @@ function SorcererUI ({
         const restore = (sorcererHealth) + (potionRestore)
         if (potionCD === true && sorTurn === 1 && potionAmount > 0 && sorcererHealth > 0) {
             potionAudio()
+            setRestorePopup(potionRestore)
             setSorcererHealth(restore)
             setPotionAmount(potionAmount - 1)
             setPotionCD(false)
@@ -283,7 +326,7 @@ function overlayTooltipAndAction(action, skillName, id, description) {
     function lightningAvailable() {
         if (lightningCD === 5) {
             return (
-                overlayTooltipAndAction(sorLightningBolt, 'Lightning Bolt', 'lightning-bolt', 'Deals 28-48 damage. \n 20% chance of reducing damage dealt by half. \n Cooldown: 5 Rounds \n Cannot miss. ')
+                overlayTooltipAndAction(sorLightningBolt, 'Lightning Bolt', 'lightning-bolt', 'Deals 28-48 damage. \n 20% chance of reducing damage dealt by half. \n Cooldown: 5 Rounds \n Does not roll. Cannot miss. ')
             )
         } else {
             return <button
@@ -301,7 +344,7 @@ function overlayTooltipAndAction(action, skillName, id, description) {
             return (
                 <div className='attack-box' >
                 {overlayTooltipAndAction(sorAttack, 'Fire Bolt', '', 'Deals 6-16 damage. \n Hit Bonus: +5')}
-                {overlayTooltipAndAction(sorMagicMissle, 'Magic Missile', 'magic-missle', 'Deals varied damage. \n Variances: 3-6, 5-10, 7-16. \n Cannot miss.')}
+                {overlayTooltipAndAction(sorMagicMissle, 'Magic Missile', 'magic-missle', 'Deals varied damage. \n Variances: 3-6, 5-10, 7-16. \n Does not roll. Cannot miss.')}
                 {lightningAvailable()}
                 </div>
                
@@ -395,9 +438,7 @@ function overlayTooltipAndAction(action, skillName, id, description) {
             src={juhl}
             alt='juhl'
             />
-         
-
-            
+            <div id='popup-box-sor'></div>
         </div>
     )
 }

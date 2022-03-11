@@ -7,7 +7,7 @@ function BattleLog({battleLog}) {
 
     function displayBattleLog() {
         const log = battleLog.map((log) => {
-            return <li className='log-appearance'>{log}</li>
+            return (<li className='log-appearance'>{log}</li>  )
         })
         return log
     }
