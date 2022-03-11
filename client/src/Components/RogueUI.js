@@ -34,7 +34,8 @@ function RogueUI ({
     enemyHealth, 
     setEnemyHealth,
     setFloatingDamage,
-    rogPopup}) {
+    rogPopup,
+    setRogPopup}) {
         
         const [potionAmount, setPotionAmount] = useState(3)
         const [potionCD, setPotionCD] = useState(true)
@@ -57,8 +58,9 @@ function RogueUI ({
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setRogPopup(0)
         
-    }, [rogPopup])
+    }, [rogPopup, setRogPopup])
 
     useEffect(() => {
         let popup = document.createElement("h3");
@@ -71,8 +73,9 @@ function RogueUI ({
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setRestorePopup(0)
         
-    }, [restorePopup])
+    }, [restorePopup, setRestorePopup])
 
 // Sound effects for clicking abilities, potions, and missing signature actions.
     function pressAudio() {

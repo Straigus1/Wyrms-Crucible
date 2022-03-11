@@ -30,7 +30,8 @@ function SorcererUI ({
     enemyHealth, 
     setEnemyHealth,
     setFloatingDamage,
-    sorPopup}) {
+    sorPopup,
+    setSorPopup}) {
 
     const [potionAmount, setPotionAmount] = useState(3)
     const [potionCD, setPotionCD] = useState(true)
@@ -53,8 +54,9 @@ function SorcererUI ({
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setSorPopup(0)
         
-    }, [sorPopup])
+    }, [sorPopup, setSorPopup])
 
     useEffect(() => {
         let popup = document.createElement("h3");
@@ -67,8 +69,9 @@ function SorcererUI ({
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setRestorePopup(0)
         
-    }, [restorePopup])
+    }, [restorePopup, setRestorePopup])
 
 // Sound effects for clicking abilities and potions.
     function pressAudio() {

@@ -34,7 +34,8 @@ function PaladinUI ({
     enemyHealth, 
     setEnemyHealth,
     setFloatingDamage,
-    palPopup}) {
+    palPopup,
+    setPalPopup}) {
     
     const [potionAmount, setPotionAmount] = useState(3)
     const [potionCD, setPotionCD] = useState(true)
@@ -57,8 +58,10 @@ function PaladinUI ({
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setPalPopup(0)
         
-}, [palPopup])
+        
+}, [palPopup, setPalPopup])
 
     useEffect(() => {
         let popup = document.createElement("h3");
@@ -71,8 +74,9 @@ function PaladinUI ({
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setRestorePopup(0)
         
-    }, [restorePopup])
+    }, [restorePopup, setRestorePopup])
 
 // Sound effects for clicking abilities, potions, and missing signature actions.
     function pressAudio() {

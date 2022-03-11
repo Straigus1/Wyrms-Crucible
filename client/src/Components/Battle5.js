@@ -56,8 +56,9 @@ function Battle5 () {
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setFloatingDamage(0)
         
-    }, [floatingDamage])
+    }, [floatingDamage, setFloatingDamage])
 
 // Rolls 1d8(One 8 sided die) with a +3 to the base damage.
     function enemyDamageModifier() {
@@ -345,6 +346,7 @@ function Battle5 () {
                     setBattleLog={setBattleLog}
                     setFloatingDamage={setFloatingDamage}
                     rogPopup={rogPopup}
+                    setRogPopup={setRogPopup}
                 />
                 <SorcererUI
                     updateBattleLog={updateBattleLog} 
@@ -362,6 +364,7 @@ function Battle5 () {
                     setBattleLog={setBattleLog}
                     setFloatingDamage={setFloatingDamage}
                     sorPopup={sorPopup}
+                    setSorPopup={setSorPopup}
                 />
                 <PaladinUI 
                     updateBattleLog={updateBattleLog} 
@@ -380,6 +383,7 @@ function Battle5 () {
                     setPaladinHealth={setPaladinHealth}
                     setFloatingDamage={setFloatingDamage}
                     palPopup={palPopup}
+                    setPalPopup={setPalPopup}
                 />
             </div>
         </div>

@@ -55,8 +55,9 @@ function Battle1 () {
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setFloatingDamage(0)
         
-    }, [floatingDamage])
+    }, [floatingDamage, setFloatingDamage])
 
    
 // Damage Modification
@@ -327,6 +328,7 @@ function Battle1 () {
                     setBattleLog={setBattleLog}
                     setFloatingDamage={setFloatingDamage}
                     rogPopup={rogPopup}
+                    setRogPopup={setRogPopup}
                     
                 />
                 <SorcererUI
@@ -345,6 +347,7 @@ function Battle1 () {
                     setBattleLog={setBattleLog}
                     setFloatingDamage={setFloatingDamage}
                     sorPopup={sorPopup}
+                    setSorPopup={setSorPopup}
                 />
                 <PaladinUI 
                     updateBattleLog={updateBattleLog} 
@@ -363,6 +366,7 @@ function Battle1 () {
                     setPaladinHealth={setPaladinHealth}
                     setFloatingDamage={setFloatingDamage}
                     palPopup={palPopup}
+                    setPalPopup={setPalPopup}
                 />
             </div>
         </div>

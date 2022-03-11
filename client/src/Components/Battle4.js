@@ -58,8 +58,9 @@ function Battle4 () {
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setFloatingDamage(0)
         
-    }, [floatingDamage])
+    }, [floatingDamage, setFloatingDamage])
 
 // Rolls 1d6(One 6 sided die) with a +14 to the base damage.
     function enemyDamageModifier() {
@@ -373,6 +374,7 @@ function Battle4 () {
                     setBattleLog={setBattleLog}
                     setFloatingDamage={setFloatingDamage}
                     rogPopup={rogPopup}
+                    setRogPopup={setRogPopup}
                 />
                 <SorcererUI
                     sorStunStatus={sorStunStatus}
@@ -391,6 +393,7 @@ function Battle4 () {
                     setBattleLog={setBattleLog}
                     setFloatingDamage={setFloatingDamage}
                     sorPopup={sorPopup}
+                    setSorPopup={setSorPopup}
                 />
                 <PaladinUI 
                     palStunStatus={palStunStatus}
@@ -410,6 +413,7 @@ function Battle4 () {
                     setPaladinHealth={setPaladinHealth}
                     setFloatingDamage={setFloatingDamage}
                     palPopup={palPopup}
+                    setPalPopup={setPalPopup}
                 />
             </div>
         </div>

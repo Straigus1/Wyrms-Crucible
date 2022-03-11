@@ -57,8 +57,9 @@ function Battle3 () {
         setTimeout(() => {
             popup.remove()
         }, 1900)
+        setFloatingDamage(0)
         
-    }, [floatingDamage])
+    }, [floatingDamage, setFloatingDamage])
 
 // Rolls 2d6(Two 6 sided dice) with a +11 to the base damage
     function enemyDamageModifier() {
@@ -354,6 +355,7 @@ function Battle3 () {
                     setBattleLog={setBattleLog}
                     setFloatingDamage={setFloatingDamage}
                     rogPopup={rogPopup}
+                    setRogPopup={setRogPopup}
                 />
                 <SorcererUI
                     sorStunStatus={sorStunStatus}
@@ -372,6 +374,7 @@ function Battle3 () {
                     setBattleLog={setBattleLog}
                     setFloatingDamage={setFloatingDamage}
                     sorPopup={sorPopup}
+                    setSorPopup={setSorPopup}
                 />
                 <PaladinUI 
                     palStunStatus={palStunStatus}
@@ -391,6 +394,7 @@ function Battle3 () {
                     setPaladinHealth={setPaladinHealth}
                     setFloatingDamage={setFloatingDamage}
                     palPopup={palPopup}
+                    setPalPopup={setPalPopup}
                 />
             </div>
         </div>
