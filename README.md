@@ -14,6 +14,10 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 #### Battle Log :white_check_mark:
 - Adjusting battle log to default to the bottom of the log.
 
+#### Floating Numbers :white_check_mark:
+- Add floating damage numbers after an attack.
+- Add floating healing numbers after restoration.
+
 #### Animations
 - Learning how to effectively use animations as an ally or enemy uses an action.
 
