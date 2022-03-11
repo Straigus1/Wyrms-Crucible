@@ -275,9 +275,8 @@ function Battle3 () {
         if (poisonStatus > 0) {
             setEnemyHealth(damagePoison)
             setPoisonStatus(poisonStatus - 1)
-            if (poisonStatus === 0) {
-            setBattleLog([...battleLog, `Werewolf was dealt ${poisonDamage} damage from poison.`])
-            setBattleLog([...battleLog, `The enemy is no longer poisoned.`])
+            if (poisonStatus === 1) {
+            setBattleLog([...battleLog, `Werewolf was dealt ${poisonDamage} damage from poison. \n Werewolf is no longer poisoned.`])
             } else {
             setBattleLog([...battleLog, `Werewolf was dealt ${poisonDamage} damage from poison.`])
             }
@@ -334,8 +333,8 @@ function Battle3 () {
                 <h3>Round: {round} </h3>
             </div>
             {renderCurrentOutcome()}
-            
             <div id='popup-box'></div>
+            
             <div className='party-box'>
                 <RogueUI 
                     rogStunStatus={rogStunStatus}

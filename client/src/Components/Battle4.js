@@ -131,17 +131,21 @@ function Battle4 () {
                 if (d20Roll === 20) {
                     updateBattleLog(
                         `Behemoth used Upheaval, rolled a natural 🎲(20) against ${name}!`,
-                        `Behemoth ejected ${name} sky high for ${upheavalCritAttack} critical damage and applied stun!!!`)
+                        `Behemoth ejected ${name} into the ceiling for ${upheavalCritAttack} critical damage and applied stun!!!`)
                     setCharacterStunStatus(true)
                     setCharacterPopup(upheavalCritAttack) 
                     
                 } else {
-                    updateBattleLog(
-                        `Behemoth used Upheaval, rolled 🎲(${d20Roll}) + 11 against ${name}.`,
-                        `Behemoth lifted ${name} high for ${upheavalAttack} damage and may apply stun!`)
                     // Using "stunChance" to determine if target is stunned.
                     if (stunChance <= 4) {
+                        updateBattleLog(
+                            `Behemoth used Upheaval, rolled 🎲(${d20Roll}) + 11 against ${name}.`,
+                            `Behemoth rammed ${name} into the wall for ${upheavalAttack} damage and stunned ${name}!`)
                         setCharacterStunStatus(true) 
+                    } else {
+                        updateBattleLog(
+                            `Behemoth used Upheaval, rolled 🎲(${d20Roll}) + 11 against ${name}.`,
+                            `Behemoth lifted ${name} sky high for ${upheavalAttack} damage!`)
                     }
                     setCharacterPopup(upheavalAttack)
                 } 
@@ -290,9 +294,8 @@ function Battle4 () {
         if (poisonStatus > 0) {
             setEnemyHealth(damagePoison)
             setPoisonStatus(poisonStatus - 1)
-            if (poisonStatus === 0) {
-            setBattleLog([...battleLog, `Behemoth was dealt ${poisonDamage} damage from poison.`])
-            setBattleLog([...battleLog, `The enemy is no longer poisoned.`])
+            if (poisonStatus === 1) {
+            setBattleLog([...battleLog, `Behemoth was dealt ${poisonDamage} damage from poison. \n Behemoth is no longer poisoned.`])
             } else {
             setBattleLog([...battleLog, `Behemoth was dealt ${poisonDamage} damage from poison.`])
             }
@@ -349,8 +352,8 @@ function Battle4 () {
                 <h3>Round: {round} </h3>
             </div>
             {renderCurrentOutcome()}
-            
             <div id='popup-box'></div>
+            
             <div className='party-box'>
                 <RogueUI 
                     rogStunStatus={rogStunStatus}

@@ -1017,7 +1017,8 @@ body {
   height: 110px;
   width: 30px;
   position: absolute;
-  top: 45%
+  top: 45%;
+  pointer-events: none;
 }
 
 .heal-float {
@@ -1056,7 +1057,8 @@ body {
   width: 120px;
   position: relative;
   left:6%;
-  bottom: 55%
+  bottom: 55%;
+  pointer-events: none;
 }
 
 #popup-box-sor {
@@ -1065,7 +1067,8 @@ body {
   width: 120px;
   position: relative;
   left:6%;
-  bottom: 55%
+  bottom: 55%;
+  pointer-events: none;
 }
 
 #popup-box-pal {
@@ -1074,7 +1077,8 @@ body {
   width: 120px;
   position: relative;
   left: 6%;
-  bottom: 60%
+  bottom: 60%;
+  pointer-events: none;
 }
 
 .damage-float {

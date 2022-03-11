@@ -267,9 +267,8 @@ function Battle5 () {
         if (poisonStatus > 0) {
             setEnemyHealth(damagePoison)
             setPoisonStatus(poisonStatus - 1)
-            if (poisonStatus === 0) {
-            setBattleLog([...battleLog, `Dragon was dealt ${poisonDamage} damage from poison.`])
-            setBattleLog([...battleLog, `The enemy is no longer poisoned.`])
+            if (poisonStatus === 1) {
+            setBattleLog([...battleLog, `Dragon was dealt ${poisonDamage} damage from poison. \n Dragon is no longer poisoned.`])
             } else {
             setBattleLog([...battleLog, `Dragon was dealt ${poisonDamage} damage from poison.`])
             }
@@ -326,8 +325,8 @@ function Battle5 () {
             <div className='round-tracker'>
                 <h3>Round: {round} </h3>
             </div>
-            
             <div id='popup-box'></div> 
+            
             <div className='party-box'>
                 <RogueUI 
                     updateBattleLog={updateBattleLog}

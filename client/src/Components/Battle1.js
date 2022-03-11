@@ -247,9 +247,8 @@ function Battle1 () {
         if (poisonStatus > 0) {
             setEnemyHealth(damagePoison)
             setPoisonStatus(poisonStatus - 1)
-            if (poisonStatus === 0) {
-            setBattleLog([...battleLog, `Lizard was dealt ${poisonDamage} damage from poison.`])
-            setBattleLog([...battleLog, `The enemy is no longer poisoned.`])
+            if (poisonStatus === 1) {
+            setBattleLog([...battleLog, `Lizard was dealt ${poisonDamage} damage from poison. \n Lizard is no longer poisoned.`])
             } else {
             setBattleLog([...battleLog, `Lizard was dealt ${poisonDamage} damage from poison.`])
             }
@@ -308,8 +307,8 @@ function Battle1 () {
                 <h3>Round: {round} </h3>
             </div>
             {renderCurrentOutcome()}
-            
             <div id='popup-box'></div> 
+            
             <div className='party-box'>
                 <RogueUI 
                     updateBattleLog={updateBattleLog}
