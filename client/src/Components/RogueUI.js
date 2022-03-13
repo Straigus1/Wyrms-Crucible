@@ -359,7 +359,7 @@ function potionStatus() {
         return (
             <OverlayTrigger
                 placement="top"
-                delay={{show: 300, hide: 10}}
+                delay={{show: 500, hide: 10}}
                 overlay={
                     <Tooltip id="button-tooltip">
                     {description} 

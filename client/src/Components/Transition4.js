@@ -1,7 +1,7 @@
 import React from 'react'
 import Typewriter from "typewriter-effect";
 import { useNavigate } from 'react-router-dom'
-import ambientSound from '../Music/ambient-theme-capstone-project.mp3'
+import ambientSound from '../Music/fable-lychfield-cemetery.mp3'
 import ReactAudioPlayer from 'react-audio-player'
 
 function Transition4() {

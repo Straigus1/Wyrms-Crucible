@@ -8,7 +8,7 @@ import BattleLog from './BattleLog'
 import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
-import battleTheme from '../Music/capstone-battle.mp3'
+import battleTheme from '../Music/magna-carta-2-battle-conditions.mp3'
 import ReactAudioPlayer from 'react-audio-player'
 // import useDelayedState from 'use-delayed-state'
 

@@ -307,7 +307,7 @@ function overlayTooltipAndAction(action, skillName, id, description) {
     return (
         <OverlayTrigger
             placement="top"
-            delay={{show: 300, hide: 70}}
+            delay={{show: 500, hide: 70}}
             overlay={
                 <Tooltip id="button-tooltip">
                 {description} 
@@ -347,7 +347,7 @@ function overlayTooltipAndAction(action, skillName, id, description) {
             return (
                 <div className='attack-box' >
                 {overlayTooltipAndAction(sorAttack, 'Fire Bolt', '', 'Deals 6-16 damage. \n Hit Bonus: +5')}
-                {overlayTooltipAndAction(sorMagicMissle, 'Magic Missile', 'magic-missle', 'Deals varied damage. \n Variances: 3-6, 5-10, 7-16. \n Does not roll. Cannot miss.')}
+                {overlayTooltipAndAction(sorMagicMissle, 'Magic Missile', 'magic-missle', 'Shoots 1, 2, or 3 missiles. \n Damage: \n [1] 3-6, [2] 5-10, [3] 7-16. \n Does not roll. Cannot miss.')}
                 {lightningAvailable()}
                 </div>
                

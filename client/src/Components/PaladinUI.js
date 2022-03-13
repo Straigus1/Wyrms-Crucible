@@ -318,7 +318,7 @@ function PaladinUI ({
         return (
             <OverlayTrigger
                 placement="top"
-                delay={{show: 300, hide: 70}}
+                delay={{show: 500, hide: 70}}
                 overlay={
                     <Tooltip id="button-tooltip">
                     {description} 

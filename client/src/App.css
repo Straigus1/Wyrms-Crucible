@@ -813,20 +813,20 @@ body {
   position: relative;
   width: 300px;
   height: 411px;
-  top: 10%;
+  top: 20%;
 }
 
 .harpy-health-value {
   position: absolute;
   color: white;
-  top: 4%;
+  top: 14%;
   left: 48%;
   font-size: 20px;
 }
 
 #harpy-hp {
   position: absolute;
-  top: 7%;
+  top: 17%;
   left: 39.5%;
   width: 330px;
   
@@ -860,6 +860,35 @@ body {
   width: 580px;
   height: 816px;
   top: 4%;
+  animation: swift-appearance 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes swift-appearance {
+  0% {
+    width: 50px;
+    height: 70px;
+    left: 0%;
+    opacity: .1
+  }
+  30% {
+    width: 170px;
+    height: 239px;
+    left: -30%;
+    opacity: .3
+  }
+  70% {
+    width: 290px;
+    height: 408px;
+    left: 30%;
+    opacity: .5;
+  }
+  100% {
+    width: 580px;
+    height: 816px;
+    left: 0%;
+    opacity: 1;
+  }
 }
 
 .dragon-health-value {

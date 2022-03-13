@@ -8,7 +8,7 @@ import BattleLog from './BattleLog'
 import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
-import battleTheme from '../Music/capstone-battle.mp3'
+import battleTheme from '../Music/magna-carta-2-battle-conditions.mp3'
 import ReactAudioPlayer from 'react-audio-player'
 import meteorSound from '../Music/meteor-sound.mp3'
 
@@ -341,7 +341,7 @@ function Battle4 () {
             autoPlay
             controls
             loop
-            volume={0.3}
+            volume={0.2}
             /> 
             <BattleLog battleLog={battleLog}/>
             <img 
