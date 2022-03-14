@@ -142,7 +142,8 @@ function SorcererUI ({
                     `Juhl rolled 🎲(${diceRoll}) + 5 against the enemy.`,
                     `Juhl blasted the enemy for ${sorcererAttack} damage!`)
                 setFloatingDamage(sorcererAttack)
-            }   
+            } 
+        setActionAnimate('Fire Bolt')  
         setEnemyHealth(damage)
         } else {
             updateBattleLog(
@@ -180,6 +181,7 @@ function SorcererUI ({
         updateBattleLog(
                 `Juhl cast Magic Missile.`,
                 `Juhl pelted the enemy for ${magicMissleAttack} damage!`)
+        setActionAnimate('Magic Missile')
         setFloatingDamage(magicMissleAttack)
         setEnemyHealth(damage)
         setPotionCD(true)
@@ -309,7 +311,7 @@ function overlayTooltipAndAction(action, skillName, id, description) {
     return (
         <OverlayTrigger
             placement="top"
-            delay={{show: 500, hide: 70}}
+            delay={{show: 600, hide: 70}}
             overlay={
                 <Tooltip id="button-tooltip">
                 {description} 

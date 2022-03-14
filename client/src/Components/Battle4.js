@@ -86,13 +86,13 @@ function Battle4 () {
         return (Math.floor(Math.random() * 15 + 1) + 8)
     }
 
+    const upheavalAttack = upheavalDamage()
+    
     function meteorAudio() {
         const audio = new Audio(meteorSound);
        audio.volume = 0.3
        audio.play()
     }
-
-    const upheavalAttack = upheavalDamage()
     // No longer attack dead heroes
     function enemyTarget () {
         const baseCritAttack = (enemyAttack + (Math.floor(Math.random() * 6 + 1)))

@@ -11,6 +11,7 @@ import SorcererUI from './SorcererUI'
 import AttackAnimations from './AttackAnimations'
 import battleTheme from '../Music/magna-carta-2-battle-conditions.mp3'
 import ReactAudioPlayer from 'react-audio-player'
+import electricSurgeSound from '../Music/electric-surge-sound.mp3'
 // import useDelayedState from 'use-delayed-state'
 
 function Battle3 () {
@@ -87,6 +88,11 @@ function Battle3 () {
 
     const electricAttack = electricalSurgeDamage()
 
+    function surgeAudio() {
+        const audio = new Audio(electricSurgeSound);
+       audio.volume = 0.3
+       audio.play()
+    }
     // No longer attack dead heroes.
     // Needs major, major refactoring.
     function enemyTarget () {
@@ -138,11 +144,12 @@ function Battle3 () {
                 } 
                 setCharacterStunStatus(true) 
                 setCharacterHealth(damage)
-                } else {
+                surgeAudio()
+            } else {
                 updateBattleLog(
                     `Werewolf cast Electric Surge, rolled 🎲(${d20Roll}) + 10 against ${name}.`,
                     string)
-                setCharacterPopup('Miss')
+                    setCharacterPopup('Miss')
                 }
         }
         // Electric Surge applies stun when it is successful, forcing the target to lose its next turn.

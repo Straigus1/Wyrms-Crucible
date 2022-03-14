@@ -159,6 +159,7 @@ function RogueUI ({
                     `Iris slashed the enemy for ${rogueAttack} damage! `)
                 setFloatingDamage(rogueAttack)
             }
+            setActionAnimate('Attack')
             setEnemyHealth(damage)
             
             
@@ -207,6 +208,7 @@ function RogueUI ({
                     `Iris dealt ${venomAttack} damage and poisoned the enemy!`)
                 setFloatingDamage(venomAttack)
             }
+            setActionAnimate('Venomous Strike')
             setEnemyHealth(damage)
             setPoisonStatus(3)
         } else {
@@ -433,7 +435,7 @@ function potionStatus() {
             return (
                 <OverlayTrigger
                     placement="bottom"
-                    delay={{show: 300, hide: 70}}
+                    delay={{show: 600, hide: 70}}
                     overlay={
                         <Tooltip id="potion-tooltip">
                             {"Restores 15-20 HP. \n Can only be used once per character's turn. \n Does not end Turn."}

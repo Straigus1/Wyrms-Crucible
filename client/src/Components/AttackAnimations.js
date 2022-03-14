@@ -5,7 +5,10 @@ import rightSlash from '../AnimationImages/right-slash.png'
 import leftSlash from '../AnimationImages/left-slash.png'
 import lightningBolt from '../AnimationImages/lightning-bolt.png'
 import divineSmite from '../AnimationImages/divine-smite.png'
-
+import attack from '../AnimationImages/attack.png'
+import fireBolt from '../AnimationImages/fire-bolt.png'
+import venomousStrike from '../AnimationImages/venomous-strike.png'
+import magicMissile from '../AnimationImages/magic-missile.png'
 
 function AttackAnimations({actionAnimate, setActionAnimate}) {
 
@@ -37,16 +40,16 @@ function AttackAnimations({actionAnimate, setActionAnimate}) {
                 setAnimate('animate-divine-smite', divineSmite, 1200)
                 break
             case 'Attack':
-                setAnimate('animate-attack')
+                setAnimate('animate-attack', attack, 1000)
                 break
             case 'Fire Bolt':
-                setAnimate('animate-fire-bolt')
+                setAnimate('animate-fire-bolt', fireBolt, 1000)
                 break
             case 'Venomous Strike':
-                setAnimate('animate-venomous-strike')
+                setAnimate('animate-venomous-strike', venomousStrike, 1000)
                 break
             case 'Magic Missile':
-                setAnimate('animate-magic-missile')
+                setAnimate('animate-magic-missile', magicMissile, 1000)
                 break
             default:
                 console.log('No Animation')

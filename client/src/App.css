@@ -1338,3 +1338,132 @@ body {
     opacity: 0
   }
 }
+
+.animate-attack {
+  position: absolute;
+  pointer-events: none;
+  height: 70%;
+  width: 70%;
+  top: 12%;
+  right:30%;
+  opacity: 0;
+  animation: attack 1s;
+  animation-fill-mode: forwards;
+  
+  
+}
+
+@keyframes attack {
+  0% {
+    opacity:0;
+    transform: rotate(-15deg)
+    
+    
+  }
+  20% {
+    opacity: 1;
+    transform: rotate(20deg);
+    
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(20deg)
+  }
+}
+
+.animate-fire-bolt {
+  position: absolute;
+  pointer-events: none;
+  height: 40%;
+  width: 40%;
+  top: 30%;
+  right: 30%;
+  opacity: 0;
+  animation: fire-bolt 1s;
+  animation-fill-mode: forwards;
+  
+}
+
+@keyframes fire-bolt {
+  0% {
+    opacity:0;
+    
+    
+  }
+  20% {
+    opacity: 1;
+    
+  }
+  100% {
+    opacity: 0
+  }
+}
+
+.animate-venomous-strike {
+  position: absolute;
+  pointer-events: none;
+  height: 70%;
+  width: 70%;
+  top: 12%;
+  left:30%;
+  opacity: 0;
+  animation: venomous-strike 1s;
+  animation-fill-mode: forwards;
+  
+  
+}
+
+@keyframes venomous-strike {
+  0% {
+    opacity:0;
+    transform: rotate(15deg)
+    
+    
+  }
+  20% {
+    opacity: 1;
+    transform: rotate(-20deg);
+    
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-20deg)
+  }
+}
+
+.animate-magic-missile {
+  position: absolute;
+  pointer-events: none;
+  height: 60%;
+  width: 60%;
+  top: 1%;
+  left: 30%;
+  opacity: 0;
+  animation: magic-missile 1s;
+  animation-fill-mode: forwards;
+  
+  
+}
+
+@keyframes magic-missile {
+  0% {
+    opacity:0;
+    top: 1%;
+    left: 30%
+    
+    
+  }
+  20% {
+    opacity: 1;
+    top: 15%;
+    left: 25%
+    
+    
+  }
+  100% {
+    opacity: 0;
+    top: 15%;
+    left: 25%
+    
+  }
+}
