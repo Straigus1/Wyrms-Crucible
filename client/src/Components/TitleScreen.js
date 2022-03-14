@@ -60,7 +60,7 @@ function TitleScreen ({player, setPlayer}) {
                     Credits
                 </Button>
                 <Button onClick={() => navigate("/transition-one")}>
-                    Tutorials/Tips
+                    Play
                 </Button>
                 </>}
                 <ReactAudioPlayer
