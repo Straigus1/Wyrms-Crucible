@@ -8,6 +8,7 @@ import BattleLog from './BattleLog'
 import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
+import AttackAnimations from './AttackAnimations'
 import battleTheme from '../Music/capstone-battle.mp3'
 import ReactAudioPlayer from 'react-audio-player'
 // import useDelayedState from 'use-delayed-state'
@@ -31,6 +32,7 @@ function Battle1 () {
     const [rogTurn, setRogTurn] = useState(0) 
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
+    const [actionAnimate, setActionAnimate] = useState('')
 
 // Controls damage popups when party characters attack an enemy.
     useEffect(() => {
@@ -308,6 +310,9 @@ function Battle1 () {
                 <h3>Round: {round} </h3>
             </div>
             {renderCurrentOutcome()}
+            <AttackAnimations
+                    actionAnimate={actionAnimate}
+                    setActionAnimate={setActionAnimate} />
             <div id='popup-box'></div> 
             
             <div className='party-box'>
@@ -329,6 +334,7 @@ function Battle1 () {
                     setFloatingDamage={setFloatingDamage}
                     rogPopup={rogPopup}
                     setRogPopup={setRogPopup}
+                    setActionAnimate={setActionAnimate}
                     
                 />
                 <SorcererUI
@@ -348,6 +354,7 @@ function Battle1 () {
                     setFloatingDamage={setFloatingDamage}
                     sorPopup={sorPopup}
                     setSorPopup={setSorPopup}
+                    setActionAnimate={setActionAnimate}
                 />
                 <PaladinUI 
                     updateBattleLog={updateBattleLog} 
@@ -367,7 +374,9 @@ function Battle1 () {
                     setFloatingDamage={setFloatingDamage}
                     palPopup={palPopup}
                     setPalPopup={setPalPopup}
+                    setActionAnimate={setActionAnimate}
                 />
+                
             </div>
         </div>
     )

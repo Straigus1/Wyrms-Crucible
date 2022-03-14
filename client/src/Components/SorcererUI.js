@@ -31,7 +31,8 @@ function SorcererUI ({
     setEnemyHealth,
     setFloatingDamage,
     sorPopup,
-    setSorPopup}) {
+    setSorPopup,
+    setActionAnimate}) {
 
     const [potionAmount, setPotionAmount] = useState(3)
     const [potionCD, setPotionCD] = useState(true)
@@ -218,6 +219,7 @@ function SorcererUI ({
                 `Juhl obliterated the target for ${lightningBoltAttack} damage!!!`)
             setFloatingDamage(lightningBoltAttack)
         }
+        setActionAnimate('Lightning Bolt')
         setEnemyHealth(damage)
         setPotionCD(true)
         setSorTurn(2)

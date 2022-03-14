@@ -35,7 +35,8 @@ function RogueUI ({
     setEnemyHealth,
     setFloatingDamage,
     rogPopup,
-    setRogPopup}) {
+    setRogPopup,
+    setActionAnimate}) {
         
         const [potionAmount, setPotionAmount] = useState(3)
         const [potionCD, setPotionCD] = useState(true)
@@ -260,7 +261,7 @@ function RogueUI ({
                     `Iris eviscerated the enemy for ${phantomAttack} damage! `)
                 setFloatingDamage(phantomAttack)
             }
-            
+            setActionAnimate('Phantom Assault')
             setEnemyHealth(damage)
             phantomAudio()
         } else {

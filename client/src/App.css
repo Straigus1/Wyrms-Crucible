@@ -1154,3 +1154,187 @@ body {
   }
 }
 
+#animation-box {
+  position: absolute;
+  pointer-events: none;
+  height: 400px;
+  width: 400px;
+  /* border: 2px solid red; */
+  top: 30%;
+}
+
+.animate-shuriken {
+  position: absolute;
+  pointer-events: none;
+  height: 40%;
+  width: 40%;
+  right: 15%;
+  animation: shuriken-throw 1s;
+  animation-fill-mode: forwards;
+  
+}
+
+@keyframes shuriken-throw {
+  0% {
+    opacity:.1;
+    top: -10%
+  }
+
+  20% {
+    opacity: .7;
+    top: 45%;
+    right: 32%;
+    transform: rotate(180deg)
+  }
+
+  100% {
+    opacity: 0;
+    top: 45%;
+    right: 32%;
+    transform: rotate(180deg)
+  }
+}
+
+.animate-right-slash {
+  position: absolute;
+  pointer-events: none;
+  height: 40%;
+  width: 40%;
+  opacity: 0;
+  animation: right-slash .4s;
+  animation-delay: .5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes right-slash {
+  0% {
+    opacity: .1;
+    top: 23%;
+    right: 22%
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    right: 12%;
+    top: 48%;
+    transform: rotate(-15deg);
+    
+  }
+}
+
+.animate-left-slash {
+  position: absolute;
+  pointer-events: none;
+  height: 40%;
+  width: 40%;
+  opacity: 0;
+  animation: left-slash .3s;
+  animation-delay: .5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes left-slash {
+  0% {
+    opacity: .1;
+    top: 23%;
+    left: 22%
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    left: 12%;
+    top: 48%;
+    transform: rotate(15deg);
+    
+  }
+}
+
+.animate-blood-splatter {
+  position: absolute;
+  pointer-events: none;
+  height: 45%;
+  width: 45%;
+  bottom: 15%;
+  right: 30%;
+  opacity: 0;
+  animation: blood-splatter 1.7s;
+  animation-delay: .3s;
+  animation-fill-mode: forwards;
+  
+}
+
+@keyframes blood-splatter {
+  0% {
+    opacity:0;
+    
+  }
+  50% {
+    opacity: .7;
+    
+  }
+  100% {
+    opacity: 0
+  }
+}
+
+.animate-lightning-bolt {
+  position: absolute;
+  pointer-events: none;
+  /* height: 45%;
+  width: 45%; */
+  bottom: 5%;
+  right: -35%;
+  opacity: 0;
+  animation: lightning-bolt .9s;
+  animation-delay: .3s;
+  animation-fill-mode: forwards;
+  
+}
+
+@keyframes lightning-bolt {
+  0% {
+    opacity:0;
+    clip: rect(0, 0, 0, 0)
+    
+  }
+  30% {
+    opacity: .7;
+    clip: rect(100%, 100%, 100%, 100%);
+  }
+  100% {
+    opacity: 0
+  }
+}
+
+.animate-divine-smite {
+  position: absolute;
+  pointer-events: none;
+  height: 60%;
+  width: 60%;
+  bottom: 8%;
+  right: 20%;
+  opacity: 0;
+  animation: divine-smite 1s;
+  animation-fill-mode: forwards;
+  border-radius: 100px;
+  
+}
+
+@keyframes divine-smite {
+  0% {
+    opacity:0;
+    
+    
+  }
+  50% {
+    opacity: .7;
+    
+  }
+  100% {
+    opacity: 0
+  }
+}

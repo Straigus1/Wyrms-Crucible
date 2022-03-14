@@ -35,7 +35,8 @@ function PaladinUI ({
     setEnemyHealth,
     setFloatingDamage,
     palPopup,
-    setPalPopup}) {
+    setPalPopup,
+    setActionAnimate}) {
     
     const [potionAmount, setPotionAmount] = useState(3)
     const [potionCD, setPotionCD] = useState(true)
@@ -211,6 +212,7 @@ function PaladinUI ({
                     `Deus smited the enemy for ${smiteAttack} damage!`)
                 setFloatingDamage(smiteAttack)
             }
+            setActionAnimate('Divine Smite')
             setEnemyHealth(damage)
             smiteAudio()
         } else {
