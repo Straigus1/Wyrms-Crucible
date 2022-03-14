@@ -18,7 +18,7 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 - Add floating damage numbers after an attack.
 - Add floating healing numbers after restoration.
 
-#### Animations
+#### Animations #####In progress...
 - Learning how to effectively use animations as an ally or enemy uses an action.
 
 - Adding animations.
@@ -37,3 +37,13 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 - Refactor code where ever possible.
 - Dice Rolling
 - Implement Redux
+
+### How to Run locally
+1. Clone down this repository from GitHub onto your local machine, then cd into root project directory
+2. Run two terminals
+3. In the first, run:
+``` bundle install && rails db:create db:migrate && rails s ```
+4. In the secondm run:
+``` npm install && npm start --prefix client ```
+5. This will install all other dependencies automatically, create the database on your machine, and start the backend and frontend. After the first time running these commands, you only need ``` rails s ``` in the backend terminal and ``` npm start --prefix client ``` in the frontend terminal to start the servers, since you do not need to install dependencies more than once.
+6. Open a browser and go to http://localhost:4000 to view the running application.
