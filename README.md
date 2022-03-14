@@ -18,7 +18,7 @@ A role-playing game that uses D&D dice rolling system to determine attack accura
 - Add floating damage numbers after an attack.
 - Add floating healing numbers after restoration.
 
-#### Animations #####In progress...
+#### Animations ``In progress...``
 - Learning how to effectively use animations as an ally or enemy uses an action.
 
 - Adding animations.
