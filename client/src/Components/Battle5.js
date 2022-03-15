@@ -190,7 +190,7 @@ function Battle5 () {
 
     }
 
-    const enemyArmorClass = 14
+    const enemyArmorClass = 15
 
     function poisonDamageModifier() {
         return (Math.floor(Math.random() * 4 + 1) + 4)
