@@ -349,6 +349,9 @@ function Battle3 () {
             <AttackAnimations
                     actionAnimate={actionAnimate}
                     setActionAnimate={setActionAnimate} />
+                    <EnemyAnimations
+                        enemyAnimate={enemyAnimate}
+                        setEnemyAnimate={setEnemyAnimate} />
             <div id='popup-box'></div>
             
             <div className='party-box'>
@@ -415,9 +418,7 @@ function Battle3 () {
                     setActionAnimate={setActionAnimate}
                 />
             </div>
-            <EnemyAnimations
-                enemyAnimate={enemyAnimate}
-                setEnemyAnimate={setEnemyAnimate} />
+            
         </div>
     )
   
