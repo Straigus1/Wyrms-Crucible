@@ -16,7 +16,7 @@ import breathSound from '../Music/dragon-breath.mp3'
 // import useDelayedState from 'use-delayed-state'
 
 function Battle5 () {
-    const [enemyHealth, setEnemyHealth] = useState(430)
+    const [enemyHealth, setEnemyHealth] = useState(460)
     const [floatingDamage, setFloatingDamage] = useState(0)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
@@ -64,9 +64,9 @@ function Battle5 () {
         
     }, [floatingDamage, setFloatingDamage])
 
-// Rolls 1d8(One 8 sided die) with a +3 to the base damage.
+// Rolls 1d8(One 8 sided die) with a +5 to the base damage.
     function enemyDamageModifier() {
-        return (Math.floor(Math.random() * 8 + 1) + 3)
+        return (Math.floor(Math.random() * 8 + 1) + 5)
     }
     const enemyAttack = enemyDamageModifier()
 
@@ -165,7 +165,7 @@ function Battle5 () {
         
     }
     }
-    const healthBar = ((enemyHealth / 430) * 100)
+    const healthBar = ((enemyHealth / 460) * 100)
 
     const navigate = useNavigate()
 
@@ -296,7 +296,7 @@ function Battle5 () {
         
         if (enemyHealth > 0) {
             return <div> 
-                <h2 className='dragon-health-value'>{enemyHealth}/430 </h2>
+                <h2 className='dragon-health-value'>{enemyHealth}/460 </h2>
                 <ProgressBar variant="danger" id='dragon-hp' now={healthBar} />
                 <img src={renderEnemy()} alt='dragon' id='dragon' />
             {playerLost()}
