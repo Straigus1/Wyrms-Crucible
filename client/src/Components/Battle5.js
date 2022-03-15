@@ -9,6 +9,7 @@ import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
 import AttackAnimations from './AttackAnimations'
+import EnemyAnimations from './EnemyAnimation'
 import battleTheme from '../Music/dark-souls-great-wolf-sif.mp3'
 import ReactAudioPlayer from 'react-audio-player'
 import breathSound from '../Music/dragon-breath.mp3'
@@ -35,6 +36,7 @@ function Battle5 () {
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
     const [actionAnimate, setActionAnimate] = useState('')
+    const [enemyAnimate, setEnemyAnimate] = useState('')
 
     useEffect(() => {
         let popup = document.createElement("h3");
@@ -134,6 +136,7 @@ function Battle5 () {
             updateBattleLog(
                 'Dragon used Dragon Breath!',
                 `The Party was dealt ${breathAttack} damage!`)
+                setEnemyAnimate('Dragon Breath')
             setBreathReady(false)
             if (rogueHealth > 0) {
                 setRogueHealth(damageFRog)
@@ -331,6 +334,7 @@ function Battle5 () {
             <AttackAnimations
                     actionAnimate={actionAnimate}
                     setActionAnimate={setActionAnimate} />
+            
             <div id='popup-box'></div> 
             
             <div className='party-box'>
@@ -394,6 +398,9 @@ function Battle5 () {
                     setActionAnimate={setActionAnimate}
                 />
             </div>
+            <EnemyAnimations
+                enemyAnimate={enemyAnimate}
+                setEnemyAnimate={setEnemyAnimate} />
         </div>
     )
   

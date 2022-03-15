@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Typewriter from "typewriter-effect";
 import { useNavigate } from 'react-router-dom'
 import ambientSound from '../Music/fable-darkwood.mp3'
@@ -7,6 +7,33 @@ import ReactAudioPlayer from 'react-audio-player'
 
 function Transition1() {
     const navigate = useNavigate()
+    const [finished, setFinished] = useState(false)
+    function doneLoading() {
+        setTimeout(() => {
+            setFinished(true)
+        }, 8000)
+        if (finished) {
+            return (
+                <div>
+                    <div id='circle' ></div>
+                        <div className='loader'>
+                            <h3>Finished.</h3>
+                        </div>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <div id='spinner' className="spinner-border text-warning" role="status">
+                    </div>
+                        <div className='loader'>
+                            <h3>Loading...</h3>
+                        </div>
+                </div>
+            )
+        }
+        
+    }
 
     function continueClick (e) {
         e.preventDefault()
@@ -39,12 +66,7 @@ function Transition1() {
                     <button className='continue-exposition' onClick={continueClick}>Continue</button>
                 </div>
             </div>
-            <div id='spinner' className="spinner-border text-warning" role="status">
-                
-            </div>
-            <div className='loader'>
-                <h3>Loading...</h3>
-            </div>
+            {doneLoading()}
 
         </div>
     )

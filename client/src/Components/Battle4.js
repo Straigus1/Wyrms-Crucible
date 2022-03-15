@@ -9,12 +9,13 @@ import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
 import AttackAnimations from './AttackAnimations'
+import EnemyAnimations from './EnemyAnimation'
 import battleTheme from '../Music/magna-carta-2-battle-conditions.mp3'
 import ReactAudioPlayer from 'react-audio-player'
 import meteorSound from '../Music/meteor-sound.mp3'
 
 function Battle4 () {
-    const [enemyHealth, setEnemyHealth] = useState(400)
+    const [enemyHealth, setEnemyHealth] = useState(120)
     const [floatingDamage, setFloatingDamage] = useState(0)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
@@ -37,6 +38,7 @@ function Battle4 () {
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
     const [actionAnimate, setActionAnimate] = useState('')
+    const [enemyAnimate, setEnemyAnimate] = useState('')
 
     useEffect(() => {
         let popup = document.createElement("h3");
@@ -143,7 +145,7 @@ function Battle4 () {
                     if (stunChance <= 4) {
                         updateBattleLog(
                             `Behemoth used Upheaval, rolled 🎲(${d20Roll}) + 11 against ${name}.`,
-                            `Behemoth rammed ${name} into the wall for ${upheavalAttack} damage and stunned ${name}!`)
+                            `Behemoth rammed ${name} into a wall for ${upheavalAttack} damage and stunned ${name}!`)
                         setCharacterStunStatus(true) 
                     } else {
                         updateBattleLog(
@@ -179,6 +181,7 @@ function Battle4 () {
                 setPaladinHealth(1)
                 setPalPopup(paladinHealth - 1)
             }
+            setEnemyAnimate('Meteor')
             meteorAudio()
         } else {
         // Using "variant" to determine if Upheaval is used.   
@@ -424,6 +427,9 @@ function Battle4 () {
                     setActionAnimate={setActionAnimate}
                 />
             </div>
+            <EnemyAnimations
+                enemyAnimate={enemyAnimate}
+                setEnemyAnimate={setEnemyAnimate} />
         </div>
     )
   

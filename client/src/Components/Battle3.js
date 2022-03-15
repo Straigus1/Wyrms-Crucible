@@ -9,6 +9,7 @@ import RogueUI from './RogueUI'
 import PaladinUI from './PaladinUI'
 import SorcererUI from './SorcererUI'
 import AttackAnimations from './AttackAnimations'
+import EnemyAnimations from './EnemyAnimation'
 import battleTheme from '../Music/magna-carta-2-battle-conditions.mp3'
 import ReactAudioPlayer from 'react-audio-player'
 import electricSurgeSound from '../Music/electric-surge-sound.mp3'
@@ -37,6 +38,7 @@ function Battle3 () {
     const [sorTurn, setSorTurn] = useState(0) 
     const [battleLog, setBattleLog] = useState([])
     const [actionAnimate, setActionAnimate] = useState('')
+    const [enemyAnimate, setEnemyAnimate] = useState('')
 
     useEffect(() => {
         let popup = document.createElement("h3");
@@ -142,6 +144,7 @@ function Battle3 () {
                         `Werewolf electrified ${name} for ${electricAttack} damage and applied stun!`)
                     setCharacterPopup(electricAttack)
                 } 
+                setEnemyAnimate('Electric Surge')
                 setCharacterStunStatus(true) 
                 setCharacterHealth(damage)
                 surgeAudio()
@@ -412,6 +415,9 @@ function Battle3 () {
                     setActionAnimate={setActionAnimate}
                 />
             </div>
+            <EnemyAnimations
+                enemyAnimate={enemyAnimate}
+                setEnemyAnimate={setEnemyAnimate} />
         </div>
     )
   

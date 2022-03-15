@@ -30,7 +30,17 @@ body {
   height: 900px;
   width: 1600px;
   top: 4%;
+  animation: reappear .7s 
   /* left: 8%; */
+}
+
+@keyframes reappear {
+  0% {
+    opacity: .3
+  }
+  100% {
+    opacity: 1
+  }
 }
 
 #scroll {
@@ -298,10 +308,18 @@ body {
   position: relative;
   width: 800px;
   height: 500px;
-  color: white;
-  font-size: 280px;
-  
-  
+  color: rgb(245, 238, 208);
+  font-size: 250px;
+  animation: in-out 1.5s;
+}
+
+@keyframes in-out {
+  0% {
+    opacity: .3
+  }
+  100% {
+    opacity: 1
+  }
 }
 
 .continue {
@@ -313,8 +331,11 @@ body {
   bottom: 50%;
   background-color: red;
   border-radius: 10px;
-  
+ 
+
 }
+
+
 
 #lose-button {
   position: absolute;
@@ -738,7 +759,8 @@ body {
   font-size: 150px;
   position: absolute;
   color: red;
-  left: 480px
+  left: 480px;
+  animation: in-out 1.5s
 }
 
 .char-name {
@@ -1386,7 +1408,7 @@ body {
 
 @keyframes fire-bolt {
   0% {
-    opacity:0;
+    opacity:.4;
     
     
   }
@@ -1466,4 +1488,135 @@ body {
     left: 25%
     
   }
+}
+
+#circle {
+  background-color: rgb(226, 193, 7);
+  height: 35px;
+  width: 35px;
+  border-radius: 100px;
+  position: absolute;
+  top: 10px;
+  right: 160px;
+}
+
+#enemy-animation-box {
+  position: absolute;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  /* border: 2px solid red; */
+  
+}
+
+.animate-dragon-breath-outer {
+  height: 100%;
+  width:100%;
+  pointer-events: none;
+  opacity: 0;
+  animation: dragon-breath 3s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes dragon-breath {
+  0% {
+    opacity: .1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0
+  }
+  
+}
+
+.animate-meteor-fall {
+  position: absolute;
+  height: 90%;
+  width:50%;
+  pointer-events: none;
+  top: 1%;
+  left: 30%;
+  opacity: 0;
+  animation: meteor-fall 1.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes meteor-fall {
+  0% {
+    top: 1%
+    
+  }
+  90% {
+    opacity: 1;
+    top: 12%
+  }
+  100% {
+    opacity: 0;
+    top: 12%
+  }
+  
+}
+
+.animate-meteor-aftermath {
+  position: absolute;
+  height: 30%;
+  width:100%;
+  pointer-events: none;
+  bottom: .00001%;
+  left: .000001%;
+  opacity: 0;
+  animation: meteor-aftermath 1.5s;
+  animation-delay: 1.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes meteor-aftermath {
+  0% {
+    opacity: .1;
+    
+  }
+  50% {
+    opacity: 1;
+    
+  }
+  100% {
+    opacity: 0;
+    
+  }
+  
+}
+
+.animate-electric-surge {
+  position: absolute;
+  height: 50%;
+  width:50%;
+  left: 25%;
+  top: 20%;
+  border-radius: 200px;
+  pointer-events: none;
+  opacity: 0;
+  animation: electric-surge 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes electric-surge {
+  0% {
+    opacity: .1;
+    transform: rotate(0deg);
+    
+  }
+  50% {
+    opacity: 1;
+    
+    
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(180deg);
+    
+  }
+  
 }
