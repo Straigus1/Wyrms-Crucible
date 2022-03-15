@@ -48,19 +48,19 @@ function TitleScreen ({player, setPlayer}) {
                 <Button>Tutorials/Tips</Button>
                 </> : 
                 <>
-                <h5>Please Login</h5>
-                <Button onClick={() => navigate("/login")}>
-                    Login
+                <h5>Have fun!!</h5>
+                <Button onClick={() => navigate("/transition-one")}>
+                    Play
                 </Button>
         
-                <Button onClick={() => navigate("/signup")}>
-                    Signup
-                </Button>
                 <Button onClick={() => navigate("/credits")}>
                     Credits
                 </Button>
-                <Button onClick={() => navigate("/transition-one")}>
-                    Play
+                <Button onClick={() => navigate("/")}>
+                    Tutorials (Not Ready)
+                </Button>
+                <Button onClick={() => navigate("/battle-five")}>
+                    ???
                 </Button>
                 </>}
                 <ReactAudioPlayer
