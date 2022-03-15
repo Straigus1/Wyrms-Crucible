@@ -15,7 +15,7 @@ import ReactAudioPlayer from 'react-audio-player'
 import meteorSound from '../Music/meteor-sound.mp3'
 
 function Battle4 () {
-    const [enemyHealth, setEnemyHealth] = useState(120)
+    const [enemyHealth, setEnemyHealth] = useState(400)
     const [floatingDamage, setFloatingDamage] = useState(0)
     const [paladinHealth, setPaladinHealth] = useState(47)
     const [rogueHealth, setRogueHealth] = useState(41)
