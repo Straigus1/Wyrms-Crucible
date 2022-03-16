@@ -271,8 +271,8 @@ function Battle2 () {
     function playerLost () {
         if (rogueHealth <= 0 && sorcererHealth <= 0 && paladinHealth <= 0) {
             return <div className='lose'>
-                You Lose
-                <button className='continue' id='lose-button' onClick={startOverClick}> Game Over... </button>
+                Game Over
+                <button className='continue' id='lose-button' onClick={startOverClick}> Return to Title </button>
             </div>
         }
     }
