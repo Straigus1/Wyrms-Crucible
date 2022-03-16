@@ -25,6 +25,17 @@ function Credits() {
                 <p className='credits-name'>Babe Abulaila</p>
                 <p className='credits-name'>Nick Lunn</p>
             </div>
+            <div id='other music'>
+                <h1 className='feature-music'>Featured Music</h1>
+                <h2 className='credits-header'>Dark Souls</h2>
+                <p className='credits-name'>Great Grey Wolf Sif</p>
+                <h2 className='credits-header'>Fable</h2>
+                <p className='credits-name'>Darkwood</p>
+                <p className='credits-name'>Witchwood</p>
+                <p className='credits-name'>Lychfield Cemetery</p>
+                <h2 className='credits-header'>Magna Carta 2</h2>
+                <p className='credits-name'>Battle Conditions</p>
+            </div>
             <ReactAudioPlayer
                 src={ambientSound}
                 className="music-control-title"

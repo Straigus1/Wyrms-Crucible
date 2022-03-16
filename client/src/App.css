@@ -947,6 +947,7 @@ body {
 
 #credits-background {
   background-color: black;
+  height: 1800px;
 }
 
 .credits-header {
@@ -1619,4 +1620,16 @@ body {
     
   }
   
+}
+
+#other-music {
+  position: absolute;
+  left: .0001%;
+  top: 10%;
+}
+
+.feature-music {
+  color: #aa8a5c;
+  margin-top: 40px;
+  text-decoration: underline;
 }
