@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.92ef76af.css",
-    "main.js": "/static/js/main.f2dd3ee2.js",
+    "main.js": "/static/js/main.0236c74b.js",
     "static/js/651.74bee06a.chunk.js": "/static/js/651.74bee06a.chunk.js",
     "static/media/fable-lychfield-cemetery.mp3": "/static/media/fable-lychfield-cemetery.c6858bbde83f5ba44880.mp3",
     "static/media/fable-darkwood.mp3": "/static/media/fable-darkwood.5ca7bebc9faca35b0d73.mp3",
@@ -75,11 +75,11 @@
     "static/media/button-press.mp3": "/static/media/button-press.2f3e37af4fb57ef29284.mp3",
     "index.html": "/index.html",
     "main.92ef76af.css.map": "/static/css/main.92ef76af.css.map",
-    "main.f2dd3ee2.js.map": "/static/js/main.f2dd3ee2.js.map",
+    "main.0236c74b.js.map": "/static/js/main.0236c74b.js.map",
     "651.74bee06a.chunk.js.map": "/static/js/651.74bee06a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.92ef76af.css",
-    "static/js/main.f2dd3ee2.js"
+    "static/js/main.0236c74b.js"
   ]
 }
