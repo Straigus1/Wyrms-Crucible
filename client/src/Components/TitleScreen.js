@@ -48,9 +48,9 @@ function TitleScreen ({player, setPlayer}) {
                 <Button>Tutorials/Tips</Button>
                 </> : 
                 <>
-                <h5>Have fun!!</h5>
+                <h5>Have Fun!!</h5>
                 <Button onClick={() => navigate("/transition-one")}>
-                    Play
+                    Start Game
                 </Button>
         
                 <Button onClick={() => navigate("/credits")}>
