@@ -49,6 +49,8 @@ Your local environment should have the following installed and setup:
 - SQLite for the database. (PostgreSQL currently failing to function)
 - OS must be Linux, Mac, or Windows. If you are using Windows, you must have WSL installed.
 
+If everything above is in order, do the following:
+
 1. Clone down this repository from GitHub onto your local machine, then cd into root project directory.
 2. Run two terminals
 3. In the first, run:
